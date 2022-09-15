@@ -1,5 +1,4 @@
 class BookingController < ApplicationController
-  def greeting
-    @users = User.all
+  def index
   end
 end
