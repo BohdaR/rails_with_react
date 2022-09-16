@@ -8,26 +8,23 @@
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_importmap_tags %>
 </head>
-
 <body>
-<div class="topnav">
-  <%= link_to 'Home', root_url %>
-  <a href="#">News</a>
-  <a href="#">Contact</a>
-  <div class="topnav-right">
-    <% if user_signed_in? %>
-      <div>
-        <%= link_to current_user.email, edit_user_registration_path %>
-        <%= link_to "Logout", destroy_user_session_path%>
-      </div>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path %> |
-      <%= link_to "Login", new_user_session_path %>
-    <% end %>
-  </div>
-</div>
+<%= react_component('NavBar', {
+  leftItems: [
+    {
+      href: 'http://127.0.0.1:3000', linkText: 'Home'
+    }],
+  rightItems: [
+    {
+      href: user_signed_in? ? edit_user_registration_path : new_user_registration_path,
+      linkText: user_signed_in? ? 'Edit profile' : 'Sing up'
+    },
+    {
+      href: user_signed_in? ? destroy_user_session_path : new_user_session_path,
+      linkText: user_signed_in? ? 'Logout' : 'Login'
+    },
+  ] }) %>
 <%= yield %>
 </body>
 </html>
