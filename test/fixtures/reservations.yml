@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee: one
+  place: one
+  start_at: 2022-09-20 18:12:16
+  end_at: 2022-09-20 18:12:16
+
+two:
+  employee: two
+  place: two
+  start_at: 2022-09-20 18:12:16
+  end_at: 2022-09-20 18:12:16
