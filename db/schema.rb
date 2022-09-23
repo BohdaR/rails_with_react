@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_20_151216) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_23_055125) do
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -67,6 +67,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_151216) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "company_id", null: false
+    t.index ["company_id"], name: "index_rooms_on_company_id"
     t.index ["office_id"], name: "index_rooms_on_office_id"
   end
 
@@ -93,5 +95,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_20_151216) do
   add_foreign_key "places", "rooms"
   add_foreign_key "reservations", "employees"
   add_foreign_key "reservations", "places"
+  add_foreign_key "rooms", "companies"
   add_foreign_key "rooms", "offices"
 end
