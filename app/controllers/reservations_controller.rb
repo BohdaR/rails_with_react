@@ -1,7 +1,5 @@
 class ReservationsController < ApplicationController
-  skip_before_action :verify_authenticity_token
   before_action :set_reservation, only: [:show, :update, :destroy]
-  before_action :get_employee
 
   def index
     if current_user
@@ -17,7 +15,7 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    reservation = Reservation.new({ employee: Employee.take }.merge(reservation_params))
+    reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
     if reservation.save
       render json: reservation
     else

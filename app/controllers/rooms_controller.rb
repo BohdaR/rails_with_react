@@ -5,7 +5,9 @@ class RoomsController < ApplicationController
   end
 
   def show
+  end
 
+  def edit
   end
 
   def new
@@ -15,7 +17,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      redirect_to room_url(@room)
+      render json: @room
     else
       render :new, status: :unprocessable_entity
     end
