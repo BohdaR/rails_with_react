@@ -18,7 +18,7 @@
   rightItems: [
     {
       href: user_signed_in? ? edit_user_registration_path : new_user_registration_path,
-      linkText: user_signed_in? ? 'Edit profile' : 'Sing up'
+      linkText: user_signed_in? ? current_user.full_name : 'Sing up'
     },
     {
       href: user_signed_in? ? destroy_user_session_path : new_user_session_path,
