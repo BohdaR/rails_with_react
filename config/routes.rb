@@ -9,4 +9,6 @@ Rails.application.routes.draw do
      controllers: {
        omniauth_callbacks: 'users/omniauth_callbacks'
      }
+
+  root 'pages#index'
 end

@@ -2,12 +2,8 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :update, :destroy]
 
   def index
-    if current_user
-      @reservations = Reservation.where(employee: get_employee)
-      render json: @reservations
-    else
-      redirect_to :new_user_session
-    end
+    @reservations = Reservation.where(employee: get_employee)
+    render json: @reservations
   end
 
   def show
@@ -42,8 +38,7 @@ class ReservationsController < ApplicationController
   end
 
   def get_employee
-    # current_user.employee
-    Employee.take
+    current_user.employee
   end
 
   def set_reservation
