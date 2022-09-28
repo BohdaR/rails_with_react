@@ -51,6 +51,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (7.0.4)
       activesupport (= 7.0.4)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (7.0.4)
       activemodel (= 7.0.4)
       activesupport (= 7.0.4)
@@ -77,6 +81,7 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    cancancan (3.4.0)
     capybara (3.37.1)
       addressable
       matrix
@@ -110,6 +115,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.0)
+    ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
@@ -125,6 +131,18 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jwt (2.5.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -137,6 +155,7 @@ GEM
     minitest (5.16.3)
     msgpack (1.5.6)
     multi_xml (0.6.0)
+    nested_form (0.3.2)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -207,6 +226,12 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
+    rails_admin (3.0.0)
+      activemodel-serializers-xml (>= 1.0)
+      kaminari (>= 0.14, < 2.0)
+      nested_form (~> 0.3)
+      rails (>= 6.0, < 8)
+      turbo-rails (~> 1.0)
     railties (7.0.4)
       actionpack (= 7.0.4)
       activesupport (= 7.0.4)
@@ -230,6 +255,14 @@ GEM
     rexml (3.2.5)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     selenium-webdriver (4.4.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -289,6 +322,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  cancancan
   capybara
   debug
   devise
@@ -300,7 +334,9 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   puma (~> 5.0)
   rails (~> 7.0.4)
+  rails_admin
   react-rails
+  sassc-rails
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
