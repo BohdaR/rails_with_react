@@ -5,6 +5,9 @@ ruby "3.1.2"
 gem 'react-rails'
 gem 'webpacker'
 gem 'devise'
+gem 'rails_admin'
+gem 'sassc-rails'
+gem 'cancancan'
 
 gem 'omniauth'
 gem "omniauth-google-oauth2"

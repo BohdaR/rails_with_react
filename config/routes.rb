@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :reservations
   resources :offices
   resources :rooms do
@@ -8,4 +9,6 @@ Rails.application.routes.draw do
      controllers: {
        omniauth_callbacks: 'users/omniauth_callbacks'
      }
+
+  root 'pages#index'
 end
