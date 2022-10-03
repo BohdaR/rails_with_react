@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import PlacesList from "./PlacesList";
+import {get} from "./useAPI/useAPI"
 
 const Room = ({room, lookFromTime, lookToTime}) => {
     const [places, setPlaces] = useState([])
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:3000/rooms/${room.id}/places?look_from=${lookFromTime}&look_to=${lookToTime}`)
+        get(`${process.env.HOST}/rooms/${room.id}/places?look_from=${lookFromTime}&look_to=${lookToTime}`)
             .then(
                 (response) => {
                     setPlaces(response.data)

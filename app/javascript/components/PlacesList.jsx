@@ -1,8 +1,7 @@
 import React from 'react';
 import Place from "./Place";
 
-const PlacesList = ({placesList}) => {
-    return (
+const PlacesList = ({placesList}) => (
         <div>
             {placesList.map((place) =>
                 <Place
@@ -12,6 +11,5 @@ const PlacesList = ({placesList}) => {
             )}
         </div>
     );
-};
 
 export default PlacesList;

@@ -1,6 +1,5 @@
 class OfficesController < ApplicationController
   before_action :set_office, only: [:show, :update, :destroy]
-  skip_before_action :authenticate_user!
 
   def index
     offices = Office.all

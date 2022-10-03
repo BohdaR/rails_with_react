@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import RoomsFilter from "./RoomsFilter";
 import RoomsList from "./RoomsList";
-import axios from "axios";
+import { get } from "./useAPI/useAPI"
+
 
 const Booking = ({defaultOffice}) => {
-    const host = 'http://127.0.0.1:3000'
-
     const [offices, setOffices] = useState([])
     const [roomList, setRoomList] = useState([])
 
@@ -16,7 +15,7 @@ const Booking = ({defaultOffice}) => {
     const [roomOfficeId, setRoomOfficeId] = useState(defaultOffice.id)
 
     useEffect(() => {
-        axios.get(`${host}/offices`)
+        get(`${process.env.HOST}/offices`)
             .then(
                 (response) => {
                     setOffices(response.data);
@@ -24,7 +23,7 @@ const Booking = ({defaultOffice}) => {
     }, []);
 
     useEffect(() => {
-        axios.get(`${host}/rooms?floor=${roomFloor}&office_id=${roomOfficeId}`)
+        get(`${process.env.HOST}/rooms?floor=${roomFloor}&office_id=${roomOfficeId}`)
             .then(
                 (response) => {
                     setRoomList(response.data);

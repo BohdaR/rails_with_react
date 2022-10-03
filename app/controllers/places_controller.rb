@@ -1,7 +1,6 @@
 class PlacesController < ApplicationController
   before_action :get_unreserved_places, only: :index
   before_action :set_place, only: [:show, :update, :destroy]
-  skip_before_action :authenticate_user!
 
   def index
     render json: @unreserved_places
