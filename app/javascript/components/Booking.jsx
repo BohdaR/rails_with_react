@@ -3,7 +3,7 @@ import RoomsFilter from "./RoomsFilter";
 import RoomsList from "./RoomsList";
 import axios from "axios";
 
-const Booking = () => {
+const Booking = ({defaultOffice}) => {
     const host = 'http://127.0.0.1:3000'
 
     const [offices, setOffices] = useState([])
@@ -13,7 +13,7 @@ const Booking = () => {
     const [lookToTime, setLookToTime] = useState('')
 
     const [roomFloor, setRoomFloor] = useState('1')
-    const [roomOfficeId, setRoomOfficeId] = useState('1')
+    const [roomOfficeId, setRoomOfficeId] = useState(defaultOffice.id)
 
     useEffect(() => {
         axios.get(`${host}/offices`)
@@ -35,6 +35,7 @@ const Booking = () => {
         <div>
             <RoomsFilter
                 offices={offices}
+                defaultOffice={roomOfficeId}
                 onChangeFloor={setRoomFloor}
                 onChangeOfficeId={setRoomOfficeId}
                 onChangeLookFromTime={setLookFromTime}

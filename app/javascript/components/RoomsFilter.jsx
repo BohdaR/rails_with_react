@@ -1,14 +1,18 @@
 import React, {useState} from 'react';
 
-const RoomsFilter = ({offices, onChangeLookFromTime, onChangeLookToTime, onChangeFloor, onChangeOfficeId}) => {
+const RoomsFilter = ({offices, defaultOffice, onChangeLookFromTime, onChangeLookToTime, onChangeFloor, onChangeOfficeId}) => {
     const [value, setValue] = useState('1')
+    const [office, setOffice] = useState(defaultOffice)
 
     const [lookFromTime, setLookFromTime] = useState('')
     const [lookToTime, setLookToTime] = useState('')
 
     return (
         <form>
-            <select name="office_id" onChange={(e) => onChangeOfficeId(e.target.value)}>
+            <select name="office_id" value={office} onChange={(e) => {
+                onChangeOfficeId(e.target.value)
+                setOffice(e.target.value)
+            }}>
                 {offices.map(office =>
                     <option
                         value={office.id}
