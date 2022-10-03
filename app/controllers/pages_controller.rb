@@ -1,5 +1,9 @@
 class PagesController < ApplicationController
-  def index
 
+  def index
   end
+
+  def booking
+  end
+
 end

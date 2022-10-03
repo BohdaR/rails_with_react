@@ -4,7 +4,7 @@ const NavItemsGroup = ({items, ...props}) => {
     return (
         <div {...props}>
         {items.map(({linkText, ...props}) =>
-                <a {...props}>{linkText}</a>
+                <a key={linkText} {...props}>{linkText}</a>
             )}
         </div>
     );

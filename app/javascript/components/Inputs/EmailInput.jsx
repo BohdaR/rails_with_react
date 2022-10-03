@@ -2,7 +2,7 @@ import React from 'react';
 
 const EmailInput = ({...props}) => {
     return (
-        <input autoFocus="autofocus" autoComplete="email" placeholder="Email" type="email" {...props} />
+        <input autoFocus="autofocus" placeholder="Email" type="email" {...props} />
     );
 };
 

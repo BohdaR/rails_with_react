@@ -1,9 +1,9 @@
 import React from 'react';
-import SubmitInput from "./SubmitInput";
-import AuthenticityTokenInput from "./AuthenticityTokenInput";
-import EmailInput from "./EmailInput";
-import PasswordInput from "./PasswordInput";
-import HiddenMethodInput from "./HiddenMethodInput";
+import SubmitInput from "./Inputs/SubmitInput";
+import AuthenticityTokenInput from "./Inputs/AuthenticityTokenInput";
+import EmailInput from "./Inputs/EmailInput";
+import PasswordInput from "./Inputs/PasswordInput";
+import HiddenMethodInput from "./Inputs/HiddenMethodInput";
 
 const EditUserForm = ({form_authenticity_token}) => {
     return (

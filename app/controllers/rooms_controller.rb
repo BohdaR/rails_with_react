@@ -1,10 +1,17 @@
 class RoomsController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :set_room, only: [:show, :update, :destroy]
+
   def index
-    @rooms = Room.all
+    floor = params[:floor] ? params[:floor] : 1
+    office_id = params[:office_id] ? params[:office_id] : current_user.employee.office_id
+
+    rooms = Room.where(floor: floor, office_id: office_id)
+    render json: rooms
   end
 
   def show
+    render json: @room
   end
 
   def edit

@@ -11,4 +11,5 @@ Rails.application.routes.draw do
      }
 
   root 'pages#index'
+  get '/booking', to: 'pages#booking', as: 'booking'
 end

@@ -1,9 +1,9 @@
 import React from 'react';
-import SubmitInput from "./SubmitInput";
+import SubmitInput from "./Inputs/SubmitInput";
 import GoogleLoginButton from "./GoogleLoginButton";
-import PasswordInput from "./PasswordInput";
-import AuthenticityTokenInput from "./AuthenticityTokenInput";
-import EmailInput from "./EmailInput";
+import PasswordInput from "./Inputs/PasswordInput";
+import AuthenticityTokenInput from "./Inputs/AuthenticityTokenInput";
+import EmailInput from "./Inputs/EmailInput";
 
 const RegForm = ({form_authenticity_token}) => {
     return (

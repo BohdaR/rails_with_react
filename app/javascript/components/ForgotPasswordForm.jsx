@@ -1,8 +1,8 @@
 import React from 'react';
-import AuthenticityTokenInput from "./AuthenticityTokenInput";
-import EmailInput from "./EmailInput";
-import PasswordInput from "./PasswordInput";
-import SubmitInput from "./SubmitInput";
+import AuthenticityTokenInput from "./Inputs/AuthenticityTokenInput";
+import EmailInput from "./Inputs/EmailInput";
+import PasswordInput from "./Inputs/PasswordInput";
+import SubmitInput from "./Inputs/SubmitInput";
 
 const ForgotPasswordForm = ({form_authenticity_token}) => {
     return (
