@@ -4,14 +4,19 @@ import RoomsList from "./RoomsList";
 import axios from "axios";
 
 const Booking = () => {
+    const host = 'http://127.0.0.1:3000'
+
     const [offices, setOffices] = useState([])
     const [roomList, setRoomList] = useState([])
+
+    const [lookFromTime, setLookFromTime] = useState('')
+    const [lookToTime, setLookToTime] = useState('')
 
     const [roomFloor, setRoomFloor] = useState('1')
     const [roomOfficeId, setRoomOfficeId] = useState('1')
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:3000/offices')
+        axios.get(`${host}/offices`)
             .then(
                 (response) => {
                     setOffices(response.data);
@@ -19,7 +24,7 @@ const Booking = () => {
     }, []);
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:3000/rooms?floor=${roomFloor}&office_id=${roomOfficeId}`)
+        axios.get(`${host}/rooms?floor=${roomFloor}&office_id=${roomOfficeId}`)
             .then(
                 (response) => {
                     setRoomList(response.data);
@@ -30,10 +35,16 @@ const Booking = () => {
         <div>
             <RoomsFilter
                 offices={offices}
-                floorOnChange={setRoomFloor}
-                office_idOnChange={setRoomOfficeId}
+                onChangeFloor={setRoomFloor}
+                onChangeOfficeId={setRoomOfficeId}
+                onChangeLookFromTime={setLookFromTime}
+                onChangeLookToTime={setLookToTime}
             />
-            <RoomsList roomsList={roomList}/>
+            <RoomsList
+                roomsList={roomList}
+                lookFromTime={lookFromTime}
+                lookToTime={lookToTime}
+            />
         </div>
     );
 };

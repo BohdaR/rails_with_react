@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 
-const RoomsFilter = ({offices, floorOnChange, office_idOnChange}) => {
+const RoomsFilter = ({offices, onChangeLookFromTime, onChangeLookToTime, onChangeFloor, onChangeOfficeId}) => {
     const [value, setValue] = useState('1')
+
+    const [lookFromTime, setLookFromTime] = useState('')
+    const [lookToTime, setLookToTime] = useState('')
 
     return (
         <form>
-            <select name="office_id" onChange={(e) => office_idOnChange(e.target.value)}>
+            <select name="office_id" onChange={(e) => onChangeOfficeId(e.target.value)}>
                 {offices.map(office =>
                     <option
                         value={office.id}
@@ -20,10 +23,24 @@ const RoomsFilter = ({offices, floorOnChange, office_idOnChange}) => {
                 value={value}
                 onChange={(e) => {
                     setValue(e.target.value);
-                    floorOnChange(e.target.value);
+                    onChangeFloor(e.target.value);
                 }}/>
-            <input type="datetime-local" name="look_from"/>
-            <input type="datetime-local" name="look_to"/>
+            <input
+                type="datetime-local"
+                value={lookFromTime}
+                name="look_from"
+                onChange={(e) => {
+                    onChangeLookFromTime(e.target.value);
+                    setLookFromTime(e.target.value);
+                }}/>
+            <input
+                type="datetime-local"
+                value={lookToTime}
+                name="look_to"
+                onChange={(e) => {
+                    onChangeLookToTime(e.target.value);
+                    setLookToTime(e.target.value);
+                }}/>
         </form>
     );
 };
