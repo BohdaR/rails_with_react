@@ -1,10 +1,15 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :update, :destroy]
+
   def index
-    @rooms = Room.all
+    query_params = params.permit(:floor, :office_id)
+
+    rooms = Room.where(query_params)
+    render json: rooms
   end
 
   def show
+    render json: @room
   end
 
   def edit

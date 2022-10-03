@@ -2,7 +2,8 @@ class OfficesController < ApplicationController
   before_action :set_office, only: [:show, :update, :destroy]
 
   def index
-    @offices = Office.all
+    offices = Office.all
+    render json: offices
   end
 
   def show
