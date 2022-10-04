@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Office < ApplicationRecord
   validates :street, :house_number, :town, :province, :country, presence: true
 

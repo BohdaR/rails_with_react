@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OfficesController < ApplicationController
   before_action :set_office, only: [:show, :update, :destroy]
 
@@ -39,11 +41,11 @@ class OfficesController < ApplicationController
   end
 
   private
-  def set_office
-    @office = Office.find(params[:id])
-  end
+    def set_office
+      @office = Office.find(params[:id])
+    end
 
-  def room_params
-    params.require(:office).permit(:company_id, :street, :house_number, :town, :province, :country)
-  end
+    def room_params
+      params.require(:office).permit(:company_id, :street, :house_number, :town, :province, :country)
+    end
 end

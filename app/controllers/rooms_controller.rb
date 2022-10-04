@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :update, :destroy]
 
@@ -42,11 +44,11 @@ class RoomsController < ApplicationController
   end
 
   private
-  def set_room
-    @room = Room.find(params[:id])
-  end
+    def set_room
+      @room = Room.find(params[:id])
+    end
 
-  def room_params
-    params.require(:room).permit(:office_id, :floor, :name, :company_id)
-  end
+    def room_params
+      params.require(:room).permit(:office_id, :floor, :name, :company_id)
+    end
 end

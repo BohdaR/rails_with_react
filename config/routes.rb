@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   resources :reservations
   resources :offices
   resources :rooms do
@@ -7,9 +9,9 @@ Rails.application.routes.draw do
   end
   devise_for :user,
      controllers: {
-       omniauth_callbacks: 'users/omniauth_callbacks'
+       omniauth_callbacks: "users/omniauth_callbacks"
      }
 
-  root 'pages#index'
-  get '/booking', to: 'pages#booking', as: 'booking'
+  root "pages#index"
+  get "/booking", to: "pages#booking", as: "booking"
 end

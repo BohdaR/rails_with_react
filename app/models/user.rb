@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   has_one :employee
 
@@ -8,7 +10,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   def admin?
-    role == 'admin'
+    role == "admin"
   end
 
   def self.from_google(auth)
