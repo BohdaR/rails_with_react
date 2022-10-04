@@ -10,6 +10,7 @@ AllCops:
   DisabledByDefault: true
   SuggestExtensions: false
   Exclude:
+    - '**/db/schema.rb'
     - '**/tmp/**/*'
     - '**/templates/**/*'
     - '**/vendor/**/*'
