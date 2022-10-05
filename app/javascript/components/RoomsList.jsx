@@ -1,15 +1,14 @@
 import React from 'react';
 import Room from "./Room";
 
-const RoomsList = ({roomsList, lookFromTime, lookToTime}) => {
+const RoomsList = ({roomsList, ...props}) => {
   return (
     <div>
       {roomsList.map((room) =>
         <Room
           key={room.id}
           room={room}
-          lookFromTime={lookFromTime}
-          lookToTime={lookToTime}
+          {...props}
         />
       )}
     </div>

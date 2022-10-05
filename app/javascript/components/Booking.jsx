@@ -4,11 +4,11 @@ import RoomsList from "./RoomsList";
 import {get} from "./useAPI/useAPI"
 
 
-const Booking = ({defaultOffice}) => {
+const Booking = ({defaultOffice, form_authenticity_token}) => {
   const [offices, setOffices] = useState([])
   const [roomList, setRoomList] = useState([])
 
-  const [lookFromTime, setLookFromTime] = useState('')
+  const [lookFromTime, setLookFromTime] = useState(Date.now())
   const [lookToTime, setLookToTime] = useState('')
 
   const [roomFloor, setRoomFloor] = useState('1')
@@ -18,6 +18,7 @@ const Booking = ({defaultOffice}) => {
     get(`${process.env.HOST}/offices`)
       .then(
         (response) => {
+          console.log(new Date(Date.now()))
           setOffices(response.data);
         })
   }, []);
@@ -44,6 +45,7 @@ const Booking = ({defaultOffice}) => {
         roomsList={roomList}
         lookFromTime={lookFromTime}
         lookToTime={lookToTime}
+        token={form_authenticity_token}
       />
     </div>
   );
