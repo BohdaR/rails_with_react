@@ -3,8 +3,19 @@ import {post} from "./useAPI/useAPI";
 
 const Place = ({place, token, start_at, end_at}) => {
   const [showPlace, setShowPlace] = useState(true)
+  const [error, setError] = useState(null)
+  const confirmationMessage = `
+  Are you sure you want to book 
+  seat number ${place.number} 
+  from ${start_at.replace('T', ' ')} 
+  to ${end_at.replace('T', ' ')}
+  `
 
   const bookPlace = () => {
+    if (start_at > end_at) {
+      setError('end date must be greater than start date')
+      return
+    }
     setShowPlace(false)
 
     post(`${process.env.HOST}/reservations`, {
@@ -23,10 +34,13 @@ const Place = ({place, token, start_at, end_at}) => {
     <div>
       {
         showPlace ?
-          <button onClick={() => {if (confirm('Are you sure?')) bookPlace()}}>
+          <button onClick={() => {
+            if (confirm(confirmationMessage)) bookPlace()
+          }}>
             Book a {place.number} place
           </button> : null
       }
+      <h2>{error}</h2>
     </div>
   )
 };

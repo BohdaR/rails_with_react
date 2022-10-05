@@ -6,7 +6,7 @@ const Room = ({room, ...props}) => {
 
   return (
     <div>
-      <h1 onClick={() => setShowRoomPlaces(true)}>{room.name}</h1>
+      <h1 onClick={() => setShowRoomPlaces(!showRoomPlaces)}>{room.name}</h1>
       {showRoomPlaces ?
         <PlacesList
           roomId={room.id}

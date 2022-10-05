@@ -8,8 +8,11 @@ const Booking = ({defaultOffice, form_authenticity_token}) => {
   const [offices, setOffices] = useState([])
   const [roomList, setRoomList] = useState([])
 
-  const [lookFromTime, setLookFromTime] = useState(Date.now())
-  const [lookToTime, setLookToTime] = useState('')
+
+  const today = new Date(Date.now())
+  const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
+  const [lookFromTime, setLookFromTime] = useState(today.toISOString().substring(0, 16))
+  const [lookToTime, setLookToTime] = useState(tomorrow.toISOString().substring(0, 16))
 
   const [roomFloor, setRoomFloor] = useState('1')
   const [roomOfficeId, setRoomOfficeId] = useState(defaultOffice.id)
@@ -18,7 +21,6 @@ const Booking = ({defaultOffice, form_authenticity_token}) => {
     get(`${process.env.HOST}/offices`)
       .then(
         (response) => {
-          console.log(new Date(Date.now()))
           setOffices(response.data);
         })
   }, []);
@@ -38,6 +40,8 @@ const Booking = ({defaultOffice, form_authenticity_token}) => {
         defaultOffice={roomOfficeId}
         onChangeFloor={setRoomFloor}
         onChangeOfficeId={setRoomOfficeId}
+        lookToTime={lookToTime}
+        lookFromTime={lookFromTime}
         onChangeLookFromTime={setLookFromTime}
         onChangeLookToTime={setLookToTime}
       />

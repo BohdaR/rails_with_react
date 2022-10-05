@@ -5,14 +5,13 @@ const RoomsFilter = ({
                        defaultOffice,
                        onChangeLookFromTime,
                        onChangeLookToTime,
+                       lookFromTime,
+                       lookToTime,
                        onChangeFloor,
                        onChangeOfficeId
                      }) => {
   const [value, setValue] = useState('1')
   const [office, setOffice] = useState(defaultOffice)
-
-  const [lookFromTime, setLookFromTime] = useState('')
-  const [lookToTime, setLookToTime] = useState('')
 
   return (
     <form>
@@ -39,18 +38,18 @@ const RoomsFilter = ({
       <input
         type="datetime-local"
         value={lookFromTime}
+        min={lookFromTime}
         name="look_from"
         onChange={(e) => {
           onChangeLookFromTime(e.target.value);
-          setLookFromTime(e.target.value);
         }}/>
       <input
         type="datetime-local"
         value={lookToTime}
+        min={lookFromTime}
         name="look_to"
         onChange={(e) => {
           onChangeLookToTime(e.target.value);
-          setLookToTime(e.target.value);
         }}/>
     </form>
   );
