@@ -3,7 +3,7 @@ import Room from "./Room";
 
 const RoomsList = ({roomsList, ...props}) => {
   return (
-    <div>
+    <div className="roomsList">
       {roomsList.map((room) =>
         <Room
           key={room.id}

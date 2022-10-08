@@ -4,10 +4,11 @@ import AuthenticityTokenInput from "./Inputs/AuthenticityTokenInput";
 import EmailInput from "./Inputs/EmailInput";
 import PasswordInput from "./Inputs/PasswordInput";
 import HiddenMethodInput from "./Inputs/HiddenMethodInput";
+import {authentication} from '../stylesheets/authentication_form.module.css'
 
 const EditUserForm = ({form_authenticity_token}) => {
   return (
-    <div className="authentication">
+    <div className={authentication}>
       <h1>Edit profile</h1>
       <form id="edit_user" action="/user" method="post">
         <HiddenMethodInput method="put"/>

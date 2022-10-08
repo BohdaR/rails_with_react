@@ -27,6 +27,8 @@ const Place = ({place, token, start_at, end_at}) => {
       }
     }).then((response) => {
       console.log(response)
+    }).then((errors) => {
+      console.log(errors)
     })
   }
 
@@ -34,13 +36,15 @@ const Place = ({place, token, start_at, end_at}) => {
     <div>
       {
         showPlace ?
-          <button onClick={() => {
-            if (confirm(confirmationMessage)) bookPlace()
-          }}>
-            Book a {place.number} place
-          </button> : null
+          <div>
+            <button onClick={() => {
+              if (confirm(confirmationMessage)) bookPlace()
+            }}>
+              Book a {place.number} place
+            </button>
+            <h2>{error}</h2>
+          </div> : null
       }
-      <h2>{error}</h2>
     </div>
   )
 };

@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import RoomsFilter from "./RoomsFilter";
 import RoomsList from "./RoomsList";
 import {get} from "./useAPI/useAPI"
+import style from '../stylesheets/booking.module.css'
 
 
 const Booking = ({defaultOffice, form_authenticity_token}) => {
   const [offices, setOffices] = useState([])
   const [roomList, setRoomList] = useState([])
-
 
   const today = new Date(Date.now())
   const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
@@ -34,7 +34,7 @@ const Booking = ({defaultOffice, form_authenticity_token}) => {
   }, [roomFloor, roomOfficeId]);
 
   return (
-    <div>
+    <div className={style.bookingWrapper}>
       <RoomsFilter
         offices={offices}
         defaultOffice={roomOfficeId}
