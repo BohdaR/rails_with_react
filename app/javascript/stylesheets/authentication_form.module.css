@@ -25,7 +25,6 @@ input[type="email"], input[type="password"]{
     outline: none;
     border: none;
     border-bottom: 2px solid #8B00FF;
-    box-shadow: 2px 2px 2px  #dfdfdf, -2px -2px 2px #dfdfdf;
 }
 label{
     font-size: 20px;

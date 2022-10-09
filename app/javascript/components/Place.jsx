@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import {post} from "./useAPI/useAPI";
+import style from '../stylesheets/booking.module.css'
 
 const Place = ({place, token, start_at, end_at}) => {
   const [showPlace, setShowPlace] = useState(true)
   const [error, setError] = useState(null)
   const confirmationMessage = `
   Are you sure you want to book 
-  seat number ${place.number} 
-  from ${start_at.replace('T', ' ')} 
-  to ${end_at.replace('T', ' ')}
+  a seat number ${place.number} 
+  from ${start_at.replace('T', ' ')} to ${end_at.replace('T', ' ')}
   `
 
   const bookPlace = () => {
@@ -33,14 +33,14 @@ const Place = ({place, token, start_at, end_at}) => {
   }
 
   return (
-    <div>
+    <div className={style.place}>
       {
         showPlace ?
           <div>
-            <button onClick={() => {
+            <button className={style.bookingButton} onClick={() => {
               if (confirm(confirmationMessage)) bookPlace()
             }}>
-              Book a {place.number} place
+              Book a place {place.number}
             </button>
             <h2>{error}</h2>
           </div> : null

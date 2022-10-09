@@ -5,14 +5,12 @@ import {get} from "./useAPI/useAPI"
 import style from '../stylesheets/booking.module.css'
 
 
-const Booking = ({defaultOffice, form_authenticity_token}) => {
+const Booking = ({defaultOffice, form_authenticity_token, currentDateTime, tomorrowDateTime}) => {
   const [offices, setOffices] = useState([])
   const [roomList, setRoomList] = useState([])
 
-  const today = new Date(Date.now())
-  const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000)
-  const [lookFromTime, setLookFromTime] = useState(today.toISOString().substring(0, 16))
-  const [lookToTime, setLookToTime] = useState(tomorrow.toISOString().substring(0, 16))
+  const [lookFromTime, setLookFromTime] = useState(currentDateTime.substring(0, 16))
+  const [lookToTime, setLookToTime] = useState(tomorrowDateTime.substring(0, 16))
 
   const [roomFloor, setRoomFloor] = useState('1')
   const [roomOfficeId, setRoomOfficeId] = useState(defaultOffice.id)

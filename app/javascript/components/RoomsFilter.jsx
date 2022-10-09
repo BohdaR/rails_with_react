@@ -15,8 +15,8 @@ const RoomsFilter = ({
   const [office, setOffice] = useState(defaultOffice)
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <div className={roomsFilter}>
+    <div className={roomsFilter}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <div className={wrapper}>
           <label>Pick an office
             <select name="office_id" value={office} onChange={(e) => {
@@ -69,8 +69,8 @@ const RoomsFilter = ({
               }}/>
           </label>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 

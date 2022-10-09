@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Place from "./Place";
 import {get} from "./useAPI/useAPI";
+import style from '../stylesheets/booking.module.css'
 
 const PlacesList = ({roomId, lookFromTime, lookToTime, ...props}) => {
   const [places, setPlaces] = useState([])
@@ -14,7 +15,7 @@ const PlacesList = ({roomId, lookFromTime, lookToTime, ...props}) => {
   }, [lookFromTime, lookToTime])
 
   return (
-    <div>
+    <div className={style.placesList}>
       {places.map((place) =>
         <Place
           key={place.id}

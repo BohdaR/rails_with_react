@@ -7,6 +7,15 @@
     box-sizing: border-box;
 }
 
+body {
+    color: white;
+    background-color: black;
+}
+
+input, select {
+    background-color: #505050;
+}
+
 .container {
     margin: 0 auto;
 }
