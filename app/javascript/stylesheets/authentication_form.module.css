@@ -1,19 +1,20 @@
-.authentication h1{
+h1{
     text-align: center;
     margin: 20px;
 }
 
-.authentication-links{
-    font-size: 20px;
-    text-align: center;
-}
-
-.authentication form {
+.authentication {
     max-width: 600px;
     width: 100%;
     margin: auto;
     padding: 10px;
 }
+
+.authenticationLinks{
+    font-size: 20px;
+    text-align: center;
+}
+
 
 input[type="email"], input[type="password"]{
     margin-bottom: 30px;
@@ -24,7 +25,6 @@ input[type="email"], input[type="password"]{
     outline: none;
     border: none;
     border-bottom: 2px solid #8B00FF;
-    box-shadow: 2px 2px 2px  #dfdfdf, -2px -2px 2px #dfdfdf;
 }
 label{
     font-size: 20px;
@@ -122,7 +122,7 @@ input[type="radio"]:checked + label:after {
     opacity: 1;
 }
 
-.authentication input[type="submit"], .authentication button{
+input[type="submit"], button{
     margin-top: 20px;
     padding: 10px;
     width: 100%;
@@ -130,22 +130,22 @@ input[type="radio"]:checked + label:after {
     font-size: 18px;
 }
 
-.authentication button{
+button{
     background-color: red;
     color: white;
 }
 
-.authentication button:hover{
+button:hover{
     background-color: #790c0c;
     cursor: pointer;
 }
 
-.authentication input[type="submit"]{
+input[type="submit"]{
     background-color: #8B00FF;
     color: white;
 }
 
-.authentication input[type="submit"]:hover{
+input[type="submit"]:hover{
     background-color: #7C00AF;
     cursor: pointer;
 }

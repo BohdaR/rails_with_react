@@ -2,14 +2,15 @@ import React, {useEffect, useState} from 'react';
 import RoomsFilter from "./RoomsFilter";
 import RoomsList from "./RoomsList";
 import {get} from "./useAPI/useAPI"
+import style from '../stylesheets/booking.module.css'
 
 
-const Booking = ({defaultOffice}) => {
+const Booking = ({defaultOffice, form_authenticity_token, currentDateTime, tomorrowDateTime}) => {
   const [offices, setOffices] = useState([])
   const [roomList, setRoomList] = useState([])
 
-  const [lookFromTime, setLookFromTime] = useState('')
-  const [lookToTime, setLookToTime] = useState('')
+  const [lookFromTime, setLookFromTime] = useState(currentDateTime.substring(0, 16))
+  const [lookToTime, setLookToTime] = useState(tomorrowDateTime.substring(0, 16))
 
   const [roomFloor, setRoomFloor] = useState('1')
   const [roomOfficeId, setRoomOfficeId] = useState(defaultOffice.id)
@@ -31,12 +32,14 @@ const Booking = ({defaultOffice}) => {
   }, [roomFloor, roomOfficeId]);
 
   return (
-    <div>
+    <div className={style.bookingWrapper}>
       <RoomsFilter
         offices={offices}
         defaultOffice={roomOfficeId}
         onChangeFloor={setRoomFloor}
         onChangeOfficeId={setRoomOfficeId}
+        lookToTime={lookToTime}
+        lookFromTime={lookFromTime}
         onChangeLookFromTime={setLookFromTime}
         onChangeLookToTime={setLookToTime}
       />
@@ -44,6 +47,7 @@ const Booking = ({defaultOffice}) => {
         roomsList={roomList}
         lookFromTime={lookFromTime}
         lookToTime={lookToTime}
+        token={form_authenticity_token}
       />
     </div>
   );

@@ -4,10 +4,11 @@ import GoogleLoginButton from "./GoogleLoginButton";
 import PasswordInput from "./Inputs/PasswordInput";
 import AuthenticityTokenInput from "./Inputs/AuthenticityTokenInput";
 import EmailInput from "./Inputs/EmailInput";
+import {authentication} from '../stylesheets/authentication_form.module.css'
 
 const RegForm = ({form_authenticity_token}) => {
   return (
-    <div className="authentication">
+    <div className={authentication}>
       <h1>Sing up</h1>
       <form action="/user" id="new_user" method="post">
         <AuthenticityTokenInput token={form_authenticity_token}/>

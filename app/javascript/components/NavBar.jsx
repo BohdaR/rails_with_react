@@ -1,12 +1,14 @@
 import React from 'react';
-
+import style from '../stylesheets/header.module.css'
 import NavItemsGroup from "./NavItemsGroup";
 
 const NavBar = ({leftItems, rightItems}) => {
   return (
-    <div className="top-nav">
-      <NavItemsGroup className={"top-nav-left"} items={leftItems}/>
-      <NavItemsGroup className={"top-nav-right"} items={rightItems}/>
+    <div className={style.topNav}>
+      <div className="container">
+        <NavItemsGroup  items={leftItems}/>
+        <NavItemsGroup className={style.topNavRight} items={rightItems}/>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,95 @@
+.roomTitle {
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.roomTitle:hover {
+    color: #7C00AF;
+}
+
+.bookingWrapper {
+    display: flex;
+    margin: 10px;
+}
+
+.roomsFilter {
+    max-width: 320px;
+}
+
+.roomsList {
+    width: 100%;
+    margin-left: 10px;
+}
+
+.room {
+    font-weight: 400;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #6a6d72;
+    border: 1px solid #ECEFF1;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+}
+
+.placesList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.place {
+    display: block;
+}
+
+.bookingButton {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.bookingButton:hover {
+    cursor: pointer;
+    background-color: darkgreen;
+}
+
+.wrapper {
+    width: 230px;
+}
+
+label {
+    font-weight: 400;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #6a6d72;
+    border: 1px solid #ECEFF1;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+}
+
+input, select {
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    line-height: 1.5rem;
+    font-size: 1rem;
+    color: white;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+input:focus, select:focus {
+    outline: none;
+}
+
+select {
+    appearance: none;
+    border: none;
+    outline: none;
+}
+
+@media (max-width: 900px) {
+    .roomsList {
+        margin: 0 10%;
+        width: 80%;
+    }
+}

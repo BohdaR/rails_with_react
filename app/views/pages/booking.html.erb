@@ -1,1 +1,6 @@
-<%= react_component('Booking', {defaultOffice: @current_office}) %>
+<%= react_component('Booking', {
+  defaultOffice: @current_office,
+  form_authenticity_token: form_authenticity_token,
+  currentDateTime: Time.now,
+  tomorrowDateTime: Time.now + 1.day
+}) %>
