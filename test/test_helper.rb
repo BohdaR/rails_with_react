@@ -1,4 +1,15 @@
 # frozen_string_literal: true
+require 'simplecov'
+SimpleCov.start do
+  add_filter "/config/"
+  add_filter "/test/"
+
+  add_group "Models", "app/models"
+  add_group "Controllers", "app/controllers"
+  add_group "Helpers", "app/helpers"
+  add_group "Jobs", "app/jobs"
+  add_group "Mailers", "app/mailers"
+end
 
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
