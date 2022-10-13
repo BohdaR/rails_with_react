@@ -1,12 +1,26 @@
 # Booking app
 ## 1. How to run on Linux/Ubuntu
-### Firstly you should install ruby 3.1.2, nodejs, npm, yarn.
+### You should install ruby 3.1.2, nodejs, npm, yarn.
 ### 1.1 Install dependencies
+Check current bundler version
 ```bash
-bundle install
+bundler -v
 ```
+If your bundler version isn't 2.3.19, you should uninstall your current version and install 2.3.19
+```bash
+gem uninstall bundler -v YOUR_VERSION
+```
+Install bundler 2.3.19
+```bash
+gem install bundler -v 2.3.19
+```
+Install yarn
 ```bash
 npm install yarn --global
+```
+Then install gems and node packages
+```bash
+bundler install
 ```
 ```bash
 npm install
