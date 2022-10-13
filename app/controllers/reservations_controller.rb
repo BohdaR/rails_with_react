@@ -4,8 +4,8 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :update, :destroy]
 
   def index
-    @reservations = Reservation.where(employee: get_employee)
-    render json: @reservations
+    reservations = Reservation.reservations_info.where(employee: get_employee)
+    render json: reservations
   end
 
   def show
