@@ -5,6 +5,7 @@ WORKDIR /App
 COPY Gemfile /App/Gemfile
 COPY Gemfile.lock /App/Gemfile.lock
 RUN bundle install
+RUN npm install --global yarn
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
