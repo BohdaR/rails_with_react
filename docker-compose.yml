@@ -7,7 +7,7 @@ services:
     build:
       dockerfile: docker/db/Dockerfile
     environment:
-      - POSTGRES_PASSWORD="${DB_PASSWORD}"
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
       - "5432:5432"
   web:
