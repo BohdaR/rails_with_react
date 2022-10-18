@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :offices
   resources :rooms do
     resources :places
+    resources :favorites, only: [:create, :destroy]
   end
+  
   devise_for :user,
      controllers: {
        omniauth_callbacks: "users/omniauth_callbacks"

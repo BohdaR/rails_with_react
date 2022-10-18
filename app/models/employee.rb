@@ -5,4 +5,5 @@ class Employee < ApplicationRecord
   belongs_to :company
   belongs_to :office
   has_many :reservations
+  has_many :favorites
 end
