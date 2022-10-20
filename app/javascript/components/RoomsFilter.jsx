@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
-import {roomsFilter, wrapper} from '../stylesheets/booking.module.css'
+import {roomsFilter,
+  wrapper,
+  bookingLabel,
+  bookingInput,
+  officePicker} from '../stylesheets/booking.module.css'
 
 const RoomsFilter = ({
                        offices,
@@ -18,8 +22,8 @@ const RoomsFilter = ({
     <div className={roomsFilter}>
       <form onSubmit={(e) => e.preventDefault()}>
         <div className={wrapper}>
-          <label>Pick an office
-            <select name="office_id" value={office} onChange={(e) => {
+          <label className={bookingLabel}>Pick an office
+            <select className={officePicker} name="office_id" value={office} onChange={(e) => {
               onChangeOfficeId(e.target.value)
               setOffice(e.target.value)
             }}>
@@ -34,8 +38,9 @@ const RoomsFilter = ({
           </label>
         </div>
         <div className={wrapper}>
-          <label>Pick a floor
+          <label className={bookingLabel}>Pick a floor
             <input
+              className={bookingInput}
               type="number"
               min="1"
               value={value}
@@ -46,8 +51,9 @@ const RoomsFilter = ({
           </label>
         </div>
         <div className={wrapper}>
-          <label>Pick a start date
+          <label className={bookingLabel}>Pick a start date
             <input
+              className={bookingInput}
               type="datetime-local"
               value={lookFromTime}
               min={lookFromTime}
@@ -58,8 +64,9 @@ const RoomsFilter = ({
           </label>
         </div>
         <div className={wrapper}>
-          <label>Pick an end date
+          <label className={bookingLabel}>Pick an end date
             <input
+              className={bookingInput}
               type="datetime-local"
               value={lookToTime}
               min={lookFromTime}

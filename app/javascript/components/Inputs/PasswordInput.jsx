@@ -1,8 +1,13 @@
 import React from 'react';
+import {authenticationPasswordInput} from '../../stylesheets/authentication_form.module.css'
 
 const PasswordInput = ({...props}) => {
   return (
-    <input type="password" {...props} />
+    <input
+      className={authenticationPasswordInput}
+      type="password"
+      {...props}
+    />
   );
 };
 

@@ -1,4 +1,4 @@
-h1{
+.authenticationHeadline{
     text-align: center;
     margin: 20px;
 }
@@ -15,8 +15,11 @@ h1{
     text-align: center;
 }
 
+.checkboxLabel {
+    font-size: 20px;
+}
 
-input[type="email"], input[type="password"]{
+.authenticationEmailInput, .authenticationPasswordInput{
     margin-bottom: 30px;
     padding-left: 5px;
     width: 100%;
@@ -26,23 +29,20 @@ input[type="email"], input[type="password"]{
     border: none;
     border-bottom: 2px solid #8B00FF;
 }
-label{
-    font-size: 20px;
-}
 
-input[type="checkbox"]:checked,
-input[type="checkbox"]:not(:checked),
-input[type="radio"]:checked,
-input[type="radio"]:not(:checked)
+.checkbox:checked,
+.checkbox:not(:checked),
+.radio:checked,
+.radio:not(:checked)
 {
     position: absolute;
     left: -9999px;
 }
 
-input[type="checkbox"]:checked + label,
-input[type="checkbox"]:not(:checked) + label,
-input[type="radio"]:checked + label,
-input[type="radio"]:not(:checked) + label {
+.checkbox:checked + label,
+.checkbox:not(:checked) + label,
+.radio:checked + label,
+.radio:not(:checked) + label {
     display: inline-block;
     position: relative;
     padding-left: 28px;
@@ -50,10 +50,10 @@ input[type="radio"]:not(:checked) + label {
     cursor: pointer;
 }
 
-input[type="checkbox"]:checked + label:before,
-input[type="checkbox"]:not(:checked) + label:before,
-input[type="radio"]:checked + label:before,
-input[type="radio"]:not(:checked) + label:before {
+.checkbox:checked + label:before,
+.checkbox:not(:checked) + label:before,
+.radio:checked + label:before,
+.radio:not(:checked) + label:before {
     content: "";
     position: absolute;
     left: 0;
@@ -64,20 +64,20 @@ input[type="radio"]:not(:checked) + label:before {
     background-color: #ffffff;
 }
 
-input[type="checkbox"]:checked + label:before,
-input[type="checkbox"]:not(:checked) + label:before {
+.checkbox:checked + label:before,
+.checkbox:not(:checked) + label:before {
     border-radius: 2px;
 }
 
-input[type="radio"]:checked + label:before,
-input[type="radio"]:not(:checked) + label:before {
+.radio:checked + label:before,
+.radio:not(:checked) + label:before {
     border-radius: 100%;
 }
 
-input[type="checkbox"]:checked + label:after,
-input[type="checkbox"]:not(:checked) + label:after,
-input[type="radio"]:checked + label:after,
-input[type="radio"]:not(:checked) + label:after {
+.checkbox:checked + label:after,
+.checkbox:not(:checked) + label:after,
+.radio:checked + label:after,
+.radio:not(:checked) + label:after {
     content: "";
     position: absolute;
     -webkit-transition: all 0.2s ease;
@@ -86,8 +86,8 @@ input[type="radio"]:not(:checked) + label:after {
     transition: all 0.2s ease;
 }
 
-input[type="checkbox"]:checked + label:after,
-input[type="checkbox"]:not(:checked) + label:after {
+.checkbox:checked + label:after,
+.checkbox:not(:checked) + label:after {
     left: 3px;
     top: 4px;
     width: 10px;
@@ -102,8 +102,8 @@ input[type="checkbox"]:not(:checked) + label:after {
     transform: rotate(-45deg);
 }
 
-input[type="radio"]:checked + label:after,
-input[type="radio"]:not(:checked) + label:after {
+.radio:checked + label:after,
+.radio:not(:checked) + label:after {
     left: 5px;
     top: 5px;
     width: 10px;
@@ -112,17 +112,17 @@ input[type="radio"]:not(:checked) + label:after {
     background-color: #8b00ff;
 }
 
-input[type="checkbox"]:not(:checked) + label:after,
-input[type="radio"]:not(:checked) + label:after {
+.checkbox:not(:checked) + label:after,
+.radio:not(:checked) + label:after {
     opacity: 0;
 }
 
-input[type="checkbox"]:checked + label:after,
-input[type="radio"]:checked + label:after {
+.checkbox:checked + label:after,
+.radio:checked + label:after {
     opacity: 1;
 }
 
-input[type="submit"], button{
+.submit, .googleLogInButton{
     margin-top: 20px;
     padding: 10px;
     width: 100%;
@@ -130,22 +130,22 @@ input[type="submit"], button{
     font-size: 18px;
 }
 
-button{
+.googleLogInButton{
     background-color: red;
     color: white;
 }
 
-button:hover{
+.googleLogInButton:hover{
     background-color: #790c0c;
     cursor: pointer;
 }
 
-input[type="submit"]{
+.submit{
     background-color: #8B00FF;
     color: white;
 }
 
-input[type="submit"]:hover{
+.submit:hover{
     background-color: #7C00AF;
     cursor: pointer;
 }

@@ -55,7 +55,7 @@
     width: 230px;
 }
 
-label {
+.bookingLabel {
     font-weight: 400;
     display: block;
     margin-bottom: 0.5rem;
@@ -65,7 +65,7 @@ label {
     border-radius: 0.5rem;
 }
 
-input, select {
+.bookingInput, .officePicker {
     font-family: 'Roboto', sans-serif;
     display: block;
     border-radius: 0.25rem;
@@ -77,11 +77,11 @@ input, select {
     margin-top: 0.5rem;
 }
 
-input:focus, select:focus {
+.bookingInput:focus, .officePicker:focus {
     outline: none;
 }
 
-select {
+.officePicker {
     appearance: none;
     border: none;
     outline: none;
