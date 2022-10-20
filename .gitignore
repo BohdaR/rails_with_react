@@ -38,6 +38,7 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 /config/secrets.yml
+/config/database.yml
 master.key
 
 /public/packs
