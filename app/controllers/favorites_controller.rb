@@ -1,4 +1,6 @@
-	class FavoritesController < ApplicationController
+# frozen_string_literal: true
+
+class FavoritesController < ApplicationController
 	before_action :set_place, only: [:create, :destroy]
 
 	def index
