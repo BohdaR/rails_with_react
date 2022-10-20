@@ -1,4 +1,4 @@
-class FavoritesController < ApplicationController
+	class FavoritesController < ApplicationController
 	before_action :set_place, only: [:create, :destroy]
 
 	def index
@@ -24,14 +24,10 @@ class FavoritesController < ApplicationController
 	private 
 
 	def get_employee
-		current_user.employee 
-	end 
+			current_user.employee 
+		end 
 
-	def set_place
-		@place = Place.find(params[:place_id])
-	end
-
-	# def favorite_params
-	# 	params.require(:favorite).permit(:place_id)
-	# end
+		def set_place
+			@place = Place.find(params[:place_id])
+		end
 end
