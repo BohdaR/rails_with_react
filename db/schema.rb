@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_28_162920) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_18_124314) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_162920) do
     t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["office_id"], name: "index_employees_on_office_id"
     t.index ["user_id"], name: "index_employees_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.bigint "place_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_favorites_on_employee_id"
+    t.index ["place_id"], name: "index_favorites_on_place_id"
   end
 
   create_table "offices", force: :cascade do |t|
@@ -95,6 +104,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_28_162920) do
   add_foreign_key "employees", "companies"
   add_foreign_key "employees", "offices"
   add_foreign_key "employees", "users"
+  add_foreign_key "favorites", "employees"
+  add_foreign_key "favorites", "places"
   add_foreign_key "offices", "companies"
   add_foreign_key "places", "rooms"
   add_foreign_key "reservations", "employees"
