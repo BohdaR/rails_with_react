@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_10_18_124314) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -23,9 +20,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_124314) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "company_id", null: false
-    t.bigint "office_id", null: false
+    t.integer "user_id", null: false
+    t.integer "company_id", null: false
+    t.integer "office_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_employees_on_company_id"
@@ -34,8 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_124314) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.bigint "employee_id", null: false
-    t.bigint "place_id", null: false
+    t.integer "employee_id", null: false
+    t.integer "place_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_favorites_on_employee_id"
@@ -43,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_124314) do
   end
 
   create_table "offices", force: :cascade do |t|
-    t.bigint "company_id", null: false
+    t.integer "company_id", null: false
     t.string "street"
     t.string "house_number"
     t.string "town"
@@ -55,7 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_124314) do
   end
 
   create_table "places", force: :cascade do |t|
-    t.bigint "room_id", null: false
+    t.integer "room_id", null: false
     t.integer "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -63,8 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_124314) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.bigint "employee_id", null: false
-    t.bigint "place_id", null: false
+    t.integer "employee_id", null: false
+    t.integer "place_id", null: false
     t.datetime "start_at"
     t.datetime "end_at"
     t.datetime "created_at", null: false
@@ -74,12 +71,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_18_124314) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.bigint "office_id", null: false
+    t.integer "office_id", null: false
     t.integer "floor"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "company_id", null: false
+    t.integer "company_id", null: false
     t.index ["company_id"], name: "index_rooms_on_company_id"
     t.index ["office_id"], name: "index_rooms_on_office_id"
   end
