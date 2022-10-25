@@ -160,7 +160,7 @@
     font-family: var(--form-font);
     border-radius: 5px;
     border: 2px solid transparent;
-    margin: 10px;
+    margin: 10px 0;
 }
 
 .submit{
@@ -173,7 +173,7 @@
     cursor: pointer;
 }
 
-.formSeperator{
+.formSeparator{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -184,7 +184,7 @@
     font-weight: 300;
 }
 
-.formSeperator::before{
+.formSeparator::before{
     content: "";
     width: 125px;
     height: 1px;
@@ -193,7 +193,7 @@
     padding-left: 0px;
 }
 
-.formSeperator::after{
+.formSeparator::after{
     content: "";
     width: 125px;
     height: 1px;
@@ -239,6 +239,7 @@ div.authenticationLinks .submit {
     background-repeat: no-repeat;
     background-position: 15px 15px;
     background-size: 22px;
+    border: 1px solid #7F8C9F !important;;
 }
 
 div.authenticationLinks .submit:hover {
