@@ -10,7 +10,7 @@ import {authentication,
   checkboxLabel,
   checkbox,
   authenticationHeadline,
-  formSeperator,
+  formSeparator,
   forgotPasswordLink,
   signupWrapper
 } from '../stylesheets/authentication_form.module.css'
@@ -28,7 +28,7 @@ const LoginForm = ({form_authenticity_token}) => {
           <label className={checkboxLabel} htmlFor="user_remember_me">Remember me</label>
           <SubmitInput value="Log in"/>
         </form>
-        <div className={formSeperator}>OR</div>
+        <div className={formSeparator}>OR</div>
         <div className={authenticationLinks}>
             <GoogleLoginButton form_authenticity_token={form_authenticity_token}/>
           <a href="/user/password/new" className={forgotPasswordLink}>Forgot your password?</a>
