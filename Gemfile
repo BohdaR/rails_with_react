@@ -67,6 +67,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "rspec"
   gem "rails-controller-testing"
+  gem "pry"
 end
 
 group :development do
