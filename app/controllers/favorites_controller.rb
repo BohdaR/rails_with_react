@@ -4,7 +4,7 @@ class FavoritesController < ApplicationController
   before_action :set_place, only: [:create, :destroy]
 
   def index
-    favorites = Favorite.where(employee_id: @employee.id)
+    favorites = Favorite.where(employee: get_employee)
     render json: favorites
   end
 
