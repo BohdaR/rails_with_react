@@ -13,7 +13,7 @@ RSpec.describe OfficesController, type: :controller do
     country: "Україна"
   ).first_or_create }
   before(:each) do
-    user = User.find_or_create_by(email: "foo@bar.com")
+    user = User.create(email: "foo@bar.com", password: "SomeUserPass")
     sign_in(user)
   end
   describe "index action" do
