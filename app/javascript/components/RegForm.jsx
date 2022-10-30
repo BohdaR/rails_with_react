@@ -29,7 +29,7 @@ const RegForm = ({form_authenticity_token}) => {
         </div>
         <div className={signupWrapper}>
           Already have an account?
-          <a className="signin-links signin-links-text" href="/user/sign_up">Log in</a>
+          <a className="signin-links signin-links-text" href="/user/sign_in">Log in</a>
         </div>
       </div>
     </div>
