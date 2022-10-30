@@ -66,6 +66,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "rspec-rails"
   gem "rspec"
+  gem "pry"
   gem "rails-controller-testing"
   gem "factory_bot_rails"
   gem "faker", "~> 1.6", ">= 1.6.6"
