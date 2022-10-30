@@ -33,7 +33,7 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    it "render all offices" do
+    it "render all rooms" do
       expect(JSON.parse(response.body)).to eq(rooms.as_json)
     end
   end
@@ -65,18 +65,18 @@ RSpec.describe RoomsController, type: :controller do
         name: "Some room"
       }
     end
-    describe "create office with correct params" do
+    describe "create room with correct params" do
       before(:each) do
         post :create, params: { room: correct_params }
       end
       it "returns http success" do
         expect(response).to have_http_status(:success)
       end
-      it "render created office" do
+      it "render created room" do
         expect(JSON.parse(response.body)).to eq(Room.where(correct_params).first.as_json)
       end
     end
-    describe "create office with incorrect params" do
+    describe "create room with incorrect params" do
       it "returns http success" do
         post :create, params: { room: incorrect_params }
         expect(response).to have_http_status(:bad_request)
@@ -113,7 +113,7 @@ RSpec.describe RoomsController, type: :controller do
         put :update, params: { id: room.id, room: correct_params }
         expect(response).to have_http_status(:success)
       end
-      it "render updated office" do
+      it "render updated room" do
         room_before_update = Room.find(room.id).as_json
         patch :update, params: { id: room.id, room: correct_params }
         room_after_update = Room.find(room.id).as_json
@@ -144,7 +144,7 @@ RSpec.describe RoomsController, type: :controller do
     it "returns http success" do
       expect(response).to have_http_status(:success)
     end
-    it "return deleted office" do
+    it "return deleted room" do
       expect(JSON.parse(response.body)).to eq(room.as_json)
     end
   end
