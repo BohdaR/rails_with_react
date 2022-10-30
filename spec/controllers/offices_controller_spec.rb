@@ -3,19 +3,31 @@
 require "rails_helper"
 
 RSpec.describe OfficesController, type: :controller do
-  let(:offices) { Office.all }
-  let(:office) { Office.where(
-    company: Company.where(name: "CyberCraft", domain_name: "cybercraftinc.com").first_or_create,
-    street: "вул. Костя Левицького",
-    house_number: "75a",
-    town: "Львів",
-    province: "Львівська обл.",
-    country: "Україна"
-  ).first_or_create }
   before(:each) do
     user = User.create(email: "foo@bar.com", password: "SomeUserPass")
     sign_in(user)
   end
+  before(:all) do
+    Company.where(name: "CyberCraft", domain_name: "cybercraftinc.com").first_or_create
+    Office.where(
+      company: Company.first,
+      street: "вул. Костя Левицького",
+      house_number: "10",
+      town: "Івано-Франківськ",
+      province: "Івано-Франківська обл.",
+      country: "Україна"
+    ).first_or_create
+    Office.where(
+      company: Company.first,
+      street: "вул. Костя Левицького",
+      house_number: "75a",
+      town: "Львів",
+      province: "Львівська обл.",
+      country: "Україна"
+    ).first_or_create
+  end
+  let(:offices) { Office.all }
+  let(:office) { Office.first }
   describe "index action" do
     before(:each) do
       get :index
@@ -38,8 +50,8 @@ RSpec.describe OfficesController, type: :controller do
     let(:correct_params) do
       {
         company_id: Company.where(name: "CyberCraft", domain_name: "cybercraftinc.com").first_or_create.id,
-        street: "вул. Костя Левицького",
-        house_number: "75a",
+        street: "вул. Тараса Шевченка",
+        house_number: "175a",
         town: "Львів",
         province: "Львівська обл.",
         country: "Україна"
@@ -62,7 +74,7 @@ RSpec.describe OfficesController, type: :controller do
         expect(response).to have_http_status(:success)
       end
       it "render created office" do
-        expect(JSON.parse(response.body)).to eq(Office.where(correct_params).first_or_create.as_json)
+        expect(JSON.parse(response.body)).to eq(Office.where(correct_params).first.as_json)
       end
     end
     describe "create office with incorrect params" do
