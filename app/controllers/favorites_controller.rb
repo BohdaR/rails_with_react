@@ -1,33 +1,32 @@
 # frozen_string_literal: true
 
 class FavoritesController < ApplicationController
-  before_action :set_place, only: [:create, :destroy]
-
   def index
     favorites = Favorite.where(employee: get_employee)
     render json: favorites
   end
 
   def create
-    favorite = get_employee.favorites.new(place_id: @place.id)
+    favorite = Favorite.new(favorite_params)
+    favorite.employee = get_employee
     if favorite.save
-      render json: favorite
+      render json: favorite, status: :created
     else
-      render json: favorite.errors.full_messages, status: 422
+      render json: { errors: { message: favorite.errors.full_messages } }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    favorite = get_employee.favorites.find_by(place_id: @place.id)
+    favorite = Favorite.find(params[:id])
     render json: favorite.destroy if favorite.present?
   end
 
   private
     def get_employee
       current_user.employee
-      end
+    end
 
-    def set_place
-      @place = Place.find(params[:place_id])
+    def favorite_params
+      params.permit(:place_id)
     end
 end
