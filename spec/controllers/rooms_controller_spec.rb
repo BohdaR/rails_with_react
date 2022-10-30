@@ -73,7 +73,7 @@ RSpec.describe RoomsController, type: :controller do
         expect(response).to have_http_status(:success)
       end
       it "render created office" do
-        expect(JSON.parse(response.body)).to eq(Room.where(correct_params).first_or_create.as_json)
+        expect(JSON.parse(response.body)).to eq(Room.where(correct_params).first.as_json)
       end
     end
     describe "create office with incorrect params" do
