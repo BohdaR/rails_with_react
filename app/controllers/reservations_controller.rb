@@ -14,6 +14,7 @@ class ReservationsController < ApplicationController
 
   def create
     reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
+
     if reservation.save
       render json: reservation
     else
@@ -37,6 +38,7 @@ class ReservationsController < ApplicationController
     def reservation_params
       params.require(:reservation).permit(:place_id, :start_at, :end_at)
     end
+
 
     def get_employee
       current_user.employee
