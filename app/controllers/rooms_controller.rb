@@ -14,33 +14,25 @@ class RoomsController < ApplicationController
     render json: @room
   end
 
-  def edit
-  end
-
-  def new
-    @room = Room.new
-  end
-
   def create
-    @room = Room.new(room_params)
-    if @room.save
-      render json: @room
+    room = Room.new(room_params)
+    if room.save
+      render json: room
     else
-      render :new, status: :unprocessable_entity
+      render json: room.errors, status: :bad_request
     end
   end
 
   def update
     if @room.update(room_params)
-      redirect_to room_url(@room)
+      render json: @room
     else
-      render :new, status: :unprocessable_entity
+      render json: @room.errors, status: :bad_request
     end
   end
 
   def destroy
-    @room.destroy
-    redirect_to rooms_url
+    render json: @room.destroy
   end
 
   private
