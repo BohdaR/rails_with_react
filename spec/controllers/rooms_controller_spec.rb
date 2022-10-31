@@ -123,15 +123,15 @@ RSpec.describe RoomsController, type: :controller do
       end
     end
     describe "update room with incorrect params" do
-      it "returns http success via patch request" do
+      it "returns http bad request via patch request" do
         patch :update, params: { id: room.id, room: incorrect_params }
         expect(response).to have_http_status(:bad_request)
       end
-      it "returns http success via post request" do
+      it "returns http bad request via post request" do
         post :update, params: { id: room.id, room: incorrect_params }
         expect(response).to have_http_status(:bad_request)
       end
-      it "returns http success via put request" do
+      it "returns http bad request via put request" do
         put :update, params: { id: room.id, room: incorrect_params }
         expect(response).to have_http_status(:bad_request)
       end
