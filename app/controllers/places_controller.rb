@@ -35,7 +35,7 @@ class PlacesController < ApplicationController
 
   private
     def place_params
-      params.require(:place).permit(:number)
+      params.require(:place).permit(:room_id, :number)
     end
 
     def set_place
@@ -44,7 +44,10 @@ class PlacesController < ApplicationController
 
     def get_unreserved_places
       look_from = params[:look_from] || Time.now
-      look_to = params[:look_to] || look_from
+      look_to = params[:look_to] || look_from + 1.day
+      if look_from > look_to
+        render json: { look_from: ["must be greater than look_from"] }, status: :bad_request
+      end
 
       @unreserved_places = Place.where
                                 .not(id: Place.joins(:reservations)
