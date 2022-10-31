@@ -5,5 +5,5 @@ class Room < ApplicationRecord
 
   belongs_to :office
   belongs_to :company
-  has_many :places
+  has_many :places, dependent: :destroy
 end
