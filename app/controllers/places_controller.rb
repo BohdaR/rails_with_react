@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 class PlacesController < ApplicationController
-  before_action :get_unreserved_places, only: :index
   before_action :set_place, only: [:show, :update, :destroy]
 
   def index
-    render json: @unreserved_places
+    free_places = Place.free_places(
+      params[:look_from],
+      params[:look_to],
+      params[:room_id]
+    )
+    render json: free_places
   end
 
   def show
@@ -40,20 +44,5 @@ class PlacesController < ApplicationController
 
     def set_place
       @place = Place.where(room_id: params[:room_id]).find(params[:id])
-    end
-
-    def get_unreserved_places
-      look_from = params[:look_from] || Time.now
-      look_to = params[:look_to] || look_from + 1.day
-      if look_from > look_to
-        render json: { look_from: ["must be greater than look_from"] }, status: :bad_request
-      end
-
-      @unreserved_places = Place.where
-                                .not(id: Place.joins(:reservations)
-                                              .where("start_at < ?", look_from).where("end_at > ?", look_from)
-                                              .or(Reservation.where("start_at < ?", look_to).where("end_at > ?", look_to))
-                                              .or(Reservation.where("start_at > ?", look_from).where("end_at < ?", look_to)))
-                                .where(room_id: params[:room_id])
     end
 end

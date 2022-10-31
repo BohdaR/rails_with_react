@@ -46,11 +46,6 @@ RSpec.describe PlacesController, type: :controller do
       get :index, params: { room_id: }
       expect(JSON.parse(response.body)).to eq(places.as_json)
     end
-    it "render error if look_from greater than look_to" do
-      get :index, params: { room_id:, look_from: Time.now + 2.day, look_to: Time.now + 5.hour }
-      expect(response).to have_http_status(:bad_request)
-      expect(JSON.parse(response.body)).to eq({ look_from: ["must be greater than look_from"] }.as_json)
-    end
     describe "not render booked places" do
       before(:all) do
         Reservation.create(
