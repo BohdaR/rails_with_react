@@ -11,27 +11,32 @@
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-<%= react_component('NavBar', {
-  leftItems: [
-    {
-      href: ENV.fetch('API_HOST' , 'http://127.0.0.1:3000'), linkText: 'Home'
-    },
-    {
-      href: booking_path, linkText: 'Book a place'
-    }
-],
-  rightItems: [
-    {
-      href: user_signed_in? ? edit_user_registration_path : new_user_registration_path,
-      linkText: user_signed_in? ? current_user.full_name : 'Sing up'
-    },
-    {
-      href: user_signed_in? ? destroy_user_session_path : new_user_session_path,
-      linkText: user_signed_in? ? 'Logout' : 'Login'
-    },
-  ] }) %>
-<div class="container">
-  <%= yield %>
+<div class="wrapper">
+  <%= react_component('NavBar', {
+    leftItems: [
+      {
+        href: ENV.fetch('API_HOST', 'http://127.0.0.1:3000'), linkText: 'Home'
+      },
+      {
+        href: booking_path, linkText: 'Book a place'
+      }
+    ],
+    rightItems: [
+      {
+        href: user_signed_in? ? edit_user_registration_path : new_user_registration_path,
+        linkText: user_signed_in? ? current_user.full_name : 'Sing up'
+      },
+      {
+        href: user_signed_in? ? destroy_user_session_path : new_user_session_path,
+        linkText: user_signed_in? ? 'Logout' : 'Login'
+      },
+    ] }) %>
+  <main>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </main>
+  <%= react_component('Footer') %>
 </div>
 </body>
 </html>
