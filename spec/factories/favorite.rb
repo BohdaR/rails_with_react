@@ -5,9 +5,4 @@ FactoryBot.define do
     employee
     place
   end
-
-  factory :invalid_favorite do
-    employee { nil }
-    place
-  end
 end

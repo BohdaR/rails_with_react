@@ -3,7 +3,7 @@
 class Company < ApplicationRecord
   validates :name, :domain_name, uniqueness: true, presence: true
 
-  has_many :offices
-  has_many :rooms
-  has_many :employees
+  has_many :offices, dependent: :destroy
+  has_many :rooms, dependent: :destroy
+  has_many :employees, dependent: :destroy
 end

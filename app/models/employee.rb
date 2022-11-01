@@ -4,6 +4,6 @@ class Employee < ApplicationRecord
   belongs_to :user
   belongs_to :company
   belongs_to :office
-  has_many :reservations
-  has_many :favorites
+  has_many :reservations, dependent: :delete_all
+  has_many :favorites, dependent: :delete_all
 end

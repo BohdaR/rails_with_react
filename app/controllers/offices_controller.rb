@@ -9,35 +9,28 @@ class OfficesController < ApplicationController
   end
 
   def show
-  end
-
-  def edit
-  end
-
-  def new
-    @office = Room.new
+    render json: @office
   end
 
   def create
-    @office = Room.new(room_params)
-    if @office.save
-      render json: @office
+    office = Office.new(offices_params)
+    if office.save
+      render json: office
     else
-      render :new, status: :unprocessable_entity
+      render json: office.errors, status: :bad_request
     end
   end
 
   def update
-    if @office.update(room_params)
-      redirect_to @office
+    if @office.update(offices_params)
+      render json: @office
     else
-      render :new, status: :unprocessable_entity
+      render json: @office.errors, status: :bad_request
     end
   end
 
   def destroy
-    @office.destroy
-    redirect_to offices_url
+    render json: @office.destroy
   end
 
   private
@@ -45,7 +38,7 @@ class OfficesController < ApplicationController
       @office = Office.find(params[:id])
     end
 
-    def room_params
+    def offices_params
       params.require(:office).permit(:company_id, :street, :house_number, :town, :province, :country)
     end
 end

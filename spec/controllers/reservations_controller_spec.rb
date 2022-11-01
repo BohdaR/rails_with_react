@@ -6,17 +6,21 @@ RSpec.describe ReservationsController, type: :controller do
   let(:reservations) { Reservation.all }
   let(:place) { create(:place) }
   let(:reservation) { create(:reservation) }
+  let(:user) { create(:user) }
+  let(:employee) { create(:employee, user:) }
 
   let(:valid_attributes) do
     {
+      employee_id: employee.id,
       place_id: place.id,
-      start_at: "2022-10-30T18:07",
-      end_at: "2022-10-31T22:07"
+      start_at: Time.now + 4.hour,
+      end_at: Time.now + 6.hour
     }
   end
 
   let(:invalid_attributes) do
     {
+      employee_id: employee.id,
       place_id: 18,
       start_at: nil,
       end_at: Time.now + 4.hours
@@ -24,8 +28,7 @@ RSpec.describe ReservationsController, type: :controller do
   end
 
   before(:each) do
-    current_user = create(:user)
-    sign_in(current_user)
+    sign_in(user)
   end
 
   describe "reservations#index" do
@@ -53,13 +56,25 @@ RSpec.describe ReservationsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
+    it "valid attributes adds a new reservation" do
+      expect { post :create, params: { reservation: valid_attributes } }.to change { Reservation.all.count }.by(1)
+    end
+
     it "renders bad request status" do
       post :create, params: { reservation: invalid_attributes }
       expect(response).to have_http_status(:bad_request)
     end
+
+    it "does not add an invalid reservation" do
+      expect { post :create, params: { reservation: invalid_attributes } }.to change { Reservation.all.count }.by(0)
+    end
   end
 
   describe "reservations#update" do
+    it "renders success status" do
+      post :update, params: { id: reservation.id, reservation: valid_attributes }
+      expect(response).to have_http_status(:success)
+    end
     it "renders bad request status" do
       post :update, params: { id: reservation.id, reservation: invalid_attributes }
       expect(response).to have_http_status(:bad_request)
