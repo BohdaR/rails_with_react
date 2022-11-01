@@ -7,12 +7,11 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    favorite = Favorite.new(favorite_params)
-    favorite.employee = get_employee
+    favorite = Favorite.new({ employee: get_employee }.merge(favorite_params))
     if favorite.save
-      render json: favorite, status: :created
+      render json: favorite
     else
-      render json: { errors: { message: favorite.errors.full_messages } }, status: :unprocessable_entity
+      render json: { errors: { message: favorite.errors.full_messages } }, status: :bad_request
     end
   end
 
@@ -27,6 +26,6 @@ class FavoritesController < ApplicationController
     end
 
     def favorite_params
-      params.permit(:place_id)
+      params.require(:favorite).permit(:place_id)
     end
 end

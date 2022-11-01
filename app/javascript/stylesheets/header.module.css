@@ -1,13 +1,15 @@
 .topNav {
-    background-color: #333;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #173166;
     overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 20px rgba(0,0,0,0.2);
 }
 
 .topNav a {
-    float: left;
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 12px;
     text-decoration: none;
     font-size: 17px;
 }
@@ -22,6 +24,18 @@
     color: white;
 }
 
+.headerNav {
+    display: flex;
+    margin: 15px;
+    justify-content: space-between;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
 .topNavRight {
-    float: right;
+    padding-right: 40px;
+}
+
+.topNavLeft {
+    padding-left: 3 0px;
 }
