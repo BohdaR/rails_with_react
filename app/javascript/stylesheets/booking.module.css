@@ -1,15 +1,17 @@
 .roomTitle {
     padding-left: 5px;
     cursor: pointer;
+    font-size: 1.4rem;
 }
 
 .roomTitle:hover {
-    color: #7C00AF;
+    color: #0c1f43;
 }
 
 .bookingWrapper {
     display: flex;
     margin: 10px;
+    font-family: 'Trebuchet MS', sans-serif;
 }
 
 .roomsFilter {
@@ -18,14 +20,15 @@
 
 .roomsList {
     width: 100%;
-    margin-left: 10px;
+    margin-left: 35px;
 }
 
 .room {
     font-weight: 400;
     display: block;
     margin-bottom: 0.5rem;
-    color: #6a6d72;
+    background-color: #ffffff;
+    color: #173166;
     border: 1px solid #ECEFF1;
     padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;
@@ -42,13 +45,21 @@
 
 .bookingButton {
     margin: 5px;
+    width: 110px;
     padding: 5px;
-    border-radius: 5px;
+    background-color: #416093;
+    border-radius: 4px;
+    border: 0;
+    box-shadow: rgba(1,60,136,.5) 0 -1px 3px 0 inset,rgba(0,44,97,.1) 0 3px 6px 0;
+    box-sizing: border-box;
+    color: #fff;
+    line-height: 26px;
+    cursor: pointer;
 }
 
 .bookingButton:hover {
     cursor: pointer;
-    background-color: darkgreen;
+    background-color: #94a412;
 }
 
 .wrapper {
@@ -58,21 +69,22 @@
 .bookingLabel {
     font-weight: 400;
     display: block;
-    margin-bottom: 0.5rem;
-    color: #6a6d72;
+    color: #f7f7f7;
     border: 1px solid #ECEFF1;
     padding: 0.5rem 0.75rem;
+    background-color: #173166;
     border-radius: 0.5rem;
 }
 
 .bookingInput, .officePicker {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Trebuchet MS', sans-serif;
     display: block;
+    background-color: #f7f7f7;
     border-radius: 0.25rem;
     border: 1px solid transparent;
     line-height: 1.5rem;
     font-size: 1rem;
-    color: white;
+    color: #727272;
     width: 100%;
     margin-top: 0.5rem;
 }
@@ -85,6 +97,30 @@
     appearance: none;
     border: none;
     outline: none;
+}
+
+.horLine {
+    display: block;
+    content: "";
+    height: 35px;
+    margin-top: -32px;
+    border-style: solid;
+    border-color: #63636359;
+    border-width: 0 0 1px 0;
+    border-radius: 15px;
+}
+
+.horTopLine {
+    height: 20px;
+    border-style: solid;
+    margin-bottom: -8px;
+    border-color: #63636359;
+    border-width: 1px 0 0 0;
+    border-radius: 15px;
+  }
+
+.lineContainer {
+    margin-top: 10px;
 }
 
 @media (max-width: 900px) {
