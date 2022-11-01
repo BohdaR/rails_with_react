@@ -67,6 +67,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "rspec"
   gem "pry"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -87,6 +88,7 @@ group :test do
   gem "webdrivers"
   gem "simplecov", require: false
   gem "shoulda-matchers"
+  gem "database_cleaner-active_record"
 end
 
 group :rubocop do
