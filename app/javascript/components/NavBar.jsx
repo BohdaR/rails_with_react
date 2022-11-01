@@ -5,8 +5,8 @@ import NavItemsGroup from "./NavItemsGroup";
 const NavBar = ({leftItems, rightItems}) => {
   return (
     <div className={style.topNav}>
-      <div className="container">
-        <NavItemsGroup  items={leftItems}/>
+      <div className={style.headerNav}>
+        <NavItemsGroup  className= {style.topNavLeft} items={leftItems}/>
         <NavItemsGroup className={style.topNavRight} items={rightItems}/>
       </div>
     </div>
