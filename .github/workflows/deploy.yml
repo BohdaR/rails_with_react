@@ -1,0 +1,15 @@
+name: "Deploy"
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  docker:
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Docker compose
+        run: . ~/update.sh
