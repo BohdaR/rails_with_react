@@ -6,7 +6,7 @@ class RoomsController < ApplicationController
   def index
     query_params = params.permit(:floor, :office_id)
 
-    rooms = Room.where(query_params)
+    rooms = Room.where(query_params).not_empty_rooms
     render json: rooms
   end
 

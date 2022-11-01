@@ -4,11 +4,6 @@ class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :update, :destroy]
 
   def index
-    free_places = Place.free_places(
-      params[:look_from],
-      params[:look_to],
-      params[:room_id]
-    )
     render json: free_places
   end
 
@@ -41,7 +36,12 @@ class PlacesController < ApplicationController
     def place_params
       params.require(:place).permit(:room_id, :number)
     end
-
+    def free_places
+      Place.free_places(
+        params[:look_from],
+        params[:look_to],
+        ).where(room_id: params[:room_id])
+    end
     def set_place
       @place = Place.where(room_id: params[:room_id]).find(params[:id])
     end
