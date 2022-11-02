@@ -26,7 +26,6 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
       }
     }).then((response) => {
       setShowPlace(false)
-      console.log(document.getElementsByTagName('button').length)
       if (document.getElementsByTagName('button').length === 1) setShowRoom(false)
     })
   }
