@@ -4,10 +4,12 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :update, :destroy]
 
   def index
-    query_params = params.permit(:floor, :office_id)
-
-    rooms = Room.where(query_params).not_empty_rooms
+    query_params = params.permit(:floor, :office_id, :look_from, :look_to)
+    rooms = Room.where(query_params.slice(:floor, :office_id)).not_empty_rooms(query_params.slice(:look_from, :look_to))
     render json: rooms
+  end
+  def floors
+    render json: Room.floors
   end
 
   def show
