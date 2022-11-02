@@ -33,8 +33,8 @@ RSpec.describe RoomsController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    it "render all rooms" do
-      expect(JSON.parse(response.body)).to eq(rooms.as_json)
+    it "render all not empty rooms" do
+      expect(JSON.parse(response.body)).to eq(rooms.not_empty_rooms({ look_from: Time.now, look_to: Time.now + 1.day }).as_json)
     end
   end
   describe "show action" do
