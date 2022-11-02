@@ -13,7 +13,8 @@ Rails.application.routes.draw do
      controllers: {
        omniauth_callbacks: "users/omniauth_callbacks",
        sessions: "users/sessions",
-       registrations: "users/registrations"
+       registrations: "users/registrations",
+       passwords: "users/passwords"
      }
 
   root "pages#index"
