@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_one :employee, dependent: :destroy
+  after_create :assign_employee_after_sign_up
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -20,5 +21,9 @@ class User < ApplicationRecord
       user.full_name = auth.info.name
       user.avatar_url = auth.info.image
     end
+  end
+
+  def assign_employee_after_sign_up
+    Employee.create(user_id: self.id, company_id: 1, office_id: 1)
   end
 end
