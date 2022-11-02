@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {post} from "./useAPI/useAPI";
 import style from '../stylesheets/booking.module.css'
 
-const Place = ({place, token, start_at, end_at}) => {
+const Place = ({place, token, start_at, end_at, setShowRoom}) => {
   const [showPlace, setShowPlace] = useState(true)
   const [error, setError] = useState(null)
   const confirmationMessage = `
@@ -16,7 +16,6 @@ const Place = ({place, token, start_at, end_at}) => {
       setError('end date must be greater than start date')
       return
     }
-    setShowPlace(false)
 
     post(`${process.env.HOST}/reservations`, {
       authenticity_token: token,
@@ -26,9 +25,9 @@ const Place = ({place, token, start_at, end_at}) => {
         place_id: place.id
       }
     }).then((response) => {
-      console.log(response)
-    }).then((errors) => {
-      console.log(errors)
+      setShowPlace(false)
+      console.log(document.getElementsByTagName('button').length)
+      if (document.getElementsByTagName('button').length === 1) setShowRoom(false)
     })
   }
 
