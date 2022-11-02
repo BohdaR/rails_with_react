@@ -40,7 +40,7 @@ class PlacesController < ApplicationController
       Place.free_places(
         params[:look_from],
         params[:look_to],
-        ).where(room_id: params[:room_id])
+      ).where(room_id: params[:room_id])
     end
     def set_place
       @place = Place.where(room_id: params[:room_id]).find(params[:id])
