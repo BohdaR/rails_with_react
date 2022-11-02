@@ -4,7 +4,7 @@ import AuthenticityTokenInput from "./Inputs/AuthenticityTokenInput";
 import EmailInput from "./Inputs/EmailInput";
 import PasswordInput from "./Inputs/PasswordInput";
 import HiddenMethodInput from "./Inputs/HiddenMethodInput";
-import {authentication, authenticationHeadline} from '../stylesheets/authentication_form.module.css'
+import {authentication, authenticationHeadline, cancelAccBtn, submitBtnContainer} from '../stylesheets/authentication_form.module.css'
 
 const EditUserForm = ({form_authenticity_token}) => {
   return (
@@ -19,11 +19,13 @@ const EditUserForm = ({form_authenticity_token}) => {
         <PasswordInput placeholder="Password confirmation" name="user[password_confirmation]"/>
         <i>We need your current password to confirm your changes</i>
         <PasswordInput placeholder="Current password" name="user[current_password]"/>
-        <SubmitInput value="Update"/>
+        <div className={submitBtnContainer}>
+          <SubmitInput value="Update"/>
+        </div>
       </form>
-      <form className="button_to" method="post" action="/user">
+      <form className="button_to" style={{position:"relative"}} method="post" action="/user">
         <HiddenMethodInput method="delete"/>
-        <button data-confirm="Are you sure?" type="submit">Cancel my account</button>
+        <button className={cancelAccBtn} data-confirm="Are you sure?" type="submit">Delete Account</button>
         <AuthenticityTokenInput token={form_authenticity_token}/>
       </form>
     </div>

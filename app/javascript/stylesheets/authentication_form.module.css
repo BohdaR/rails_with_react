@@ -244,4 +244,36 @@ div.authenticationLinks .submit {
 
 div.authenticationLinks .submit:hover {
     box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
-  }
+}
+
+div.submitBtnContainer .submit,
+.cancelAccBtn {
+    background-color: #416093;
+    border: 1px solid #385380;
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 2px;
+    padding: 12px 15px 16px;
+    text-align: center;
+    width: 40%;
+}
+
+.cancelAccBtn {
+    position: absolute;
+    top: -54px;
+    right: 0px;
+}
+
+.cancelAccBtn:hover,
+div.submitBtnContainer .submit:hover {
+    box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 2px 4px rgba(0, 0, 0, .25);
+}
+
+i {
+    color:black;
+    margin-bottom: 2px;
+}
