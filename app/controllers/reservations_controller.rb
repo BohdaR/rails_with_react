@@ -15,6 +15,7 @@ class ReservationsController < ApplicationController
   def create
     reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
     if reservation.save
+      BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later
       render json: reservation
     else
       render json: reservation.errors, status: :bad_request

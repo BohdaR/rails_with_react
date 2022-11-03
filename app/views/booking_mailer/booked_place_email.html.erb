@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+<body>
+<h1>Hello <%= @employee.user.full_name %>!</h1>
+<h3>
+  You've successfully booked place <%=@reservation.place.number %> in <%=@reservation.place.room.name %>.<br>
+  From: <%=@reservation.start_at.strftime("%B %d, %H:%M")%>
+  To:   <%=@reservation.end_at.strftime("%B %d, %H:%M")%>
+</h3>
+<h2>Have a great day!</h2>
+</body>
+</html>
