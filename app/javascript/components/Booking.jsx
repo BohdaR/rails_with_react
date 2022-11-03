@@ -7,12 +7,13 @@ import style from '../stylesheets/booking.module.css'
 
 const Booking = ({defaultOffice, form_authenticity_token, currentDateTime, tomorrowDateTime}) => {
   const [offices, setOffices] = useState([])
+  const [floors, setFloors] = useState([])
   const [roomList, setRoomList] = useState([])
 
   const [lookFromTime, setLookFromTime] = useState(currentDateTime.substring(0, 16))
   const [lookToTime, setLookToTime] = useState(tomorrowDateTime.substring(0, 16))
 
-  const [roomFloor, setRoomFloor] = useState('1')
+  const [roomFloor, setRoomFloor] = useState('')
   const [roomOfficeId, setRoomOfficeId] = useState(defaultOffice.id)
 
   useEffect(() => {
@@ -24,18 +25,29 @@ const Booking = ({defaultOffice, form_authenticity_token, currentDateTime, tomor
   }, []);
 
   useEffect(() => {
-    get(`${process.env.HOST}/rooms?floor=${roomFloor}&office_id=${roomOfficeId}`)
+    get(`${process.env.HOST}/floors`)
+      .then(
+        (response) => {
+          setFloors(response.data);
+          setRoomFloor(response.data[0].floor)
+        })
+  }, []);
+
+  useEffect(() => {
+    get(`${process.env.HOST}/rooms?floor=${roomFloor}&office_id=${roomOfficeId}&look_from=${lookFromTime}&look_to=${lookToTime}`)
       .then(
         (response) => {
           setRoomList(response.data);
         })
-  }, [roomFloor, roomOfficeId]);
+  }, [roomFloor, roomOfficeId, lookFromTime, lookToTime]);
 
   return (
     <div className={style.bookingWrapper}>
       <RoomsFilter
         offices={offices}
+        floors={floors}
         defaultOffice={roomOfficeId}
+        defaultFloor={roomFloor}
         onChangeFloor={setRoomFloor}
         onChangeOfficeId={setRoomOfficeId}
         lookToTime={lookToTime}

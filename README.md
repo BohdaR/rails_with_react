@@ -1,4 +1,4 @@
-# Booking app
+# [Booking app](http://ec2-3-71-161-29.eu-central-1.compute.amazonaws.com/)
 ## 1. How to run on Linux/Ubuntu
 ### You should install ruby 3.1.2, nodejs, npm, yarn.
 ### 1.1 Install dependencies

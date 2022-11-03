@@ -19,7 +19,17 @@ module App
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = "Europe/Kiev"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.default_url_options = { host: ENV["HOST"] }
+    config.action_mailer.smtp_settings = {
+      address: "smtp.gmail.com",
+      domain: "gmail.com",
+      port: 587,
+      user_name: ENV["MAILER_USER_NAME"],
+      password: ENV["MAILER_USER_PASSWORD"],
+      authentication: "plain"
+    }
   end
 end

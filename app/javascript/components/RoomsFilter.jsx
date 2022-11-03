@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
-import {roomsFilter,
+import {
+  roomsFilter,
   wrapper,
   bookingLabel,
   bookingInput,
-  officePicker} from '../stylesheets/booking.module.css'
+  officePicker
+} from '../stylesheets/booking.module.css'
 
 const RoomsFilter = ({
                        offices,
                        defaultOffice,
+                       floors,
+                       defaultFloor,
                        onChangeLookFromTime,
                        onChangeLookToTime,
                        lookFromTime,
@@ -15,8 +19,9 @@ const RoomsFilter = ({
                        onChangeFloor,
                        onChangeOfficeId
                      }) => {
-  const [value, setValue] = useState('1')
+
   const [office, setOffice] = useState(defaultOffice)
+  const [floor, setFloor] = useState(defaultFloor)
 
   return (
     <div className={roomsFilter}>
@@ -39,15 +44,18 @@ const RoomsFilter = ({
         </div>
         <div className={wrapper}>
           <label className={bookingLabel}>Pick a floor
-            <input
-              className={bookingInput}
-              type="number"
-              min="1"
-              value={value}
-              onChange={(e) => {
-                setValue(e.target.value);
-                onChangeFloor(e.target.value);
-              }}/>
+            <select className={officePicker} name="floor" value={floor} onChange={(e) => {
+              onChangeFloor(e.target.value)
+              setFloor(e.target.value)
+            }}>
+              {floors.map(floor =>
+                <option
+                  value={floor.floor}
+                  key={floor.floor}>
+                  {floor.floor}
+                </option>
+              )}
+            </select>
           </label>
         </div>
         <div className={wrapper}>
