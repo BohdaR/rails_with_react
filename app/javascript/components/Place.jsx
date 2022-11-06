@@ -1,21 +1,37 @@
 import React, {useState} from 'react';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import {post} from "./useAPI/useAPI";
 import style from '../stylesheets/booking.module.css'
 
 const Place = ({place, token, start_at, end_at, setShowRoom}) => {
-  const [showPlace, setShowPlace] = useState(true)
-  const [error, setError] = useState(null)
+  const [showPlace, setShowPlace] = useState(true);
+  const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
+
   const confirmationMessage = `
   Are you sure you want to book 
   a seat number ${place.number} 
-  from ${start_at.replace('T', ' ')} to ${end_at.replace('T', ' ')}
-  `
+  from ${start_at.replace('T', ' ')} to ${end_at.replace('T', ' ')}?
+  `;
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const bookPlace = () => {
     if (start_at > end_at) {
       setError('end date must be greater than start date')
       return
-    }
+    };
 
     post(`${process.env.HOST}/reservations`, {
       authenticity_token: token,
@@ -27,7 +43,7 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
     }).then((response) => {
       setShowPlace(false)
       if (document.getElementsByTagName('button').length === 1) setShowRoom(false)
-    })
+    });
   }
 
   return (
@@ -35,11 +51,43 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
       {
         showPlace ?
           <div>
-            <button className={style.bookingButton} onClick={() => {
-              if (confirm(confirmationMessage)) bookPlace()
-            }}>
-              Book a place {place.number}
+            <button className={style.bookingButton} onClick={handleClickOpen}>
+              Place {place.number}
             </button>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+              >
+              <DialogTitle id="alert-dialog-title"
+                style={{
+                   textAlign: "center",
+                   color: "#173166"
+                }}>
+                {"Book a place"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  {confirmationMessage}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button 
+                  onClick={handleClose}
+                  style={{
+                    color: "#173166"
+                  }}
+                >Cancel</Button>
+                <Button 
+                  onClick={bookPlace} autoFocus
+                  style={{
+                    color: "#173166"
+                  }}>
+                  Confirm
+                </Button>
+              </DialogActions>
+            </Dialog>
             <h2>{error}</h2>
           </div> : null
       }
