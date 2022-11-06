@@ -3,7 +3,8 @@
 class FavoritesController < ApplicationController
   def index
     favorites = Favorite.where(employee: get_employee)
-    render json: favorites
+    render json: favorites.to_json(only: [:place_id, :id],
+    include: [place: { only: [:number]}])
   end
 
   def create

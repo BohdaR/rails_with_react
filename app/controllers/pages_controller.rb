@@ -11,4 +11,7 @@ class PagesController < ApplicationController
       render file: "#{Rails.root}/public/403.html", status: 403, layout: false
     end
   end
+
+  def favorite_places
+  end
 end
