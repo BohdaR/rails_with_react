@@ -3,6 +3,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   resources :reservations
+  resources :companies
   resources :offices
   resources :rooms do
     resources :places
