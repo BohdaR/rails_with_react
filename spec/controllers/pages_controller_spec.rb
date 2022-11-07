@@ -13,7 +13,7 @@ RSpec.describe PagesController, type: :controller do
 
   describe "pages#booking" do
     it "renders current office if user is employee" do
-      current_office = Office.find(employee.office_id)
+      Office.find(employee.office_id)
       get "booking"
       expect(response).to have_http_status(:success)
     end
