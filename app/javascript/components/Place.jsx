@@ -19,13 +19,7 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
   from ${start_at.replace('T', ' ')} to ${end_at.replace('T', ' ')}?
   `;
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleModal = () => setOpen(!open);
 
   const bookPlace = () => {
     if (start_at > end_at) {
@@ -51,12 +45,12 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
       {
         showPlace ?
           <div>
-            <button className={style.bookingButton} onClick={handleClickOpen}>
+            <button className={style.bookingButton} onClick={handleModal}>
               Place {place.number}
             </button>
             <Dialog
               open={open}
-              onClose={handleClose}
+              onClose={handleModal}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
               >
@@ -74,7 +68,7 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
               </DialogContent>
               <DialogActions>
                 <Button 
-                  onClick={handleClose}
+                  onClick={handleModal}
                   style={{
                     color: "#173166"
                   }}
