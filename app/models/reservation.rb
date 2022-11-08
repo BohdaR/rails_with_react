@@ -19,7 +19,14 @@ class Reservation < ApplicationRecord
   }
 
   scope :office_visitors_by_current_week, -> (office_id) {
-    select("count(distinct employee_id) AS quantity, extract(dow from week.day_of_week)::int AS week_day")
+    select("count(distinct employee_id) AS quantity, case extract(dow from week.day_of_week) when 0 then 'Sunday'
+                               when 1 then 'Monday'
+                               when 2 then 'Tuesday'
+                               when 3 then 'Wednesday'
+                               when 4 then 'Thursday'
+                               when 5 then 'Friday'
+                               when 6 then 'Saturday'
+                               end AS week_day")
       .joins("INNER JOIN places on places.id = reservations.place_id")
       .joins("INNER JOIN rooms on places.room_id = rooms.id")
       .joins("INNER JOIN offices on offices.id = rooms.office_id")
