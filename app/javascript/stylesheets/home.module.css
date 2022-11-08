@@ -1,0 +1,22 @@
+.wrapper {
+    color: black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.requestErrors {
+    text-align: center;
+    color: red;
+}
+
+.companyInformation {
+    width: 50%;
+}
+
+.companyInformation p {
+    text-align: justify;
+}
+
+.officesInformation{
+
+}
