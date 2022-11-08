@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Reservation < ApplicationRecord
-  validates :start_at, comparison: { greater_than_or_equal_to: Time.now }, presence: true
+  validates :start_at, comparison: { greater_than_or_equal_to: Time.zone.now }, presence: true
   validates :end_at, comparison: { greater_than: :start_at }, presence: true
 
   belongs_to :employee
@@ -16,5 +16,29 @@ class Reservation < ApplicationRecord
         places.number as place_number,
         reservations.start_at,
         reservations.end_at")
+  }
+
+  scope :office_visitors_by_current_week, -> (office_id) {
+    select("count(distinct employee_id) AS quantity, extract(dow from week.day_of_week)::int AS week_day")
+      .joins("INNER JOIN places on places.id = reservations.place_id")
+      .joins("INNER JOIN rooms on places.room_id = rooms.id")
+      .joins("INNER JOIN offices on offices.id = rooms.office_id")
+      .joins("INNER JOIN (SELECT (now() at time zone '#{Time.zone.name}')::date - abs(extract(dow FROM now() at time zone '#{Time.zone.name}'))::int as day_of_week
+                     UNION
+                     SELECT (now() at time zone '#{Time.zone.name}')::date - abs(extract(dow FROM now() at time zone '#{Time.zone.name}'))::int + 1
+                     UNION
+                     SELECT (now() at time zone '#{Time.zone.name}')::date - abs(extract(dow FROM now() at time zone '#{Time.zone.name}'))::int + 2
+                     UNION
+                     SELECT (now() at time zone '#{Time.zone.name}')::date - abs(extract(dow FROM now() at time zone '#{Time.zone.name}'))::int + 3
+                     UNION
+                     SELECT (now() at time zone '#{Time.zone.name}')::date - abs(extract(dow FROM now() at time zone '#{Time.zone.name}'))::int + 4
+                     UNION
+                     SELECT (now() at time zone '#{Time.zone.name}')::date - abs(extract(dow FROM now() at time zone '#{Time.zone.name}'))::int + 5
+                     UNION
+                     SELECT (now() at time zone '#{Time.zone.name}')::date - abs(extract(dow FROM now() at time zone '#{Time.zone.name}'))::int + 6) as week
+                    on extract(day from week.day_of_week) BETWEEN extract(day from start_at) AND extract(day from end_at)")
+      .where("offices.id = ? ", office_id)
+      .group('day_of_week')
+      .order('day_of_week')
   }
 end
