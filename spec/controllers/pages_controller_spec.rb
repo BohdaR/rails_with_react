@@ -11,7 +11,7 @@ RSpec.describe PagesController, type: :controller do
     sign_in(user)
   end
 
-  let(:current_office){
+  let(:current_office) {
     user.employee.office_id
   }
 

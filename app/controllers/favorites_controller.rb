@@ -6,7 +6,7 @@ class FavoritesController < ApplicationController
   def index
     favorites = Favorite.where(employee: get_employee)
     render json: favorites.to_json(only: [:place_id, :id, :employee_id],
-    include: [place: { only: [:number]}])
+    include: [place: { only: [:number] }])
   end
 
   def create
@@ -23,7 +23,7 @@ class FavoritesController < ApplicationController
     if favorite.destroy
       render json: favorite.destroy
     else
-      render json: {errors: { message: favorite.errors.full_messages }}, status: :bad_request
+      render json: { errors: { message: favorite.errors.full_messages } }, status: :bad_request
     end
   end
 
