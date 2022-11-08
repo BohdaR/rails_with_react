@@ -5,7 +5,7 @@ import "../stylesheets/favorite_places.css";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const FavoritePlaces = ({id}) => {
+const FavoritePlaces = () => {
  
   const [favorites, setFavorites] = useState([]);
 
@@ -19,8 +19,7 @@ const FavoritePlaces = ({id}) => {
 
   const onFavoriteDelete = async (id) => {
     try {
-      const resp = await axios.delete(`${process.env.HOST}/favorites/${id}`);
-      console.log(resp.data);
+      await axios.delete(`${process.env.HOST}/favorites/${id}`);
       const del = favorites.filter((favorite) => id !== favorite.id);
       setFavorites(del);
     } catch (err) {
@@ -33,9 +32,9 @@ const FavoritePlaces = ({id}) => {
     <div key={favorite.id} className="favorite-list">
       <li>Place Number: { favorite.place.number }</li>
       <IconButton onClick={() => onFavoriteDelete(favorite.id)}>
-                <DeleteIcon style={{
-                    color: "#FAFBFC"
-                  }} />
+        <DeleteIcon style={{
+            color: "#FAFBFC"
+        }} />
       </IconButton>
     </div>
     );
@@ -50,7 +49,7 @@ const FavoritePlaces = ({id}) => {
               {list}
             </ul>
           </div>
-        : <h1>There is no favorite places</h1>
+        : <h1>Oops..There are no any favorite places</h1>
       }
     </div>
   );
