@@ -12,6 +12,7 @@ h1 {
 .favorite-list{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: white;
   font-size: 20px;
   margin: 5px;
