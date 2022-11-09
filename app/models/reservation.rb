@@ -16,6 +16,7 @@ class Reservation < ApplicationRecord
         places.number as place_number,
         reservations.start_at,
         reservations.end_at")
+      .order("id DESC")
   }
 
   scope :office_visitors_by_current_week, -> (office_id) {

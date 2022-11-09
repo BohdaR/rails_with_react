@@ -21,5 +21,7 @@ Rails.application.routes.draw do
   root "pages#index"
   get "/booking", to: "pages#booking", as: "booking"
   get "/floors", to: "rooms#floors", as: "rooms_floors"
+
   get "/statistics/office_visiting/:office_id", to: "dashboard_statistics#office_visiting", as: "office_visiting"
+  get "/user/reservation", to: "pages#user_reservation", as: "user_reservation"
 end
