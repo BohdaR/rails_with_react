@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   get "/booking", to: "pages#booking", as: "booking"
   get "/floors", to: "rooms#floors", as: "rooms_floors"
   get "/favoriteplaces", to: "pages#favorite_places"
+  get "/user/reservation", to: "pages#user_reservation", as: "user_reservation"
 end

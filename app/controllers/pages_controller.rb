@@ -4,6 +4,8 @@ class PagesController < ApplicationController
   def index
   end
 
+  def user_reservation
+  end
   def booking
     if current_user.employee
       @current_office = Office.find(current_user.employee.office_id)
