@@ -36,7 +36,7 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
       }
     }).then((response) => {
       setShowPlace(false)
-      if (document.getElementsByTagName('button').length === 1) setShowRoom(false)
+      if (document.getElementsByClassName(style.bookingButton).length === 1) setShowRoom(false)
     });
   }
 
