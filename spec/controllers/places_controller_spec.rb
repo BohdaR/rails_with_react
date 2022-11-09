@@ -5,7 +5,7 @@ require "rails_helper"
 RSpec.describe PlacesController, type: :controller do
   before(:all) do
     User.create(email: "foo@bar.com", password: "SomeUserPass")
-    Company.where(name: "CyberCraft", domain_name: "cybercraftinc.com").first_or_create
+    create(:company)
     Office.where(
       company: Company.first,
       street: "вул. Костя Левицького",

@@ -9,7 +9,7 @@ RSpec.describe RoomsController, type: :controller do
   end
   before(:all) do
     Office.where(
-      company: Company.where(name: "CyberCraft", domain_name: "cybercraftinc.com").first_or_create,
+      company: create(:company),
       street: "вул. Костя Левицького",
       house_number: "75a",
       town: "Львів",

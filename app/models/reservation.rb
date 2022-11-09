@@ -45,7 +45,7 @@ class Reservation < ApplicationRecord
                      SELECT (now() at time zone '#{Time.zone.name}')::date - abs(extract(dow FROM now() at time zone '#{Time.zone.name}'))::int + 6) as week
                     on week.day_of_week::date BETWEEN start_at::date AND end_at::date")
       .where("offices.id = ? ", office_id)
-      .group('day_of_week')
-      .order('day_of_week')
+      .group("day_of_week")
+      .order("day_of_week")
   }
 end
