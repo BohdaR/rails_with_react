@@ -11,6 +11,7 @@ class Place < ApplicationRecord
     Place.left_joins(:reservations)
          .where("place_id IS NULL")
          .or(Reservation.where("end_at < ?", look_from).where("? < ?", look_from, look_to))
+         .distinct
          .order(:id)
   end
 end
