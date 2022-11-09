@@ -16,5 +16,6 @@ class Reservation < ApplicationRecord
         places.number as place_number,
         reservations.start_at,
         reservations.end_at")
+      .order("id DESC")
   }
 end

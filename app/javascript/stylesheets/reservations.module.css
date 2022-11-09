@@ -1,0 +1,23 @@
+.headline {
+    text-align: center;
+    color: #173166;
+    margin-bottom: 15px;
+}
+
+.reservation {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #173166;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.reservation > div {
+    text-align: center;
+}
+
+.reservation > div {
+    text-align: center;
+}
