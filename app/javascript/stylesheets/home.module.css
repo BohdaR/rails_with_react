@@ -11,12 +11,61 @@
 
 .companyInformation {
     width: 50%;
+    margin-right: 20px;
 }
 
-.companyInformation p {
+.wrapper h1 {
+    margin-bottom: 15px;
+}
+
+.wrapper p {
     text-align: justify;
 }
 
-.officesInformation{
+.companyLogo{
+    width: 50%;
+    min-width: 20px;
+    float: left;
+    margin-right: 20px;
+}
 
+.bookedStatistic {
+    margin-bottom: 20px;
+}
+
+.bookedStatistic li {
+    font-size: 30px;
+}
+
+.companyDescription {
+    font-size: 20px;
+}
+
+.officesInformation h1 {
+    text-align: justify;
+}
+@media (max-width: 1200px) {
+    .wrapper h1 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 980px) {
+    .wrapper {
+        flex-direction: column;
+    }
+    .companyInformation {
+        width: 100%;
+        margin: 0;
+    }
+
+    .officesInformation {
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .companyLogo {
+        width: 100%;
+    }
 }
