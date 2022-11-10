@@ -4,5 +4,6 @@ FactoryBot.define do
   factory :user do
     sequence(:email, 100) { |n| "person#{n}@example.com" }
     password { "password123" }
+    after(:build) { |user| user.class.skip_callback(:create, :after, :assign_employee, raise: false) }
   end
 end
