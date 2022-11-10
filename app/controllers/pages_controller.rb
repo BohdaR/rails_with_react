@@ -2,6 +2,9 @@
 
 class PagesController < ApplicationController
   def index
+    unless current_user.employee
+      render file: "#{Rails.root}/public/403.html", status: 403, layout: false
+    end
   end
 
   def user_reservation
