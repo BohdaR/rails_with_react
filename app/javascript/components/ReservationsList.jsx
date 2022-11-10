@@ -24,7 +24,7 @@ const ReservationsList = ({token}) => {
           reservation={item}
           token={token}
         />
-      ) : <h1 className={style.headline}>There are no any reservation yet</h1>}
+      ) : <h1 className={style.headline}>There are no reservation</h1>}
     </div>
   );
 };
