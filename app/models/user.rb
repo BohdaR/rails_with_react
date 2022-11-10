@@ -25,7 +25,6 @@ class User < ApplicationRecord
 
   def assign_employee
     employee = Employee.find_by(email: self.email)
-    employee.update(user_id: self.id)
-    employee.save
+    employee.update(user_id: self.id) unless employee.nil?
   end
 end

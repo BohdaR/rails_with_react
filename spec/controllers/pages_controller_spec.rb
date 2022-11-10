@@ -23,4 +23,11 @@ RSpec.describe PagesController, type: :controller do
       expect(response).to have_http_status(403)
     end
   end
+
+  describe "pages#index" do
+    it "renders forbidden if user isn't an employee" do
+      get :index
+      expect(response).to have_http_status(403)
+    end
+  end
 end
