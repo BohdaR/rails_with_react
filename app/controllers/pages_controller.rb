@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 
   def user_reservation
   end
-  
+
   def booking
     if current_user.employee
       @current_office = Office.find(current_user.employee.office_id)
@@ -21,9 +21,7 @@ class PagesController < ApplicationController
   end
 
   private
-
-  def assign_employee
-    current_user.assign_employee
-  end
-
+    def assign_employee
+      current_user.assign_employee
+    end
 end
