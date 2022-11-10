@@ -4,7 +4,7 @@
 
 }
 
-h1 {
+.favorites h1 {
   margin: 10px;
   text-align: center;
 }
@@ -23,13 +23,13 @@ h1 {
   box-shadow: rgba(1,60,136,.5) 0 -1px 3px 0 inset,rgba(0,44,97,.1) 0 3px 6px 0;
 }
 
-ul {
+.favorites ul {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-li {
+.favorites li {
   margin: 5px;
 }
 
