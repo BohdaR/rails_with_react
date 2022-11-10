@@ -20,6 +20,9 @@ class PagesController < ApplicationController
     end
   end
 
+  def favorite_places
+  end
+
   private
     def assign_employee
       current_user.assign_employee
