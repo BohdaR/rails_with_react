@@ -10,6 +10,10 @@ Bundler.require(*Rails.groups)
 
 module App
   class Application < Rails::Application
+    ActiveStorage::Engine.config
+                         .active_storage
+                         .content_types_to_serve_as_binary
+                         .delete("image/svg+xml")
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.hosts << "ec2-3-71-161-29.eu-central-1.compute.amazonaws.com"

@@ -8,7 +8,7 @@ RSpec.describe OfficesController, type: :controller do
     sign_in(user)
   end
   before(:all) do
-    Company.where(name: "CyberCraft", domain_name: "cybercraftinc.com").first_or_create
+    create(:company)
     Office.where(
       company: Company.first,
       street: "вул. Костя Левицького",
@@ -49,7 +49,7 @@ RSpec.describe OfficesController, type: :controller do
   describe "create action" do
     let(:correct_params) do
       {
-        company_id: Company.where(name: "CyberCraft", domain_name: "cybercraftinc.com").first_or_create.id,
+        company_id: Company.first,
         street: "вул. Тараса Шевченка",
         house_number: "175a",
         town: "Львів",
@@ -87,7 +87,7 @@ RSpec.describe OfficesController, type: :controller do
   describe "update action" do
     let(:correct_params) do
       {
-        company_id: Company.where(name: "FooBar", domain_name: "foo.bar").first_or_create.id,
+        company_id: Company.first.id,
         street: "вул. Костя Левицького",
         house_number: "75a",
         town: "Львів",

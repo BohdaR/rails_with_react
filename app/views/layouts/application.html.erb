@@ -15,10 +15,13 @@
   <%= react_component('NavBar', {
     leftItems: [
       {
-        href: ENV.fetch('API_HOST', 'http://127.0.0.1:3000'), linkText: 'Home'
+        href: ENV.fetch('HOST', 'http://127.0.0.1:3000'), linkText: 'Home'
       },
       {
         href: booking_path, linkText: 'Book a place'
+      },
+      {
+        href: favoriteplaces_path, linkText: 'Favorite Places'
       },
       {
         href: user_reservation_path, linkText: 'Your reservation'

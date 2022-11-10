@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
 class FavoritesController < ApplicationController
+  protect_from_forgery with: :null_session
+
   def index
     favorites = Favorite.where(employee: get_employee)
-    render json: favorites
+    render json: favorites.to_json(only: [:place_id, :id, :employee_id],
+    include: [place: { only: [:number] }])
   end
 
   def create
@@ -17,7 +20,11 @@ class FavoritesController < ApplicationController
 
   def destroy
     favorite = Favorite.find(params[:id])
-    render json: favorite.destroy if favorite.present?
+    if favorite.destroy
+      render json: favorite.destroy
+    else
+      render json: { errors: { message: favorite.errors.full_messages } }, status: :bad_request
+    end
   end
 
   private

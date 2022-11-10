@@ -1,0 +1,40 @@
+.favorites { 
+  color: #173166;
+  font-family: 'Trebuchet MS', sans-serif;
+
+}
+
+.favorites h1 {
+  margin: 10px;
+  text-align: center;
+}
+
+.favorite-list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  margin: 5px;
+  width: 40%;
+  background-color: #173166;
+  padding: 25px;
+  border-radius: 4px;
+  box-shadow: rgba(1,60,136,.5) 0 -1px 3px 0 inset,rgba(0,44,97,.1) 0 3px 6px 0;
+}
+
+.favorites ul {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.favorites li {
+  margin: 5px;
+}
+
+@media (max-width: 500px) {
+  .favorite-list {
+    width: 250px;
+  }
+}
