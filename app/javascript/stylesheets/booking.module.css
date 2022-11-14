@@ -9,18 +9,16 @@
 }
 
 .bookingWrapper {
-    display: flex;
-    margin: 10px;
     font-family: 'Trebuchet MS', sans-serif;
 }
 
 .roomsFilter {
     max-width: 320px;
+    margin-left: 5px;
 }
 
 .roomsList {
     width: 100%;
-    margin-left: 35px;
 }
 
 .room {
@@ -45,7 +43,7 @@
 
 .bookingButton {
     margin: 5px;
-    width: 110px;
+    width: 100px;
     padding: 5px;
     background-color: #416093;
     border-radius: 4px;
@@ -124,9 +122,39 @@
     margin-top: 10px;
 }
 
+.lineContainer p {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
 @media (max-width: 900px) {
     .roomsList {
         margin: 0 10%;
         width: 80%;
+    }
+}
+
+/* for mobiles */
+@media (min-width: 710px) {
+    .bookingWrapper{
+        display: flex;
+        margin: 10px;
+    }
+
+    .roomsList {
+        margin-left: 35px;
+    }
+}
+
+
+@media only screen and (max-width: 700px) and (min-width: 340px)  {
+    .roomsList{
+        margin-top: 15px;
+        margin-left: 5px;
+    }
+
+    .lineContainer p {
+        font-size: 16px;
     }
 }
