@@ -10,8 +10,7 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    place = Place.find(params[:place_id])
-    favorite = get_employee.favorites.new(place_id: place.id)
+    favorite = Favorite.new({ employee: get_employee }.merge(favorite_params))
     if favorite.save
       render json: favorite
     else
@@ -31,5 +30,9 @@ class FavoritesController < ApplicationController
   private
     def get_employee
       current_user.employee
+    end
+
+    def favorite_params
+      params.require(:favorite).permit(:place_id)
     end
 end
