@@ -277,3 +277,9 @@ i {
     color:black;
     margin-bottom: 2px;
 }
+
+@media only screen and (max-width: 700px) and (min-width: 320px)  {
+    .authentication {
+        margin: 10px;
+    }
+}

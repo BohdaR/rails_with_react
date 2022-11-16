@@ -21,28 +21,28 @@ const Reservation = ({reservation, token}) => {
   }
 
   return (
-      showReservation ?
-        <>
-          <div className={ `${style.placeColumn} ${style.col}`} 
-            data-label="Room / Place">
-              {reservation.room_name}, place: {reservation.place_number}
-          </div>
-          <div className={`${style.startColumn} ${style.col}`} 
-            data-label="Start At">
-              {dateHandler(reservation.start_at)}
-          </div>
-          <div className={`${style.endColumn} ${style.col}`} 
-            data-label="End At">
-              {dateHandler(reservation.end_at)}
-          </div>
-          <div className={`${style.btnColumn} ${style.col}`}>
-            <IconButton onClick={() => deleteReservation(reservation.id)}>
-              <DeleteIcon style={{
-                color: "#173166"
-              }}/>
-            </IconButton>
-          </div> 
-        </>: null
+    showReservation ?
+      <div className={style.tableRow}>
+        <div className={ `${style.placeColumn} ${style.col}`} 
+          data-label="Room / Place">
+          {reservation.room_name}, place: {reservation.place_number}
+        </div>
+        <div className={`${style.startColumn} ${style.col}`} 
+          data-label="Start At">
+          {dateHandler(reservation.start_at)}
+        </div>
+        <div className={`${style.endColumn} ${style.col}`} 
+          data-label="End At">
+          {dateHandler(reservation.end_at)}
+        </div>
+        <div className={`${style.btnColumn} ${style.col}`}>
+          <IconButton onClick={() => deleteReservation(reservation.id)}>
+            <DeleteIcon style={{
+              color: "#173166"
+            }}/>
+          </IconButton>
+        </div> 
+      </div>: null
   );
 };
 

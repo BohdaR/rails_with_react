@@ -17,29 +17,30 @@ const ReservationsList = ({token}) => {
   return (
     <div>
       <h1 className={style.headline}>Your reservations</h1>
-      <ul className={style.reservationTable}>
-        <li className={style.tableHeader}>
-          <div className={ `${style.placeColumn} ${style.col}`}>
-            Room Name / Place Number
+      { Object.keys(reservations).length !== 0 ?
+        <div className={style.reservationTable}>
+          <div className={style.tableHeader}>
+            <div className={ `${style.placeColumn} ${style.col}`}>
+              Room Name / Place Number
+            </div>
+            <div className={`${style.startColumn} ${style.col}`}>
+              Start At
+            </div>
+            <div className={`${style.endColumn} ${style.col}`}>
+              End At
+            </div>
+            <div className={`${style.btnColumn} ${style.col}`}></div> 
           </div>
-          <div className={`${style.startColumn} ${style.col}`}>
-            Start At
-          </div>
-          <div className={`${style.endColumn} ${style.col}`}>
-            End At
-          </div>
-          <div className={`${style.btnColumn} ${style.col}`}></div> 
-        </li>
-        { Object.keys(reservations).length !== 0 ?
-          reservations.map((item) =>
-          <li className={style.tableRow} key={item.id}>
+          {reservations.map((item) =>
             <Reservation
+              key={item.id}
               reservation={item}
               token={token}
             />
-          </li>
-        ) : <h1 className={style.headline}>There are no reservations</h1>}
-      </ul>
+          )}
+        </div>
+        : <h1 className={style.headline}>There are no reservations</h1>
+      }
     </div>
   );
 };
