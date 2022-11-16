@@ -280,6 +280,7 @@ i {
 
 @media only screen and (max-width: 700px) and (min-width: 320px)  {
     .authentication {
-        margin: 10px;
+        width: 330px;
+        top: 30px;
     }
 }
