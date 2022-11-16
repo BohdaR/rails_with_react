@@ -148,10 +148,19 @@
 }
 
 
-@media only screen and (max-width: 700px) and (min-width: 320px)  {
-    .roomsList{
+@media only screen and (max-width: 780px) and (min-width: 320px)  {
+    .roomsList {
         margin-top: 15px;
-        margin-left: 5px;
+    }
+
+    .bookingWrapper {
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .roomTitle {
+        font-size: 20px;
     }
 
     .lineContainer p {
