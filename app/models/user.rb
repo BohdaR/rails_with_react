@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  has_and_belongs_to_many :roles
   has_one :employee, dependent: :destroy
   after_create :assign_employee
 
@@ -9,10 +10,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
-
-  def admin?
-    role == "admin"
-  end
 
   def self.from_google(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

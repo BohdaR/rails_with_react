@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_09_142114) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_16_092411) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +84,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_142114) do
     t.index ["company_id"], name: "index_offices_on_company_id"
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "permissions_roles", id: false, force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.bigint "permission_id", null: false
+    t.index ["permission_id"], name: "index_permissions_roles_on_permission_id"
+    t.index ["role_id"], name: "index_permissions_roles_on_role_id"
+  end
+
   create_table "places", force: :cascade do |t|
     t.bigint "room_id", null: false
     t.integer "number"
@@ -101,6 +114,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_142114) do
     t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_reservations_on_employee_id"
     t.index ["place_id"], name: "index_reservations_on_place_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -126,7 +150,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_09_142114) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "role", default: "user"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
