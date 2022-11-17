@@ -21,7 +21,7 @@ const RegForm = ({form_authenticity_token}) => {
           <EmailInput name="user[email]"/>
           <PasswordInput placeholder="Password" name="user[password]"/>
           <PasswordInput placeholder="Password confirmation" name="user[password_confirmation]"/>
-          <SubmitInput value="Sign up"/>
+          <SubmitInput value="Sing up"/>
         </form>
         <div className={formSeparator}>OR</div>
         <div className={authenticationLinks}>

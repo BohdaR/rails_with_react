@@ -5,5 +5,6 @@ FactoryBot.define do
     user
     company
     office
+    sequence(:email, 100) { |n| "person#{n}@example.com" }
   end
 end
