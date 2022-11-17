@@ -35,6 +35,7 @@
 
 .placeColumn {
     flex-basis: 35%;
+    text-align: center;
 }
 
 .startColumn {
@@ -53,6 +54,10 @@
 }
 
 @media all and (max-width: 700px) {
+    .headline {
+        font-size: 26px;
+    }
+
     .reservationTable .tableHeader {
         display: none;
     }
@@ -61,6 +66,7 @@
         display: block;
         color: #173166;
         width: 100%;
+        font-size: 15px;
     }
 
     .reservationTable > .col {
@@ -76,7 +82,7 @@
         color: #6C7A89;
         padding-right: 10px;
         content: attr(data-label);
-        flex-basis: 30%;
+        margin: auto;
         text-align: right;
     }
 }

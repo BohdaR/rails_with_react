@@ -25,7 +25,7 @@ const Reservation = ({reservation, token}) => {
       <div className={style.tableRow}>
         <div className={ `${style.placeColumn} ${style.col}`} 
           data-label="Room / Place">
-          {reservation.room_name}, place: {reservation.place_number}
+          {reservation.room_name}, place {reservation.place_number}
         </div>
         <div className={`${style.startColumn} ${style.col}`} 
           data-label="Start At">
