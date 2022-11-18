@@ -30,7 +30,7 @@ const FavoritePlaces = () => {
   const list = favorites.map(favorite => {
   return (
     <div key={favorite.id} className="favorite-list">
-      <li>Place Number: { favorite.place.number }</li>
+      <li>{ favorite.room_name }, place { favorite.place_number } </li>
       <IconButton onClick={() => onFavoriteDelete(favorite.id)}>
         <DeleteIcon style={{
             color: "#FAFBFC"

@@ -4,9 +4,8 @@ class FavoritesController < ApplicationController
   protect_from_forgery with: :null_session
 
   def index
-    favorites = Favorite.where(employee: get_employee)
-    render json: favorites.to_json(only: [:place_id, :id, :employee_id],
-    include: [place: { only: [:number] }])
+    favorites = Favorite.favorites_info.where(employee: get_employee)
+    render json: favorites
   end
 
   def create
