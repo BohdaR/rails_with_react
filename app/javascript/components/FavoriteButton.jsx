@@ -6,27 +6,46 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 const FavoriteButton = ({ token, place }) => {
 	const [favorited, setFavorited] = useState(false);
 
-	const addFav = () => { post(`${process.env.HOST}/favorites`, {
-		authenticity_token: token,
-		favorite: {
-		  place_id: 7
+	const onFavoriteClick = () => {
+		if (favorited) {
+			post(`${process.env.HOST}/favorites`, {
+				authenticity_token: token,
+				favorite: {
+				  place_id: place.id
+				}
+			  }).then(
+				(response) => {
+					setFavorited(!favorited);
+					console.log(response.data);
+				}
+			  ).catch(
+				(errors) => {
+				  console.log(errors);
+				});
+			} else {
+				post(`${process.env.HOST}/favorites`, {
+					authenticity_token: token,
+					favorite: {
+						place_id: place.id
+					}
+					}).then(
+					(response) => {
+					setFavorited(favorited);
+					console.log(response.data);
+					}
+					).catch(
+					(errors) => {
+						console.log(errors);
+					});
 		}
-	  }).then(
-		(response) => {
-		setFavorited(response.data);
-		console.log(response.data);
-		}
-	  ).catch(
-		(errors) => {
-		  console.log(errors);
-		});
+		
 	}
   return(
 		<>
-			{/* <button onClick={addFav}>Favorite</button> */}
-			<h2 onClick={() => setFavorited((prevState) => !prevState)}>
+			<button onClick={onFavoriteClick}>{favorited ? " Not Favorite~" : "Add to Favorite "} </button>
+			{/* <h2 onClick={() => setFavorited((prevState) => !prevState)}>
 				{ favorited ? <StarIcon/> : <StarBorderIcon/> }
-			</h2>
+			</h2> */}
 		</>
 	);
 }
