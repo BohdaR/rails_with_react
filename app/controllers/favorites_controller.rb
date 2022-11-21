@@ -9,8 +9,7 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    place = Place.find(params[:place_id])
-    favorite = current_user.employee.favorites.new(place_id: place.id)
+    favorite = Favorite.new({ employee: get_employee }.merge(favorite_params))
     if favorite.save
       render json: favorite
     else

@@ -11,6 +11,7 @@ class Favorite < ApplicationRecord
       .joins("INNER JOIN rooms on rooms.id = places.room_id")
       .select("
         favorites.id,
+        places.id as place_id,
         rooms.name as room_name,
         places.number as place_number")
       .order("id DESC")
