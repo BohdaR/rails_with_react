@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_16_092411) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_21_162405) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_092411) do
     t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["office_id"], name: "index_employees_on_office_id"
     t.index ["user_id"], name: "index_employees_on_user_id"
+  end
+
+  create_table "employees_roles", id: false, force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.bigint "role_id", null: false
+    t.index ["employee_id"], name: "index_employees_roles_on_employee_id"
+    t.index ["role_id"], name: "index_employees_roles_on_role_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -120,11 +127,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_16_092411) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "roles_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "role_id", null: false
   end
 
   create_table "rooms", force: :cascade do |t|
