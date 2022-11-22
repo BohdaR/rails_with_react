@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :update, :destroy]
+  before_action :set_reservation, only: [:show, :update, :destroy, :sync_with_google]
 
   def index
     reservations = Reservation.reservations_info.where(employee: get_employee)
@@ -33,6 +33,12 @@ class ReservationsController < ApplicationController
   def destroy
     render json: @reservation.destroy
   end
+
+  # def sync_with_google
+  #   ge = @reservation.get_google_event(@reservation.calendar_id, @reservation.employee)
+  #   @reservation.update(start_at: ge.start.start_at, end_at: ge.end.end_at)
+  #   render json: @reservation, notice: "Event has been synced with google successfully."
+  # end
 
   private
     def reservation_params

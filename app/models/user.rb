@@ -27,4 +27,8 @@ class User < ApplicationRecord
     employee = Employee.find_by(email: self.email)
     employee.update(user_id: self.id) unless employee.nil?
   end
+
+  def expired?
+    expire_at < Time.current.to_i
+  end
 end

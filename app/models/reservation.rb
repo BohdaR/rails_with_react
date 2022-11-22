@@ -1,11 +1,19 @@
 # frozen_string_literal: true
 
 class Reservation < ApplicationRecord
+  include GoogleCalendarApi
+
+  CALENDAR_ID = "primary"
+
   validates :start_at, comparison: { greater_than_or_equal_to: Time.zone.now }, presence: true
   validates :end_at, comparison: { greater_than: :start_at }, presence: true
 
   belongs_to :employee
   belongs_to :place
+
+  after_create :publish_event_to_gcal
+  # # after_update :update_event_on_gcal
+  # before_destroy :remove_event_from_gcal
 
   scope :reservations_info, -> {
     joins("INNER JOIN places on places.id = reservations.place_id")
@@ -50,4 +58,12 @@ class Reservation < ApplicationRecord
       .group("day_of_week")
       .order("day_of_week")
   }
+
+  def publish_event_to_gcal
+    self.create_google_event(self)
+  end
+
+#  def remove_event_from_gcal
+#   self.delete_google_event(self)
+#  end
 end

@@ -27,11 +27,10 @@ Devise.setup do |config|
   config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
   config.omniauth :google_oauth2, ENV["GOOGLE_OAUTH_CLIENT_ID"], ENV["GOOGLE_OAUTH_CLIENT_SECRET"],
     {
-      access_type: "offline", 
+      access_type: "offline",
       prompt: "consent",
       select_account: true,
-      scope: "userinfo.email, calendar"  
-
+      scope: 'userinfo.email' 
     }
 
   # Configure the class responsible to send e-mails.
