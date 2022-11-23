@@ -2,11 +2,13 @@ import React, {useState} from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import style from '../stylesheets/reservations.module.css'
-import {deleteRequest} from "./useAPI/useAPI";
-import FavoriteButton from './FavoriteButton';
+import {deleteRequest, post} from "./useAPI/useAPI";
+// import FavoriteButton from './FavoriteButton';
 
 const Reservation = ({reservation, token}) => {
   const [showReservation, setShowReservation] = useState(true)
+  const [favorited, setFavorited] = useState(false);
+
   const dateHandler = (dateString) => {
     let date = new Date(dateString)
     return `${date.toDateString()} ${date.toTimeString().substring(0, 5)}`
@@ -21,6 +23,23 @@ const Reservation = ({reservation, token}) => {
       )
   }
 
+  const onFavoriteClick = () => {
+		post(`${process.env.HOST}/favorites`, {
+			authenticity_token: token,
+			favorite: {
+				place_id: reservation.place_id
+			}
+			}).then(
+			(response) => {
+				setFavorited(!favorited);
+				console.log(favorited);
+			}
+			).catch(
+			(errors) => {
+				console.log(errors);
+			});
+	}
+
   return (
       showReservation ?
         <div className={style.reservation}>
@@ -28,7 +47,7 @@ const Reservation = ({reservation, token}) => {
           <div>{dateHandler(reservation.start_at)}</div>
           <div>{dateHandler(reservation.end_at)}</div>
           <div>
-            <FavoriteButton />
+            <button onClick={onFavoriteClick}> Add to Favorite </button>
           </div>
           <div>
             <IconButton onClick={() => deleteReservation(reservation.id)}>
