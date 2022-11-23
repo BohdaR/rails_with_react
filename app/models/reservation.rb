@@ -3,7 +3,7 @@
 class Reservation < ApplicationRecord
   include GoogleCalendarApi
 
-  CALENDAR_ID = "primary"
+  CALENDAR_ID = "primary".freeze
 
   validates :start_at, comparison: { greater_than_or_equal_to: Time.zone.now }, presence: true
   validates :end_at, comparison: { greater_than: :start_at }, presence: true
@@ -11,7 +11,7 @@ class Reservation < ApplicationRecord
   belongs_to :employee
   belongs_to :place
 
-  after_create :publish_event_to_gcal
+  # after_create :publish_event_to_gcal
   # # after_update :update_event_on_gcal
   # before_destroy :remove_event_from_gcal
 
@@ -59,8 +59,8 @@ class Reservation < ApplicationRecord
       .order("day_of_week")
   }
 
-  def publish_event_to_gcal
-    self.create_google_event(self)
+  def publish_event_to_gcal(user)
+    self.create_google_event(self, user)
   end
 
 #  def remove_event_from_gcal

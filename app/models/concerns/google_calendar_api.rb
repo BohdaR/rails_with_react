@@ -1,17 +1,17 @@
+require "active_support"
 require "google/apis/calendar_v3"
 require "google/api_client/client_secrets.rb"
 
 module GoogleCalendarApi
 
   include ActiveSupport::Concern
-
-  def get_google_calendar_client(current_user)
+  def get_google_calendar_client(user)
     client = Google::Apis::CalendarV3::CalendarService.new
-    return unless (current_user.present? && current_user.access_token.present? && current_user.refresh_token.present?)
+    return unless (user.present? && user.access_token.present? && user.refresh_token.present?)
     secrets = Google::APIClient::ClientSecrets.new({
       "web" => {
-        "access_token" => current_user.access_token,
-        "refresh_token" => current_user.refresh_token,
+        "access_token" => user.access_token,
+        "refresh_token" => user.refresh_token,
 				"client_id" => ENV["GOOGLE_OAUTH_CLIENT_ID"],
 				"client_secret" => ENV["GOOGLE_OAUTH_CLIENT_SECRET"]
       }
@@ -29,7 +29,7 @@ module GoogleCalendarApi
         )
       end
     rescue => e
-      flash[:error] = "Your token has been expired. Please login again with google."
+      puts e.message
     end
     client
   end
@@ -62,8 +62,8 @@ module GoogleCalendarApi
     })
   end
 
-	def create_google_event(reservation)
-		client = get_google_calendar_client(employee)
+	def create_google_event(reservation, user)
+		client = get_google_calendar_client(user)
     g_event = get_event(reservation)
     ge = client.insert_event(Event::CALENDAR_ID, g_event)
     reservation.update(calendar_id: ge.id)
@@ -76,8 +76,9 @@ module GoogleCalendarApi
 
   # #correct!!
 
-  # def get_google_event(calendar_id, employee)
-  #   client = get_google_calendar_client(current_user.employee)
-  #   g_event = client.get_event(Event::CALENDAR_ID, calendar_id)
-  # end
+  def get_google_event(calendar_id, employee)
+    client = get_google_calendar_client(employee)
+    g_event = client.get_event(Event::CALENDAR_ID, calendar_id)
+
+  end
 end

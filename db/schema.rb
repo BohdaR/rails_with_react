@@ -99,7 +99,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_124431) do
     t.datetime "end_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "calendar_id"
+    t.string "calendar_id", default: "", null: false
     t.index ["employee_id"], name: "index_reservations_on_employee_id"
     t.index ["place_id"], name: "index_reservations_on_place_id"
   end

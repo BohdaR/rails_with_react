@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+require "google/apis/calendar_v3"
 
 class ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :update, :destroy, :sync_with_google]
+  before_action :set_reservation, only: [:show, :update, :destroy]
 
   def index
-    reservations = Reservation.reservations_info.where(employee: get_employee)
-    render json: reservations
+    @reservations = Reservation.reservations_info.where(employee: get_employee)
+    render json: @reservations
   end
 
   def show
@@ -13,12 +14,14 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
-    if reservation.save
+    @reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
+    @reservation.publish_event_to_gcal(current_user)
+
+    if @reservation.save
       BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later
-      render json: reservation
+      render json: @reservation
     else
-      render json: reservation.errors, status: :bad_request
+      render json: @reservation.errors, status: :bad_request
     end
   end
 

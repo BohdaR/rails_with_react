@@ -29,6 +29,6 @@ class User < ApplicationRecord
   end
 
   def expired?
-    expire_at < Time.current.to_i
+    expires_at < Time.current.to_i
   end
 end
