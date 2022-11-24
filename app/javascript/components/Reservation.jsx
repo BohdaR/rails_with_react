@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import style from '../stylesheets/reservations.module.css'
 import {deleteRequest, post} from "./useAPI/useAPI";
+import "../stylesheets/favorite_places.css";
 // import FavoriteButton from './FavoriteButton';
 
 const Reservation = ({reservation, token}) => {
@@ -24,6 +25,7 @@ const Reservation = ({reservation, token}) => {
   }
 
   const onFavoriteClick = () => {
+    if (favorited === false) {
 		post(`${process.env.HOST}/favorites`, {
 			authenticity_token: token,
 			favorite: {
@@ -32,31 +34,29 @@ const Reservation = ({reservation, token}) => {
 			}).then(
 			(response) => {
 				setFavorited(!favorited);
-				console.log(favorited);
-			}
-			).catch(
-			(errors) => {
-				console.log(errors);
-			});
+			})
+    } else {
+
+    }
 	}
 
   return (
-      showReservation ?
-        <div className={style.reservation}>
-          <div>{reservation.room_name} place {reservation.place_number}</div>
-          <div>{dateHandler(reservation.start_at)}</div>
-          <div>{dateHandler(reservation.end_at)}</div>
-          <div>
-            <button onClick={onFavoriteClick}> Add to Favorite </button>
-          </div>
-          <div>
-            <IconButton onClick={() => deleteReservation(reservation.id)}>
-              <DeleteIcon style={{
-                color: "#FAFBFC"
-              }}/>
-            </IconButton>
-          </div>
-        </div> : null
+    showReservation ?
+      <div className={style.reservation}>
+        <div>{reservation.room_name} place {reservation.place_number}</div>
+        <div>{dateHandler(reservation.start_at)}</div>
+        <div>{dateHandler(reservation.end_at)}</div>
+        <div>
+          <button className="button-13" onClick={onFavoriteClick}> {favorited ? "Added" : "Add to favorite"}</button>
+        </div>
+        <div>
+          <IconButton onClick={() => deleteReservation(reservation.id)}>
+            <DeleteIcon style={{
+              color: "#FAFBFC"
+            }}/>
+          </IconButton>
+        </div>
+      </div> : null
   );
 };
 
