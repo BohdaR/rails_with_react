@@ -1,4 +1,11 @@
 import React, {useState} from 'react';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import StepContent from '@mui/material/StepContent';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import {
   roomsFilter,
   wrapper,
@@ -20,10 +27,73 @@ const RoomsFilter = ({
                        onChangeOfficeId
                      }) => {
 
-  const [office, setOffice] = useState(defaultOffice)
-  const [floor, setFloor] = useState(defaultFloor)
+  const [office, setOffice] = useState(defaultOffice);
+  const [floor, setFloor] = useState(defaultFloor);
+  const [activeStep, setActiveStep] = useState(0);
+
+  const steps = [
+    {label: "Select an office"},
+    {label: "Select an floor"},
+    {label: "Pick a start date"},
+    {label: "Pick an end date"}
+  ];
+  
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  }
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  }
+
+  const handleReset = () => {
+    setActiveStep(0);
+  }
 
   return (
+    <div>
+    <div>
+      <Stepper orientation="vertical" activeStep={activeStep}>
+        {steps.map((step, index) => (
+          <Step key={step.label}>
+            <StepLabel
+              optional={
+                index === 3 ? (
+                  <Typography variant="caption">Last step</Typography>
+                ) : null
+            }>
+              {step.label}
+            </StepLabel>
+            <StepContent>
+            <div>
+                  <Button
+                    variant="contained"
+                    onClick={handleNext}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    {index === steps.length - 1 ? 'Finish' : 'Continue'}
+                  </Button>
+                  <Button
+                    disabled={index === 0}
+                    onClick={handleBack}
+                    sx={{ mt: 1, mr: 1 }}
+                  >
+                    Back
+                  </Button>
+                </div>
+            </StepContent>
+          </Step>
+        ))}
+      </Stepper>
+      {activeStep === steps.length && (
+        <Paper square elevation={0} sx={{ p: 3 }}>
+          <Typography>All steps completed - you&apos;re finished</Typography>
+          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+            Reset
+          </Button>
+        </Paper>
+      )}
+    </div>
     <div className={roomsFilter}>
       <form onSubmit={(e) => e.preventDefault()}>
         <div className={wrapper}>
@@ -86,6 +156,7 @@ const RoomsFilter = ({
         </div>
       </form>
     </div>
+  </div>
   );
 };
 
