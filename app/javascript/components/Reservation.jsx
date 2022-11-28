@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import style from '../stylesheets/reservations.module.css'
 import {deleteRequest, post} from "./useAPI/useAPI";
 import "../stylesheets/favorite_places.css";
-// import FavoriteButton from './FavoriteButton';
+
 
 const Reservation = ({reservation, token}) => {
-  const [showReservation, setShowReservation] = useState(true)
+  const [showReservation, setShowReservation] = useState(true);
   const [favorited, setFavorited] = useState(false);
 
   const dateHandler = (dateString) => {
@@ -24,8 +24,8 @@ const Reservation = ({reservation, token}) => {
       )
   }
 
-  const onFavoriteClick = () => {
-    if (favorited === false) {
+  const onfavoritedClick = () => {
+    if (!favorited) {
 		post(`${process.env.HOST}/favorites`, {
 			authenticity_token: token,
 			favorite: {
@@ -33,10 +33,10 @@ const Reservation = ({reservation, token}) => {
 			}
 			}).then(
 			(response) => {
-				setFavorited(!favorited);
-			})
-    } else {
-
+        console.log(response.data);
+				setFavorited(prev => !prev);
+        alert( `Place ${reservation.place_number} successfully added to favorites.`)
+			});
     }
 	}
 
@@ -47,7 +47,15 @@ const Reservation = ({reservation, token}) => {
         <div>{dateHandler(reservation.start_at)}</div>
         <div>{dateHandler(reservation.end_at)}</div>
         <div>
-          <button className="button-13" onClick={onFavoriteClick}> {favorited ? "Added" : "Add to favorite"}</button>
+        {!favorited ? (
+          <button className="button-13" onClick={onfavoritedClick}>
+            Add to favorite
+          </button>
+        ) : (
+          <button>
+            Delete from favorite
+          </button>
+        )} 
         </div>
         <div>
           <IconButton onClick={() => deleteReservation(reservation.id)}>
