@@ -2,6 +2,7 @@
 
 class FavoritesController < ApplicationController
   protect_from_forgery with: :null_session
+  authorize_resource
 
   def index
     favorites = Favorite.where(employee: get_employee)

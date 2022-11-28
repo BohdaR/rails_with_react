@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  protect_from_forgery
   before_action :authenticate_user!
   rescue_from CanCan::AccessDenied do |exception|
     if current_user

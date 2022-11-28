@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CompaniesController < ApplicationController
+  authorize_resource
   before_action :set_company, only: [:show, :update, :destroy]
 
   def index

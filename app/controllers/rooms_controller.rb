@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RoomsController < ApplicationController
+  authorize_resource
+  skip_authorize_resource only: :floors
   before_action :set_room, only: [:show, :update, :destroy]
 
   def index
