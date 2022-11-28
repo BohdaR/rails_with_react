@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_21_162405) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_23_104321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_162405) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "allowed_actions", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "companies", force: :cascade do |t|
@@ -95,6 +102,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_162405) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "scope_id", null: false
+    t.bigint "subject_id", null: false
+    t.bigint "allowed_action_id", null: false
+    t.index ["allowed_action_id"], name: "index_permissions_on_allowed_action_id"
+    t.index ["scope_id"], name: "index_permissions_on_scope_id"
+    t.index ["subject_id"], name: "index_permissions_on_subject_id"
   end
 
   create_table "permissions_roles", id: false, force: :cascade do |t|
@@ -140,6 +153,20 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_162405) do
     t.index ["office_id"], name: "index_rooms_on_office_id"
   end
 
+  create_table "scopes", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -164,6 +191,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_162405) do
   add_foreign_key "favorites", "employees"
   add_foreign_key "favorites", "places"
   add_foreign_key "offices", "companies"
+  add_foreign_key "permissions", "allowed_actions"
+  add_foreign_key "permissions", "scopes"
+  add_foreign_key "permissions", "subjects"
   add_foreign_key "places", "rooms"
   add_foreign_key "reservations", "employees"
   add_foreign_key "reservations", "places"
