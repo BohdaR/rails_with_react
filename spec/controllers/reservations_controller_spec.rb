@@ -6,8 +6,20 @@ RSpec.describe ReservationsController, type: :controller do
   let(:reservations) { Reservation.all }
   let(:place) { create(:place) }
   let(:reservation) { create(:reservation) }
+
+  let(:allowed_action) { create(:allowed_action) }
+  let(:subject) { create(:subject) }
+  let(:scope) { create(:scope) }
+  let(:permission) { create(:permission, allowed_action:, subject:, scope:) }
+  let(:role) { create(:role) }
   let(:user) { create(:user) }
   let(:employee) { create(:employee, user:) }
+
+  before(:each) do
+    role.permissions << permission
+    employee.roles << role
+    sign_in(user)
+  end
 
   let(:valid_attributes) do
     {
@@ -25,10 +37,6 @@ RSpec.describe ReservationsController, type: :controller do
       start_at: nil,
       end_at: Time.now + 4.hours
     }
-  end
-
-  before(:each) do
-    sign_in(user)
   end
 
   describe "reservations#index" do

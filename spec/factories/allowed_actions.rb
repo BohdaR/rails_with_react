@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :allowed_action do
-    name { "MyString" }
+    name { "manage" }
     description { "MyString" }
   end
 end

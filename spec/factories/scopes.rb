@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :scope do
-    name { "MyString" }
+    name { "all" }
     description { "MyString" }
   end
 end

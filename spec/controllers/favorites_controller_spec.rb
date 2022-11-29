@@ -9,6 +9,18 @@ RSpec.describe FavoritesController, type: :controller do
   let(:place) { create(:place) }
   let(:favorite) { create(:favorite) }
 
+  let(:allowed_action) { create(:allowed_action) }
+  let(:subject) { create(:subject) }
+  let(:scope) { create(:scope) }
+  let(:permission) { create(:permission, allowed_action:, subject:, scope:) }
+  let(:role) { create(:role) }
+
+  before(:each) do
+    role.permissions << permission
+    employee.roles << role
+    sign_in(user)
+  end
+
 
   let(:valid_attributes) do
     {
@@ -19,13 +31,9 @@ RSpec.describe FavoritesController, type: :controller do
 
   let(:invalid_attributes) do
     {
-      place_id: place.id,
+      place_id: -10,
       employee_id: "12"
     }
-  end
-
-  before(:each) do
-    sign_in(user)
   end
 
   describe "favorites#index" do
