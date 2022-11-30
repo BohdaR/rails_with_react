@@ -7,8 +7,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     employee = user.employee
 
-    return unless employee
-    return unless employee.roles
+    return unless employee&.roles
 
     can :manage, :dashboard
     employee.roles.each do |role|
