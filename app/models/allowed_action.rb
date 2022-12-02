@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 class AllowedAction < ApplicationRecord
-  has_many :permissions
+  has_and_belongs_to_many :permissions
 end

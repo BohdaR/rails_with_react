@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_23_104321) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_30_145106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_104321) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "allowed_actions_permissions", id: false, force: :cascade do |t|
+    t.bigint "allowed_action_id", null: false
+    t.bigint "permission_id", null: false
+    t.index ["allowed_action_id"], name: "index_allowed_actions_permissions_on_allowed_action_id"
+    t.index ["permission_id"], name: "index_allowed_actions_permissions_on_permission_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -104,8 +111,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_104321) do
     t.datetime "updated_at", null: false
     t.bigint "scope_id", null: false
     t.bigint "subject_id", null: false
-    t.bigint "allowed_action_id", null: false
-    t.index ["allowed_action_id"], name: "index_permissions_on_allowed_action_id"
     t.index ["scope_id"], name: "index_permissions_on_scope_id"
     t.index ["subject_id"], name: "index_permissions_on_subject_id"
   end
@@ -140,6 +145,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_104321) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "priority"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -191,7 +197,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_23_104321) do
   add_foreign_key "favorites", "employees"
   add_foreign_key "favorites", "places"
   add_foreign_key "offices", "companies"
-  add_foreign_key "permissions", "allowed_actions"
   add_foreign_key "permissions", "scopes"
   add_foreign_key "permissions", "subjects"
   add_foreign_key "places", "rooms"

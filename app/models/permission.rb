@@ -2,7 +2,8 @@
 
 class Permission < ApplicationRecord
   has_and_belongs_to_many :roles
-  belongs_to :allowed_action
+  has_and_belongs_to_many :allowed_actions
+
   belongs_to :scope
   belongs_to :subject
 end
