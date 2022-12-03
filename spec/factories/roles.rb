@@ -3,5 +3,6 @@
 FactoryBot.define do
   factory :role do
     name { "MyString" }
+    auth_group
   end
 end

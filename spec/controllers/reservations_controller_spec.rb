@@ -8,16 +8,19 @@ RSpec.describe ReservationsController, type: :controller do
   let(:reservation) { create(:reservation) }
 
   let(:allowed_action) { create(:allowed_action) }
+  let(:auth_group) { create(:auth_group) }
   let(:subject) { create(:subject) }
   let(:scope) { create(:scope) }
-  let(:permission) { create(:permission, allowed_action:, subject:, scope:) }
-  let(:role) { create(:role) }
+  let(:permission) { create(:permission, subject:, scope:, auth_group:) }
+  let(:role) { create(:role, auth_group:) }
+
   let(:user) { create(:user) }
   let(:employee) { create(:employee, user:) }
 
   before(:each) do
-    role.permissions << permission
+    permission.allowed_actions << allowed_action
     employee.roles << role
+    role.permissions << permission
     sign_in(user)
   end
 

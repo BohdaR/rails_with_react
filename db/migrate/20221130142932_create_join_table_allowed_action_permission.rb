@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateJoinTableAllowedActionPermission < ActiveRecord::Migration[7.0]
   def change
     create_join_table :allowed_actions, :permissions do |t|

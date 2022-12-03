@@ -3,7 +3,6 @@
 FactoryBot.define do
   factory :permission do
     scope
-    allowed_action
     subject
     name { "MyString" }
   end

@@ -6,4 +6,5 @@ class Permission < ApplicationRecord
 
   belongs_to :scope
   belongs_to :subject
+  belongs_to :auth_group
 end

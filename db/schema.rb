@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_30_145106) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_30_142932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_145106) do
     t.bigint "permission_id", null: false
     t.index ["allowed_action_id"], name: "index_allowed_actions_permissions_on_allowed_action_id"
     t.index ["permission_id"], name: "index_allowed_actions_permissions_on_permission_id"
+  end
+
+  create_table "auth_groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "priority"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "companies", force: :cascade do |t|
@@ -107,10 +114,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_145106) do
 
   create_table "permissions", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "auth_group_id", null: false
     t.bigint "scope_id", null: false
     t.bigint "subject_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["auth_group_id"], name: "index_permissions_on_auth_group_id"
     t.index ["scope_id"], name: "index_permissions_on_scope_id"
     t.index ["subject_id"], name: "index_permissions_on_subject_id"
   end
@@ -143,9 +152,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_145106) do
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
+    t.bigint "auth_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "priority"
+    t.index ["auth_group_id"], name: "index_roles_on_auth_group_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -162,15 +172,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_145106) do
   create_table "scopes", force: :cascade do |t|
     t.string "name"
     t.string "description"
+    t.integer "priority", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "subjects", force: :cascade do |t|
     t.string "name"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
   end
 
   create_table "users", force: :cascade do |t|
@@ -197,11 +208,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_145106) do
   add_foreign_key "favorites", "employees"
   add_foreign_key "favorites", "places"
   add_foreign_key "offices", "companies"
+  add_foreign_key "permissions", "auth_groups"
   add_foreign_key "permissions", "scopes"
   add_foreign_key "permissions", "subjects"
   add_foreign_key "places", "rooms"
   add_foreign_key "reservations", "employees"
   add_foreign_key "reservations", "places"
+  add_foreign_key "roles", "auth_groups"
   add_foreign_key "rooms", "companies"
   add_foreign_key "rooms", "offices"
 end
