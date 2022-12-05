@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Reservation < ApplicationRecord
-  include GoogleCalendarApi
+  # include GoogleCalendarApi
 
-  CALENDAR_ID = "primary".freeze
+  # CALENDAR_ID = "primary".freeze
 
   validates :start_at, comparison: { greater_than_or_equal_to: Time.zone.now }, presence: true
   validates :end_at, comparison: { greater_than: :start_at }, presence: true
