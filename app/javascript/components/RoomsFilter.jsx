@@ -52,8 +52,8 @@ const RoomsFilter = ({
   }
 
   return (
-    <div>
-      <div className={roomsFilter}>
+    <div className={roomsFilter}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <Stepper orientation="vertical" activeStep={activeStep} className={classes.root}>
           <Step>
             <StepLabel>Select an office </StepLabel>
@@ -197,7 +197,7 @@ const RoomsFilter = ({
             </StepContent>
           </Step>
         </Stepper>
-      </div>
+      </form>
     </div>
   );
 };
