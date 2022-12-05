@@ -11,10 +11,14 @@ class Room < ApplicationRecord
 
   def self.not_empty_rooms(kwargs)
     free_places = Place.free_places(kwargs[:look_from], kwargs[:look_to]).to_sql
-    Room.distinct.joins("INNER JOIN (#{free_places}) free_places on free_places.room_id = rooms.id").order(:id)
+    Room
+      .left_joins(:issues)
+      .where("issues_rooms_rooms_join.room_id IS NULL")
+      .joins("INNER JOIN (#{free_places}) AS free_places ON free_places.room_id = rooms.id")
+      .distinct
   end
 
-  scope :floors, -> {
-    Room.select(:floor).distinct
-  }
+  def self.floors(kwargs)
+    Room.not_empty_rooms(kwargs).select("floor")
+  end
 end

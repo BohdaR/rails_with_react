@@ -25,7 +25,7 @@ const Booking = ({defaultOffice, form_authenticity_token, currentDateTime, tomor
   }, []);
 
   useEffect(() => {
-    get(`${process.env.HOST}/floors`)
+    get(`${process.env.HOST}/floors?look_from=${lookFromTime}&look_to=${lookToTime}`)
       .then(
         (response) => {
           setFloors(response.data);
