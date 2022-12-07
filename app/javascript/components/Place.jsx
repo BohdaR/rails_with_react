@@ -46,7 +46,7 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
         showPlace ?
           <div>
             <button className={style.bookingButton} onClick={handleModal}>
-              Place {place.number}
+              {place.number}
             </button>
             <Dialog
               open={open}
