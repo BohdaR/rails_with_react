@@ -35,7 +35,7 @@ const LoginForm = ({form_authenticity_token}) => {
         </div>
         <div className={signupWrapper}>
           Don't have an account?
-          <a class="signin-links signin-links-text" href="/user/sign_up">Sign Up</a>
+          <a className="signin-links signin-links-text" href="/user/sign_up">Sign Up</a>
         </div>
       </div>
     </div>
