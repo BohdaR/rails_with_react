@@ -28,7 +28,7 @@ class User < ApplicationRecord
     employee.update(user_id: self.id) unless employee.nil?
   end
 
-  def expired?
-    expires_at < Time.current.to_i
+  def token_expired?
+    expires_at.to_i < Time.now.to_i
   end
 end

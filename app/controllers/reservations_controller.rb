@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require "google/apis/calendar_v3"
 
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :update, :destroy]
@@ -14,14 +13,15 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
-    # @reservation.publish_event_to_gcal(current_user)
+    reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
+    # reservation.publish_event_to_gcal(current_user)
 
-    if @reservation.save
+    if reservation.save
+      GoogleCalendar::EventScheduler.new(current_user, reservation).register_event
       BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later
-      render json: @reservation
+      render json: reservation
     else
-      render json: @reservation.errors, status: :bad_request
+      render json: reservation.errors, status: :bad_request
     end
   end
 
@@ -34,14 +34,9 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
+    GoogleCalendar::EventScheduler.new(current_user, @reservartion).delete_event
     render json: @reservation.destroy
   end
-
-  # def sync_with_google
-  #   ge = @reservation.get_google_event(@reservation.calendar_id, @reservation.employee)
-  #   @reservation.update(start_at: ge.start.start_at, end_at: ge.end.end_at)
-  #   render json: @reservation, notice: "Event has been synced with google successfully."
-  # end
 
   private
     def reservation_params
