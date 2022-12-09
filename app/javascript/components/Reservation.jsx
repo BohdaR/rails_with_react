@@ -3,7 +3,6 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import style from '../stylesheets/reservations.module.css'
 import {deleteRequest} from "./useAPI/useAPI";
-import FavoriteButton from './FavoriteButton';
 
 const Reservation = ({reservation, token}) => {
   const [showReservation, setShowReservation] = useState(true)
