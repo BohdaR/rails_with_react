@@ -14,8 +14,6 @@ class ReservationsController < ApplicationController
 
   def create
     reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
-    # reservation.publish_event_to_gcal(current_user)
-
     if reservation.save
       GoogleCalendar::EventScheduler.new(current_user, reservation).register_event
       BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later

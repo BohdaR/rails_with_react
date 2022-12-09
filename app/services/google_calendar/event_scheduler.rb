@@ -19,7 +19,7 @@ module GoogleCalendar
       calendar_event = Google::Apis::CalendarV3::Event.new(
         summary: "Place Reservation",
         location: "Ukraine, Lviv",
-        description: "You booked a place",
+        description: "Hello! You booked a place number #{reservation.place.number} at #{reservation.place.room.name}",
         start: {
           date_time: reservation.start_at.to_datetime.rfc3339,
           time_zone: "Europe/Kiev"
