@@ -54,7 +54,7 @@ module GoogleCalendar
     end
 
     def delete_event
-      client.delete_event("primary", reservartion.calendar_id)
+      client.delete_event("primary", reservation.calendar_id)
       rescue StandardError => e
         puts "Error occured for deleting reservation"
         puts e

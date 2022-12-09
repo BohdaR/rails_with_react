@@ -34,7 +34,7 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
-    GoogleCalendar::EventScheduler.new(current_user, @reservartion).delete_event
+    GoogleCalendar::EventScheduler.new(current_user, @reservation).delete_event
     render json: @reservation.destroy
   end
 
