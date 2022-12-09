@@ -13,7 +13,6 @@ class Reservation < ApplicationRecord
       .select("
         reservations.id,
         rooms.name as room_name,
-        places.id as place_id,
         places.number as place_number,
         reservations.start_at,
         reservations.end_at")
