@@ -6,15 +6,15 @@ import style from '../stylesheets/booking.module.css'
 
 
 const Booking = ({defaultOffice, form_authenticity_token, currentDateTime, tomorrowDateTime}) => {
-  const [offices, setOffices] = useState([])
-  const [floors, setFloors] = useState([])
-  const [roomList, setRoomList] = useState([])
+  const [offices, setOffices] = useState([]);
+  const [floors, setFloors] = useState([]);
+  const [roomList, setRoomList] = useState([]);
 
-  const [lookFromTime, setLookFromTime] = useState(currentDateTime.substring(0, 16))
-  const [lookToTime, setLookToTime] = useState(tomorrowDateTime.substring(0, 16))
+  const [lookFromTime, setLookFromTime] = useState(currentDateTime.substring(0, 16));
+  const [lookToTime, setLookToTime] = useState(tomorrowDateTime.substring(0, 16));
 
-  const [roomFloor, setRoomFloor] = useState('')
-  const [roomOfficeId, setRoomOfficeId] = useState(defaultOffice.id)
+  const [roomFloor, setRoomFloor] = useState("");
+  const [roomOfficeId, setRoomOfficeId] = useState(defaultOffice.id);
 
   useEffect(() => {
     get(`${process.env.HOST}/offices`)
@@ -29,7 +29,7 @@ const Booking = ({defaultOffice, form_authenticity_token, currentDateTime, tomor
       .then(
         (response) => {
           setFloors(response.data);
-          setRoomFloor(response.data[0].floor)
+          setRoomFloor(response.data.floor);
         })
   }, []);
 
