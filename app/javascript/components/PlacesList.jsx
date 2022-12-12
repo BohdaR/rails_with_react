@@ -18,6 +18,7 @@ const PlacesList = ({roomId, lookFromTime, lookToTime, ...props}) => {
     <Fragment>
       <div className={style.lineContainer}>
         <hr className={style.horTopLine} />
+        <p>Available Places:</p>
       </div>
       <div className={style.placesList}>
         {places.map((place) =>
