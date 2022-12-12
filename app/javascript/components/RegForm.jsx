@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import SubmitInput from "./Inputs/SubmitInput";
 import GoogleLoginButton from "./GoogleLoginButton";
 import PasswordInput from "./Inputs/PasswordInput";
-import AuthenticityTokenInput from "./Inputs/AuthenticityTokenInput";
 import EmailInput from "./Inputs/EmailInput";
 import {
   authentication,
