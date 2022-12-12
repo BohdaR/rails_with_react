@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
     render json: rooms
   end
   def floors
-    render json: Room.floors
+    render json: Room.floors(params.permit(:look_from, :look_to))
   end
 
   def show
