@@ -49,6 +49,8 @@
 }
 
 .btnColumn {
+    display: flex;
+    align-items: center;
     flex-basis: 15%;
     text-align: center;
 }
