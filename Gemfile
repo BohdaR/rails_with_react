@@ -16,6 +16,7 @@ gem "omniauth"
 gem "omniauth-google-oauth2"
 gem "omniauth-rails_csrf_protection"
 gem "active_model_serializers"
+gem "google-api-client", require: "google/apis/calendar_v3"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4"

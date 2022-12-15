@@ -168,6 +168,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_091433) do
     t.datetime "end_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "calendar_id"
+    t.string "calendar_link"
     t.index ["employee_id"], name: "index_reservations_on_employee_id"
     t.index ["place_id"], name: "index_reservations_on_place_id"
   end
@@ -218,6 +220,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_05_091433) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role", default: "user"
+    t.string "access_token"
+    t.datetime "expires_at"
+    t.string "refresh_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
