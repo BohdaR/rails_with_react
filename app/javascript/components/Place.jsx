@@ -7,11 +7,13 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import {post} from "./useAPI/useAPI";
 import style from '../stylesheets/booking.module.css'
+import {Alert} from "@mui/material";
 
 const Place = ({place, token, start_at, end_at, setShowRoom}) => {
   const [showPlace, setShowPlace] = useState(true);
-  const [error, setError] = useState(null);
   const [open, setOpen] = useState(false);
+  const [errors, setErrors] = useState({});
+
 
   const confirmationMessage = `
   Are you sure you want to book 
@@ -19,13 +21,12 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
   from ${start_at.replace('T', ' ')} to ${end_at.replace('T', ' ')}?
   `;
 
-  const handleModal = () => setOpen(!open);
+  const handleModal = () => {
+    setOpen(!open);
+    setErrors({});
+  }
 
   const bookPlace = () => {
-    if (start_at > end_at) {
-      setError('end date must be greater than start date')
-      return
-    };
 
     post(`${process.env.HOST}/reservations`, {
       authenticity_token: token,
@@ -37,7 +38,11 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
     }).then((response) => {
       setShowPlace(false)
       if (document.getElementsByClassName(style.bookingButton).length === 1) setShowRoom(false)
-    });
+    }).catch(
+      (errors) => {
+        setErrors(errors.response.data)
+      }
+    );
   }
 
   return (
@@ -63,6 +68,27 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
               </DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
+                  {errors.start_at ?
+                    <Alert severity="error" onClose={() => {
+                      setErrors({start_at: null, place_id: errors.place_id, end_at: errors.end_at})
+                    }} style={{marginBottom: 10}}>
+                      Start date {errors.start_at} <br/>
+                    </Alert> : null
+                  }
+                  {errors.place_id ?
+                    <Alert severity="error" onClose={() => {
+                      setErrors({start_at: errors.start_at, place_id: null, end_at: errors.end_at})
+                    }} style={{marginBottom: 10}}>
+                      Place {errors.place_id}
+                    </Alert> : null
+                  }
+                  {errors.end_at ?
+                    <Alert severity="error" onClose={() => {
+                      setErrors({email: errors.start_at, place_id: errors.place_id, end_at: null})
+                    }} style={{marginBottom: 10}}>
+                      End date {errors.end_at}
+                    </Alert> : null
+                  }
                   {confirmationMessage}
                 </DialogContentText>
               </DialogContent>
@@ -82,7 +108,6 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
                 </Button>
               </DialogActions>
             </Dialog>
-            <h2>{error}</h2>
           </div> : null
       }
     </div>
