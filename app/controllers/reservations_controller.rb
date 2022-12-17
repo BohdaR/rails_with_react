@@ -16,6 +16,7 @@ class ReservationsController < ApplicationController
   def create
     reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
     if reservation.save
+      GoogleCalendar::EventScheduler.new(current_user, reservation).register_event
       BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later
       render json: reservation
     else
@@ -32,6 +33,7 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
+    GoogleCalendar::EventScheduler.new(current_user, @reservation).delete_event
     render json: @reservation.destroy
   end
 

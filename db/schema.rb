@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_30_142932) do
+
+ActiveRecord::Schema[7.0].define(version: 2022_12_05_091433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -100,6 +101,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_142932) do
     t.index ["place_id"], name: "index_favorites_on_place_id"
   end
 
+  create_table "issues", force: :cascade do |t|
+    t.string "name"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_issues_on_company_id"
+  end
+
+  create_table "issues_places", id: false, force: :cascade do |t|
+    t.bigint "issue_id", null: false
+    t.bigint "place_id", null: false
+    t.index ["issue_id"], name: "index_issues_places_on_issue_id"
+    t.index ["place_id"], name: "index_issues_places_on_place_id"
+  end
+
+  create_table "issues_rooms", id: false, force: :cascade do |t|
+    t.bigint "issue_id", null: false
+    t.bigint "room_id", null: false
+    t.index ["issue_id"], name: "index_issues_rooms_on_issue_id"
+    t.index ["room_id"], name: "index_issues_rooms_on_room_id"
+  end
+
   create_table "offices", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.string "street"
@@ -146,6 +169,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_142932) do
     t.datetime "end_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "calendar_id"
+    t.string "calendar_link"
     t.index ["employee_id"], name: "index_reservations_on_employee_id"
     t.index ["place_id"], name: "index_reservations_on_place_id"
   end
@@ -196,6 +221,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_142932) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "access_token"
+    t.datetime "expires_at"
+    t.string "refresh_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -207,6 +235,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_142932) do
   add_foreign_key "employees", "users"
   add_foreign_key "favorites", "employees"
   add_foreign_key "favorites", "places"
+  add_foreign_key "issues", "companies"
   add_foreign_key "offices", "companies"
   add_foreign_key "permissions", "auth_groups"
   add_foreign_key "permissions", "scopes"
