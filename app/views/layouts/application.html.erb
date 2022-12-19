@@ -12,29 +12,29 @@
 </head>
 <body>
 <div class="wrapper">
-  <%= react_component('NavBar', {
-    leftItems: [
+  <%= react_component('Header', {
+    leftNavigationLinks: [
       {
-        href: ENV.fetch('HOST', 'http://127.0.0.1:3000'), linkText: 'Home'
+        href: ENV.fetch('HOST', 'http://127.0.0.1:3000'), name: 'Home'
       },
       {
-        href: booking_path, linkText: 'Book a place'
+        href: booking_path, name: 'Book a place'
       },
       {
-        href: favoriteplaces_path, linkText: 'Favorite Places'
+        href: favoriteplaces_path, name: 'Favorite Places'
       },
       {
-        href: user_reservation_path, linkText: 'Your reservation'
+        href: user_reservation_path, name: 'Your reservation'
       }
     ],
-    rightItems: [
+    rightNavigationLinks: [
       {
         href: user_signed_in? ? edit_user_registration_path : new_user_registration_path,
-        linkText: user_signed_in? ? current_user.full_name : 'Sing up'
+        name: user_signed_in? ? current_user.full_name : 'Sing up'
       },
       {
         href: user_signed_in? ? destroy_user_session_path : new_user_session_path,
-        linkText: user_signed_in? ? 'Logout' : 'Login'
+        name: user_signed_in? ? 'Logout' : 'Login'
       },
     ] }) %>
   <main>
