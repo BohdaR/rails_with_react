@@ -34,16 +34,26 @@
 }
 
 .bookedStatistic li {
-    font-size: 30px;
+    font-size: 22px;
+}
+
+.bookedStatistic > li > div {
+    width: 250px;
+}
+
+.bookedStatistic > li > div > div {
+    display: inline-block;
+    width: 50%;
 }
 
 .companyDescription {
     font-size: 20px;
 }
 
-.officesInformation h1 {
+.officesInformation h1, h2 {
     text-align: justify;
 }
+
 @media (max-width: 1200px) {
     .wrapper h1 {
         font-size: 30px;

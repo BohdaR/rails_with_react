@@ -64,11 +64,18 @@ const HomePage = ({employee_information, company_image_url}) => {
         </div>
         <div className={style.officesInformation}>
           <h1>{`Your office - ${office.town}, ${office.street}, ${office.house_number}`}</h1>
-          <h1>How many employees booked a place in this office each day in the week.</h1>
+          <h2>How many employees booked a place in this office each day in the week.</h2>
           <ul className={style.bookedStatistic}>
             {officeStatistics.map((item) =>
               <li key={item.week_day}>
-                {item.week_day} - {item.quantity}
+                <div>
+                  <div>
+                    {item.week_day}
+                  </div>
+                  <div>
+                    {item.quantity}
+                  </div>
+                </div>
               </li>
             )}
           </ul>
