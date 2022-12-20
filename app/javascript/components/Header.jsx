@@ -1,11 +1,18 @@
 import React, {Fragment, useState} from 'react';
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import Box from "@mui/material/Box";
-import {Link, Container, SwipeableDrawer, Divider, List, ListItem} from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Box,
+  Link,
+  Container,
+  SwipeableDrawer,
+  Divider,
+  List,
+  ListItem
+} from "@mui/material";
 
 
 const Header = ({leftNavigationLinks, rightNavigationLinks}) => {
@@ -78,7 +85,7 @@ const Header = ({leftNavigationLinks, rightNavigationLinks}) => {
                 </Link>
               )}
             </Box>
-            <Box>
+            <Box sx={{display: {md: 'block', xs: 'none'},}}>
               {rightNavigationLinks.map((item) =>
                 <Link
                   key={item.name}
@@ -120,16 +127,15 @@ const Header = ({leftNavigationLinks, rightNavigationLinks}) => {
           <List>
             {leftNavigationLinks.map((item) =>
               <ListItem
-              sx={{
-                "&:hover": {
-                  background: "white",
-                  color: "black"
-                }
-              }}
+                key={item.name}
+                sx={{
+                  "&:hover": {
+                    background: "white",
+                    color: "black"
+                  }
+                }}
               >
                 <Link
-                  key={item.name}
-                  sx={{}}
                   color="inherit"
                   variant="button"
                   underline="none"
@@ -143,6 +149,7 @@ const Header = ({leftNavigationLinks, rightNavigationLinks}) => {
           <List>
             {rightNavigationLinks.map((item) =>
               <ListItem
+                key={item.name}
                 sx={{
                   "&:hover": {
                     background: "white",
@@ -151,7 +158,6 @@ const Header = ({leftNavigationLinks, rightNavigationLinks}) => {
                 }}
               >
                 <Link
-                  key={item.name}
                   color="inherit"
                   variant="button"
                   underline="none"
