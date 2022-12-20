@@ -5,6 +5,8 @@ class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :update, :destroy]
 
   def index
+    @companies = Company.all
+    render json: @companies
   end
 
   def show

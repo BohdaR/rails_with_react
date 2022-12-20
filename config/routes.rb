@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   get "/statistics/office_visiting/:office_id", to: "dashboard_statistics#office_visiting", as: "office_visiting"
   get "/favoriteplaces", to: "pages#favorite_places"
   get "/user/reservation", to: "pages#user_reservation", as: "user_reservation"
+  get"/companies_list", to: "pages#companies_list"
 end
