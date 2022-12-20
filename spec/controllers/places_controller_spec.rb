@@ -3,6 +3,16 @@
 require "rails_helper"
 
 RSpec.describe PlacesController, type: :controller do
+  let(:allowed_action) { create(:allowed_action) }
+  let(:auth_group) { create(:auth_group) }
+  let(:subject) { create(:subject) }
+  let(:scope) { create(:scope) }
+  let(:permission) { create(:permission, subject:, scope:, auth_group:) }
+  let(:role) { create(:role, auth_group:) }
+
+  let(:user) { create(:user) }
+  let(:employee) { create(:employee, user:) }
+
   before(:all) do
     User.create(email: "foo@bar.com", password: "SomeUserPass")
     create(:company)
@@ -22,7 +32,10 @@ RSpec.describe PlacesController, type: :controller do
     Employee.create(user: User.first, company: Company.first, office: Office.first)
   end
   before(:each) do
-    sign_in(User.first)
+    permission.allowed_actions << allowed_action
+    employee.roles << role
+    role.permissions << permission
+    sign_in(user)
   end
   after(:all) do
     Company.first.destroy

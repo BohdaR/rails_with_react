@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ReservationsController < ApplicationController
+  authorize_resource
   before_action :set_reservation, only: [:show, :update, :destroy]
 
   def index

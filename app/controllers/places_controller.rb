@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PlacesController < ApplicationController
+  authorize_resource
   before_action :set_place, only: [:show, :update, :destroy]
 
   def index

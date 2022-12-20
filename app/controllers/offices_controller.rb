@@ -2,6 +2,7 @@
 
 class OfficesController < ApplicationController
   before_action :set_office, only: [:show, :update, :destroy]
+  authorize_resource
 
   def index
     offices = Office.all

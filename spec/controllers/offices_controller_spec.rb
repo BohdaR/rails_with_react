@@ -3,10 +3,23 @@
 require "rails_helper"
 
 RSpec.describe OfficesController, type: :controller do
+  let(:allowed_action) { create(:allowed_action) }
+  let(:auth_group) { create(:auth_group) }
+  let(:subject) { create(:subject) }
+  let(:scope) { create(:scope) }
+  let(:permission) { create(:permission, subject:, scope:, auth_group:) }
+  let(:role) { create(:role, auth_group:) }
+
+  let(:user) { create(:user) }
+  let(:employee) { create(:employee, user:) }
+
   before(:each) do
-    user = User.create(email: "foo@bar.com", password: "SomeUserPass")
+    permission.allowed_actions << allowed_action
+    employee.roles << role
+    role.permissions << permission
     sign_in(user)
   end
+
   before(:all) do
     create(:company)
     Office.where(
