@@ -3,6 +3,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import style from '../stylesheets/reservations.module.css'
 import {deleteRequest} from "./useAPI/useAPI";
+import RebookButton from "./RebookButton";
 
 const Reservation = ({reservation, token}) => {
   const [showReservation, setShowReservation] = useState(true)
@@ -36,12 +37,16 @@ const Reservation = ({reservation, token}) => {
           {dateHandler(reservation.end_at)}
         </div>
         <div className={`${style.btnColumn} ${style.col}`}>
+          <RebookButton
+            token={token}
+            placeId={reservation.place_id}
+          />
           <IconButton onClick={() => deleteReservation(reservation.id)}>
             <DeleteIcon style={{
               color: "#173166"
             }}/>
           </IconButton>
-        </div> 
+        </div>
       </div>: null
   );
 };
