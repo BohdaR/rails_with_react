@@ -40,6 +40,7 @@ const Reservation = ({reservation, token}) => {
           <RebookButton
             token={token}
             placeId={reservation.place_id}
+            placeNumber={reservation.place_number}
           />
           <IconButton onClick={() => deleteReservation(reservation.id)}>
             <DeleteIcon style={{
