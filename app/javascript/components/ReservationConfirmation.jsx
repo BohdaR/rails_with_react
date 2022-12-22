@@ -38,23 +38,37 @@ const ReservationConfirmation = ({
         <DialogContentText id="alert-dialog-description">
           {errors.start_at ?
             <Alert severity="error" onClose={() => {
-              setErrors({start_at: null, place_id: errors.place_id, end_at: errors.end_at})
+              setErrors({...errors, start_at: null})
             }} style={{marginBottom: 10}}>
               Start date {errors.start_at} <br/>
             </Alert> : null
           }
           {errors.place_id ?
             <Alert severity="error" onClose={() => {
-              setErrors({start_at: errors.start_at, place_id: null, end_at: errors.end_at})
+              setErrors({...errors, place_id: null})
             }} style={{marginBottom: 10}}>
               Place {errors.place_id}
             </Alert> : null
           }
           {errors.end_at ?
             <Alert severity="error" onClose={() => {
-              setErrors({start_at: errors.start_at, place_id: errors.place_id, end_at: null})
+              setErrors({...errors, end_at: null})
             }} style={{marginBottom: 10}}>
               End date {errors.end_at}
+            </Alert> : null
+          }
+          {errors.time ?
+            <Alert severity="error" onClose={() => {
+              setErrors({...errors, time: null})
+            }} style={{marginBottom: 10}}>
+              {errors.time}
+            </Alert> : null
+          }
+          {errors.place ?
+            <Alert severity="error" onClose={() => {
+              setErrors({...errors, place: null})
+            }} style={{marginBottom: 10}}>
+              {errors.place}
             </Alert> : null
           }
           {confirmationMessage}

@@ -25,6 +25,7 @@ const RebookButton = ({token, placeId, placeNumber}) => {
       .then(
         (response) => {
           setOpen(false)
+          setConfirmationOpen(false)
           setErrors({})
         })
       .catch(
@@ -44,6 +45,7 @@ const RebookButton = ({token, placeId, placeNumber}) => {
         })
       .catch(
         (errors) => {
+          console.log(errors)
           setErrors(errors.response.data)
         }
       );
@@ -55,27 +57,6 @@ const RebookButton = ({token, placeId, placeNumber}) => {
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Book a place</DialogTitle>
         <DialogContent>
-          {errors.start_at ?
-            <Alert severity="error" onClose={() => {
-              setErrors({start_at: null, place_id: errors.place_id, end_at: errors.end_at})
-            }} style={{marginBottom: 10}}>
-              Start date {errors.start_at} <br/>
-            </Alert> : null
-          }
-          {errors.place_id ?
-            <Alert severity="error" onClose={() => {
-              setErrors({start_at: errors.start_at, place_id: null, end_at: errors.end_at})
-            }} style={{marginBottom: 10}}>
-              Place {errors.place_id}
-            </Alert> : null
-          }
-          {errors.end_at ?
-            <Alert severity="error" onClose={() => {
-              setErrors({start_at: errors.start_at, place_id: errors.place_id, end_at: null})
-            }} style={{marginBottom: 10}}>
-              End date {errors.end_at}
-            </Alert> : null
-          }
           <TextField
             margin="dense"
             label="Start date"
