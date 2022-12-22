@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FavoritePlaces from "./FavoritePlaces";
+import NewCompany from './NewCompany';
 // import Company from './Company';
 
 const CompaniesList = ({token}) => {
@@ -52,6 +53,7 @@ const CompaniesList = ({token}) => {
 
 		return(
 			<div>
+        <NewCompany />
 				<h1 className={style.headline}>All companies</h1>
 				<div className={style.reservationTable}>
           <div className={style.tableHeader}>
