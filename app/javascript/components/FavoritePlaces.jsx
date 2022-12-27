@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {get} from "./useAPI/useAPI";
-import "../stylesheets/favorite_places.css";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import style from "../stylesheets/reservations.module.css";
 
 const FavoritePlaces = () => {
- 
+
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -28,28 +28,44 @@ const FavoritePlaces = () => {
   };
 
   const list = favorites.map(favorite => {
-  return (
-    <div key={favorite.id} className="favorite-list">
-      <li>Place Number: { favorite.place.number }</li>
-      <IconButton onClick={() => onFavoriteDelete(favorite.id)}>
-        <DeleteIcon style={{
-            color: "#FAFBFC"
-        }} />
-      </IconButton>
-    </div>
+    return (
+      <div className={style.tableRow}>
+        <div className={`${style.placeColumn} ${style.col}`}
+             data-label="Room">
+          {favorite.place.room.name}
+        </div>
+        <div className={`${style.placeColumn} ${style.col}`}
+             data-label="Place">
+          Place {favorite.place.number}
+        </div>
+        <div className={`${style.btnColumn} ${style.col}`}>
+          <IconButton onClick={() => onFavoriteDelete(favorite.id)}>
+            <DeleteIcon style={{
+              color: "#173166"
+            }}/>
+          </IconButton>
+        </div>
+      </div>
     );
   });
 
-  return(
-    <div className="favorites">
-      <h1>Favorite Places</h1>
-      { Object.keys(favorites).length !== 0
-        ? <div>
-            <ul>
-              {list}
-            </ul>
+  return (
+    <div>
+      <h1 className={style.headline}>Favorite places</h1>
+      {Object.keys(favorites).length !== 0 ?
+        <div className={style.reservationTable}>
+          <div className={style.tableHeader}>
+            <div className={`${style.placeColumn} ${style.col}`}>
+              Room Name
+            </div>
+            <div className={`${style.startColumn} ${style.col}`}>
+              Place Number
+            </div>
+            <div className={`${style.btnColumn} ${style.col}`}></div>
           </div>
-        : <h1>Oops..There are no any favorite places</h1>
+          {list}
+        </div>
+        : <h1 className={style.headline}>There are no any favorites</h1>
       }
     </div>
   );
