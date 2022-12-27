@@ -8,7 +8,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FavoritePlaces from "./FavoritePlaces";
 import NewCompany from './NewCompany';
-// import Company from './Company';
 
 const CompaniesList = ({token}) => {
 	const [companies, setCompanies] = useState([]);

@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {post} from "./useAPI/useAPI";
-import TextareaAutosize from '@mui/base/TextareaAutosize';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import "../stylesheets/company.css"
@@ -55,6 +53,7 @@ const NewCompany = ({token, company}) => {
         <DialogContent>
 					<div className="company_form">
 						<form onSubmit={handleSubmit}>
+							<div className="message">{message ? <p>{message}</p> : null}</div>
 							<input type="text"
 								className="company_input"
 								value={name}
@@ -68,6 +67,7 @@ const NewCompany = ({token, company}) => {
 								value={domainName}
 								placeholder="Domain Name"
 								onChange={(e) => setDomainName(e.target.value)}
+								required
 							/>
 							<textarea cols="30" rows="10"
 								value={description}
@@ -78,7 +78,6 @@ const NewCompany = ({token, company}) => {
 								<Button type="submit">Create</Button>
 								<Button onClick={handleModal}>Cancel</Button>
 							</div>
-							<div className="message">{message ? <p>{message}</p> : null}</div>
 						</form>
 					</div>
         </DialogContent>
