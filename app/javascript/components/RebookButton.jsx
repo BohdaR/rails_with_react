@@ -53,7 +53,10 @@ const RebookButton = ({token, placeId, placeNumber}) => {
 
   return (
     <Fragment>
-      <Button onClick={() => setOpen(true)} variant="outlined">Rebook</Button>
+      <Button onClick={() => {
+        setOpen(true);
+        setErrors({});
+      }} variant="outlined">Rebook</Button>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <DialogTitle>Book a place</DialogTitle>
         <DialogContent>

@@ -4,8 +4,9 @@ import {get} from "./useAPI/useAPI";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import style from "../stylesheets/reservations.module.css";
+import RebookButton from "./RebookButton";
 
-const FavoritePlaces = () => {
+const FavoritePlaces = ({token}) => {
 
   const [favorites, setFavorites] = useState([]);
 
@@ -39,6 +40,11 @@ const FavoritePlaces = () => {
           Place {favorite.place.number}
         </div>
         <div className={`${style.btnColumn} ${style.col}`}>
+          <RebookButton
+            token={token}
+            placeId={favorite.place_id}
+            placeNumber={favorite.place_number}
+          />
           <IconButton onClick={() => onFavoriteDelete(favorite.id)}>
             <DeleteIcon style={{
               color: "#173166"
