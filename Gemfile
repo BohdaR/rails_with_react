@@ -101,3 +101,5 @@ group :rubocop do
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
 end
+
+gem "slack-ruby-client", "~> 2.0"
