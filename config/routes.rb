@@ -22,6 +22,6 @@ Rails.application.routes.draw do
   get "/booking", to: "pages#booking", as: "booking"
   get "/floors", to: "rooms#floors", as: "rooms_floors"
   get "/statistics/office_visiting/:office_id", to: "dashboard_statistics#office_visiting", as: "office_visiting"
-  get "/favoriteplaces", to: "pages#favorite_places"
+  get "/favorite_places", to: "pages#favorite_places"
   get "/user/reservation", to: "pages#user_reservation", as: "user_reservation"
 end
