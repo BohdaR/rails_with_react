@@ -82,7 +82,7 @@
         color: #6C7A89;
         padding-right: 10px;
         content: attr(data-label);
-        margin: auto;
+        margin-right: auto;
         text-align: right;
     }
 }
