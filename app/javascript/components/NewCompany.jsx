@@ -4,81 +4,84 @@ import TextareaAutosize from '@mui/base/TextareaAutosize';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import "../stylesheets/company.css"
 
 const NewCompany = ({token, company}) => {
-	const [company, setCompany] = useState({
-		name: "",
-		domain_name: "",
-		description: ""
-	});
+	const [name, setName] = useState("");
+	const [domainName, setDomainName] = useState("");
+	const [description, setDescription] = useState("");
 	const [open, setOpen] = useState(false);
+	const [message, setMessage] = useState("");
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const handleModal = () => {
+    setOpen(!open);
+  }
 
-  const handleClose = () => {
-    setOpen(false);
-  };
 
-	const createCompany = (e) => {
-		e.preventDefault();
-
+	let handleSubmit = async (e) => {
+    e.preventDefault();
 		post(`${process.env.HOST}/companies`, {
-      authenticity_token: token,
-      company: {
-        name: name,
-        domain_name: domain_name,
-        description: description
-      }
-    }).then((response) => {
-      setShowPlace({})
-    });
-	}
+			authenticity_token: token,
+			company: {
+				name: name,
+				domain_name: domainName,
+				description: description
+			}
+			}).then(
+			(response) => {
+				if (response.status === 200) {
+					setName("");
+					setDomainName("");
+					setDescription("");
+					setMessage("Company was created successfully");
+				} else {
+					setMessage("Some error occured");
+				}
+			}
+			).catch(
+			(errors) => {
+				console.log(errors);
+			});
+  };
 
 	return(
 		<div>
-			<Button variant="outlined" onClick={handleClickOpen}>
+			<Button variant="outlined" onClick={handleModal}>
         Create New Company
       </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New Company</DialogTitle>
+      <Dialog open={open} onClose={handleModal}>
+        <h2 className="new_company_title">New Company</h2>
         <DialogContent>
-          <DialogContentText>
-            To create a company, please enter company name, domain and description here.
-          </DialogContentText>
-          <form className="eventForm">
-						<div>
-							<label htmlFor="company_name">
-								<strong>Name:</strong>
-								<input type="text" id="name" name="name" />
-							</label>
-						</div>
-						<div>
-							<label htmlFor="description">
-								<strong>Company Description:</strong>
-								<textarea cols="30" rows="10" id="description" name="description" />
-							</label>
-						</div>
-						<div>
-							<label htmlFor="domain">
-								<strong>Domain:</strong>
-								<input type="text" id="domain" name="domian" />
-							</label>
-						</div>
-						{/* <div className="form-actions">
-							<button type="submit">Save</button>
-						</div> */}
-     		</form>
+					<div className="company_form">
+						<form onSubmit={handleSubmit}>
+							<input type="text"
+								className="company_input"
+								value={name}
+								placeholder="Name"
+								onChange={(e) => setName(e.target.value)}
+								required
+							/>
+							<input type="text"
+								className="company_input"
+								name="domain"
+								value={domainName}
+								placeholder="Domain Name"
+								onChange={(e) => setDomainName(e.target.value)}
+							/>
+							<textarea cols="30" rows="10"
+								value={description}
+								placeholder="Description"
+								onChange={(e) => setDescription(e.target.value)}
+							/>
+							<div className="new_company_btns">
+								<Button type="submit">Create</Button>
+								<Button onClick={handleModal}>Cancel</Button>
+							</div>
+							<div className="message">{message ? <p>{message}</p> : null}</div>
+						</form>
+					</div>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Submit</Button>
-        </DialogActions>
       </Dialog>
 		</div>
 		);

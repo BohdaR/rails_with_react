@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CompaniesController < ApplicationController
+  protect_from_forgery with: :null_session
   authorize_resource
   before_action :set_company, only: [:show, :update, :destroy]
 
