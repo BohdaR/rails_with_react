@@ -3,6 +3,10 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  Rails.application.routes.default_url_options = {
+    host: "http://127.0.0.1:3000"
+  }
+  
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time

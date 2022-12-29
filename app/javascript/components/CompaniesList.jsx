@@ -8,8 +8,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import FavoritePlaces from "./FavoritePlaces";
 import NewCompany from './NewCompany';
+import EditCompany from './EditCompany';
 
-const CompaniesList = ({token}) => {
+
+const CompaniesList = ({token, company_image_url}) => {
 	const [companies, setCompanies] = useState([]);
 
   useEffect(() => {
@@ -27,6 +29,11 @@ const CompaniesList = ({token}) => {
 					data-label="Company Name">
 					{ company.name }
         </div>
+        <img
+          src={company_image_url}
+          alt="Company logo"
+          className={style.companyLogo}
+        />
 				<div className={`${style.startColumn} ${style.col}`} 
         	data-label="Domain Name">
         	{ company.domain_name }
@@ -35,9 +42,11 @@ const CompaniesList = ({token}) => {
 					{/* <button onClick={() => history.push(`/companies/${company.id}`)}>
 						Click me
 					</button> */}
-					<Button to={`/favoriteplaces`}>
+					{/* <Button to={`/favoriteplaces`}>
 						Click Me
-					</Button>
+					</Button> */}
+          <EditCompany
+            company={company} />
         </div>
         <div className={`${style.btnColumn} ${style.col}`}>
           <IconButton>
