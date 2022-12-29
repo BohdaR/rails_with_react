@@ -17,7 +17,7 @@ const Booking = ({defaultOffice, form_authenticity_token, currentDateTime, tomor
   const [roomOfficeId, setRoomOfficeId] = useState(defaultOffice.id);
 
   useEffect(() => {
-    get(`${process.env.HOST}/offices`)
+    get(`${process.env.API_HOST}/offices`)
       .then(
         (response) => {
           setOffices(response.data);
@@ -25,7 +25,7 @@ const Booking = ({defaultOffice, form_authenticity_token, currentDateTime, tomor
   }, []);
 
   useEffect(() => {
-    get(`${process.env.HOST}/floors?look_from=${lookFromTime}&look_to=${lookToTime}`)
+    get(`${process.env.API_HOST}/floors?look_from=${lookFromTime}&look_to=${lookToTime}`)
       .then(
         (response) => {
           setFloors(response.data);
@@ -34,7 +34,7 @@ const Booking = ({defaultOffice, form_authenticity_token, currentDateTime, tomor
   }, []);
 
   useEffect(() => {
-    get(`${process.env.HOST}/rooms?floor=${roomFloor}&office_id=${roomOfficeId}&look_from=${lookFromTime}&look_to=${lookToTime}`)
+    get(`${process.env.API_HOST}/rooms?floor=${roomFloor}&office_id=${roomOfficeId}&look_from=${lookFromTime}&look_to=${lookToTime}`)
       .then(
         (response) => {
           setRoomList(response.data);

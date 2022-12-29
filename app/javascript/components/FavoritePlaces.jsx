@@ -10,7 +10,7 @@ const FavoritePlaces = () => {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    get(`${process.env.HOST}/favorites`)
+    get(`${process.env.API_HOST}/favorites`)
       .then(
         (response) => {
           setFavorites(response.data);
@@ -19,7 +19,7 @@ const FavoritePlaces = () => {
 
   const onFavoriteDelete = async (id) => {
     try {
-      await axios.delete(`${process.env.HOST}/favorites/${id}`);
+      await axios.delete(`${process.env.API_HOST}/favorites/${id}`);
       const del = favorites.filter((favorite) => id !== favorite.id);
       setFavorites(del);
     } catch (err) {

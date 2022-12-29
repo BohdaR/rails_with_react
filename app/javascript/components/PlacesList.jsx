@@ -7,7 +7,7 @@ const PlacesList = ({roomId, lookFromTime, lookToTime, ...props}) => {
   const [places, setPlaces] = useState([])
 
   useEffect(() => {
-    get(`${process.env.HOST}/rooms/${roomId}/places?look_from=${lookFromTime}&look_to=${lookToTime}`)
+    get(`${process.env.API_HOST}/rooms/${roomId}/places?look_from=${lookFromTime}&look_to=${lookToTime}`)
       .then(
         (response) => {
           setPlaces(response.data)

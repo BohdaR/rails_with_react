@@ -28,7 +28,7 @@ const ForgotPasswordForm = ({form_authenticity_token}) => {
       }
     }
 
-    post(`${process.env.HOST}/user/password`, data, config)
+    post(`${process.env.API_HOST}/user/password`, data, config)
       .then(
         () => {
           setSuccess('Check your email for a link to reset your password. If it doesn’t appear within a few minutes, check your spam folder.')

@@ -35,7 +35,7 @@ const RegForm = ({form_authenticity_token}) => {
       }
     }
 
-    post(`${process.env.HOST}/user`, data, config).then(
+    post(`${process.env.API_HOST}/user`, data, config).then(
       (responce) => {
         document.location.replace('/')
       }

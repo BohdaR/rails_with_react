@@ -41,7 +41,7 @@ const LoginForm = ({form_authenticity_token}) => {
       }
     }
 
-    post(`${process.env.HOST}/user/sign_in`, data, config).then(
+    post(`${process.env.API_HOST}/user/sign_in`, data, config).then(
       (responce) => {
         document.location.replace('/')
       }

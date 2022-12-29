@@ -10,6 +10,7 @@ gem "rails_admin"
 gem "react-rails"
 gem "sassc-rails"
 gem "webpacker"
+gem "jwt"
 
 gem "dotenv-rails"
 gem "omniauth"

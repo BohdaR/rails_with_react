@@ -7,7 +7,7 @@ const ReservationsList = ({token}) => {
   const [reservations, setReservations] = useState([])
 
   useEffect(() => {
-    get(`${process.env.HOST}/reservations`)
+    get(`${process.env.API_HOST}/reservations`)
       .then(
         (response) => {
           setReservations(response.data)
