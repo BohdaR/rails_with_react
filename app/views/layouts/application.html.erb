@@ -15,7 +15,7 @@
   <%= react_component('Header', {
     leftNavigationLinks: [
       {
-        href: ENV.fetch('HOST', 'http://127.0.0.1:3000'), name: 'Home'
+        href: ENV.fetch('API_HOST', 'http://127.0.0.1:3000'), name: 'Home'
       },
       {
         href: booking_path, name: 'Book a place'

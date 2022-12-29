@@ -2,3 +2,8 @@
   employee_information: current_user.employee,
   company_image_url: url_for(current_user.employee.company.image)
 }) %>
+
+<h1></h1>
+
+<%= react_component('SlackLoginButton') %>
+<%= react_component('AddToSlackButton') %>
