@@ -12,7 +12,7 @@ const Reservation = ({reservation, token}) => {
   }
 
   const deleteReservation = (reservation_id) => {
-    deleteRequest(`${process.env.HOST}/reservations/${reservation_id}?authenticity_token=${token}`)
+    deleteRequest(`${process.env.API_HOST}/reservations/${reservation_id}?authenticity_token=${token}`)
       .then(
         (response) => {
           setShowReservation(false)

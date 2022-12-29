@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_27_112623) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_29_115602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_112623) do
     t.datetime "updated_at", null: false
     t.string "domain_name"
     t.string "description"
+    t.string "slack_access_token"
     t.index ["domain_name"], name: "index_companies_on_domain_name"
   end
 
@@ -79,6 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_112623) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
+    t.string "slack_id"
     t.index ["company_id"], name: "index_employees_on_company_id"
     t.index ["office_id"], name: "index_employees_on_office_id"
     t.index ["user_id"], name: "index_employees_on_user_id"
@@ -223,7 +225,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_27_112623) do
     t.string "access_token"
     t.datetime "expires_at"
     t.string "refresh_token"
-    t.string "slack_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

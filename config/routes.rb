@@ -24,4 +24,6 @@ Rails.application.routes.draw do
   get "/statistics/office_visiting/:office_id", to: "dashboard_statistics#office_visiting", as: "office_visiting"
   get "/favorite_places", to: "pages#favorite_places"
   get "/user/reservation", to: "pages#user_reservation", as: "user_reservation"
+  get "/user/auth/slack", to: "slack_auth#user", as: "slack_user_auth"
+  get "/company/auth/slack", to: "slack_auth#company", as: "slack_company_auth"
 end
