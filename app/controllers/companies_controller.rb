@@ -37,6 +37,6 @@ class CompaniesController < ApplicationController
       @company = Company.find(params[:id])
     end
     def company_params
-      params.require(:company).permit(:name, :domain_name, :description)
+      params.require(:company).permit(:name, :domain_name, :description, :slack_access_token)
     end
 end
