@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_one :employee, dependent: :destroy
+  validates :full_name, length: { minimum: 5 }
   after_create :assign_employee
 
   # Include default devise modules. Others available are:

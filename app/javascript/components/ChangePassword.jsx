@@ -32,7 +32,7 @@ const ChangePassword = ({form_authenticity_token, reset_password_token}) => {
       }
     }
 
-    put(`${process.env.REACT_API_HOST}/user/password`, data, config)
+    put(`${process.env.API_HOST}/user/password`, data, config)
       .then(
         () => {
           document.location.replace('/')

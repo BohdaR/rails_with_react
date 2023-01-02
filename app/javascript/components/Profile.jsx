@@ -1,29 +1,28 @@
 import React, {Fragment, useState} from 'react';
 import style from '../stylesheets/profile.module.css'
 import {
+  Alert,
   Avatar,
   Divider,
-  Link,
   List,
-  ListItem,
 } from "@mui/material";
 import {deepOrange} from "@mui/material/colors";
 import NotificationSettings from "./userSettings/NotificationSettings";
 import NavItem from "./userSettings/NavItem";
 import PasswordSettings from "./userSettings/PasswordSettings";
+import AccountInfoSettings from "./userSettings/AccountInfoSettings";
 
-const Profile = () => {
+const Profile = ({user, form_authenticity_token}) => {
+  const [errors, setErrors] = useState({});
   const [openSetting, setOpenSetting] = useState({
-    account: false,
+    account: true,
     password: false,
     notification: false,
     security: false,
   })
-  const user = {
-    name: 'Bohdan Shushval',
-  }
+
   const navLinks = [
-    {name: 'Account', href: '#'},
+    {name: 'Account', href: '#acount'},
     {name: 'Password', href: '#'},
     {name: 'Notification', href: '#'},
     {name: 'Security', href: '#'}
@@ -50,25 +49,62 @@ const Profile = () => {
           >
             B
           </Avatar>
-          <h2 className={style.userName}>{user.name}</h2>
+          <h2 className={style.userName}>{user.full_name}</h2>
           <Divider flexItem/>
           <List sx={{
             width: "100%",
             paddingTop: 0,
             paddingBottom: 0
           }}>
-            <NavItem link={{name: 'account', href: '#'}}
+            <NavItem link={{name: 'account', href: '#account'}}
                      handleClick={() => setOpenSetting({account: true})}/>
-            <NavItem link={{name: 'password', href: '#'}}
+            <NavItem link={{name: 'password', href: '#password'}}
                      handleClick={() => setOpenSetting({password: true})}/>
-            <NavItem link={{name: 'notification', href: '#'}}
+            <NavItem link={{name: 'notification', href: '#notification'}}
                      handleClick={() => setOpenSetting({notification: true})}/>
           </List>
         </div>
         <Divider orientation="vertical" flexItem/>
         <div className={style.profileContentTab}>
-          {openSetting.notification ? <NotificationSettings/> : null}
-          {openSetting.password ? <PasswordSettings/> : null}
+          {errors.current_password ?
+            <Alert severity="error" onClose={() => {
+              setErrors({...errors, current_password: null})
+            }} style={{marginBottom: 10}}>
+              Current password {errors.current_password} <br/>
+            </Alert> : null
+          }
+          {errors.full_name ?
+            <Alert severity="error" onClose={() => {
+              setErrors({...errors, full_name: null})
+            }} style={{marginBottom: 10}}>
+              Full name {errors.full_name}
+            </Alert> : null
+          }
+          {errors.email ?
+            <Alert severity="error" onClose={() => {
+              setErrors({...errors, email: null})
+            }} style={{marginBottom: 10}}>
+              Email {errors.email}
+            </Alert> : null
+          }
+          {errors.new_password ?
+            <Alert severity="error" onClose={() => {
+              setErrors({...errors, new_password: null})
+            }} style={{marginBottom: 10}}>
+              New password {errors.new_password}
+            </Alert> : null
+          }
+          {/*{errors.place ?*/}
+          {/*  <Alert severity="error" onClose={() => {*/}
+          {/*    setErrors({...errors, place: null})*/}
+          {/*  }} style={{marginBottom: 10}}>*/}
+          {/*    {errors.place}*/}
+          {/*  </Alert> : null*/}
+          {/*}*/}
+          {openSetting.account ?
+            <AccountInfoSettings token={form_authenticity_token} user={user} setErrors={setErrors}/> : null}
+          {openSetting.password ? <PasswordSettings token={form_authenticity_token} setErrors={setErrors}/> : null}
+          {openSetting.notification ? <NotificationSettings setErrors={setErrors}/> : null}
         </div>
       </div>
     </Fragment>
