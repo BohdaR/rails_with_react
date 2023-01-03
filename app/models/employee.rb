@@ -12,8 +12,9 @@ class Employee < ApplicationRecord
   has_many :favorites, dependent: :delete_all
 
   has_and_belongs_to_many :roles
+
   private
-  def create_settings
-    EmployeeSetting.create(employee: self, slack_notifications: false)
-  end
+    def create_settings
+      EmployeeSetting.create(employee: self, slack_notifications: false)
+    end
 end
