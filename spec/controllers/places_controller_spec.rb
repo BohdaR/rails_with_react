@@ -39,7 +39,6 @@ RSpec.describe PlacesController, type: :controller do
   end
   after(:all) do
     Company.first.destroy
-    User.first.destroy
   end
   let(:places) {
     Place.all
