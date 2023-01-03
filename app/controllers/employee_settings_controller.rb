@@ -37,6 +37,6 @@ class EmployeeSettingsController < ApplicationController
     @setting = EmployeeSetting.find(params[:id])
   end
   def employee_settings_params
-    params.require(:employee_setting).permit(:slack_notification, :email_notification)
+    params.require(:employee_setting).permit(:slack_notifications, :email_notifications)
   end
 end

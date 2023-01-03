@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :rooms do
     resources :places
   end
+  resources :employee_settings
   resources :favorites, only: [:index, :create, :destroy]
 
   devise_for :user,

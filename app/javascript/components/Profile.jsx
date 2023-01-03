@@ -12,7 +12,7 @@ import NavItem from "./userSettings/NavItem";
 import PasswordSettings from "./userSettings/PasswordSettings";
 import AccountInfoSettings from "./userSettings/AccountInfoSettings";
 
-const Profile = ({user, form_authenticity_token}) => {
+const Profile = ({user, form_authenticity_token, has_slack_id, company_slack, settings}) => {
   const [errors, setErrors] = useState({});
   const [openSetting, setOpenSetting] = useState({
     account: true,
@@ -94,17 +94,12 @@ const Profile = ({user, form_authenticity_token}) => {
               New password {errors.new_password}
             </Alert> : null
           }
-          {/*{errors.place ?*/}
-          {/*  <Alert severity="error" onClose={() => {*/}
-          {/*    setErrors({...errors, place: null})*/}
-          {/*  }} style={{marginBottom: 10}}>*/}
-          {/*    {errors.place}*/}
-          {/*  </Alert> : null*/}
-          {/*}*/}
           {openSetting.account ?
             <AccountInfoSettings token={form_authenticity_token} user={user} setErrors={setErrors}/> : null}
           {openSetting.password ? <PasswordSettings token={form_authenticity_token} setErrors={setErrors}/> : null}
-          {openSetting.notification ? <NotificationSettings setErrors={setErrors}/> : null}
+          {openSetting.notification ?
+            <NotificationSettings setErrors={setErrors} user={user} has_slack_id={has_slack_id}
+                                  company_slack={company_slack} token={form_authenticity_token} settings={settings}/> : null}
         </div>
       </div>
     </Fragment>
