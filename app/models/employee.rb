@@ -5,6 +5,8 @@ class Employee < ApplicationRecord
   belongs_to :company
   belongs_to :office
 
+  has_one :employee_setting
+
   has_many :reservations, dependent: :delete_all
   has_many :favorites, dependent: :delete_all
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_29_115602) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_03_084518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_29_115602) do
     t.string "description"
     t.string "slack_access_token"
     t.index ["domain_name"], name: "index_companies_on_domain_name"
+  end
+
+  create_table "employee_settings", force: :cascade do |t|
+    t.boolean "slack_notifications"
+    t.boolean "email_notifications", default: true
+    t.bigint "employee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_employee_settings_on_employee_id"
   end
 
   create_table "employees", force: :cascade do |t|
@@ -231,6 +240,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_29_115602) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "employee_settings", "employees"
   add_foreign_key "employees", "companies"
   add_foreign_key "employees", "offices"
   add_foreign_key "employees", "users"
