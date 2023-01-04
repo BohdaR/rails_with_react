@@ -40,6 +40,7 @@ class Ability
         place: { subject: Place, condition: nil },
         reservation: { subject: Reservation, condition: nil },
         favorite: { subject: Favorite, condition: nil },
+        employee_settings: { subject: EmployeeSetting, condition: nil },
       }
 
       company_subjects_list = {
@@ -54,6 +55,7 @@ class Ability
         place: { subject: Place, condition: { room: { company: } } },
         reservation: { subject: Reservation, condition: { employee: { company: } } },
         favorite: { subject: Favorite, condition: { employee: { company: } } },
+        employee_settings: { subject: EmployeeSetting, condition: { employee: { company: } } },
       }
 
       own_subjects_list = {
@@ -61,6 +63,7 @@ class Ability
         employee: { subject: Employee, condition: { id: employee.id } },
         reservation: { subject: Reservation, condition: { employee: } },
         favorite: { subject: Favorite, condition: { employee: } },
+        employee_settings: { subject: EmployeeSetting, condition: { employee: } },
       }
 
       case permission_scope

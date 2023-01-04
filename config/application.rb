@@ -17,7 +17,7 @@ module App
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.hosts << "ec2-3-71-161-29.eu-central-1.compute.amazonaws.com"
-    config.hosts << "127.0.0.1"
+    config.hosts << ENV["HOST"]
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

@@ -40,7 +40,7 @@ const EditUserForm = ({form_authenticity_token}) => {
       }
     }
 
-    put(`${process.env.HOST}/user`, data, config)
+    put(`${process.env.API_HOST}/user`, data, config)
       .then(
         () => {
           setErrors({})

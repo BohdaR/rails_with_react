@@ -9,7 +9,7 @@ const HomePage = ({employee_information, company_image_url}) => {
   const [errors, setErrors] = useState(null)
 
   useEffect(() => {
-    get(`${process.env.HOST}/offices/${employee_information.office_id}`)
+    get(`${process.env.API_HOST}/offices/${employee_information.office_id}`)
       .then(
         (response) => {
           setOffice(response.data);
@@ -22,7 +22,7 @@ const HomePage = ({employee_information, company_image_url}) => {
   }, []);
 
   useEffect(() => {
-    get(`${process.env.HOST}/statistics/office_visiting/${employee_information.office_id}`)
+    get(`${process.env.API_HOST}/statistics/office_visiting/${employee_information.office_id}`)
       .then(
         (response) => {
           setOfficeStatistics(response.data);
@@ -35,7 +35,7 @@ const HomePage = ({employee_information, company_image_url}) => {
   }, []);
 
   useEffect(() => {
-    get(`${process.env.HOST}/companies/${employee_information.company_id}`)
+    get(`${process.env.API_HOST}/companies/${employee_information.company_id}`)
       .then(
         (response) => {
           setCompany(response.data);

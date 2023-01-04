@@ -24,7 +24,7 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
 
   const bookPlace = () => {
 
-    post(`${process.env.HOST}/reservations`, {
+    post(`${process.env.API_HOST}/reservations`, {
       authenticity_token: token,
       reservation: {
         start_at: start_at,
