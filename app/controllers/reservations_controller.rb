@@ -14,18 +14,34 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
-    if reservation.save
-      GoogleCalendar::EventScheduler.new(current_user, reservation).register_event
-      unless get_employee.slack_id.blank?
-        send_slack_notification(reservation)
-      end
-      if get_employee.employee_setting&.email_notifications
-        BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later
-      end
-      render json: reservation
+    if Place.where(id: params[:reservation][:place_id]).empty?
+      render json: { place: ["There is no such place!"] }, status: :bad_request
     else
-      render json: reservation.errors, status: :bad_request
+      reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
+      if reservation.save
+        GoogleCalendar::EventScheduler.new(current_user, reservation).register_event
+        unless get_employee.slack_id.blank?
+          send_slack_notification(reservation)
+        end
+        if get_employee.employee_setting&.email_notifications
+          BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later
+        end
+        render json: reservation
+      else
+        reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
+        if reservation.valid?
+          if available_place?(reservation_params)
+            reservation.save
+            GoogleCalendar::EventScheduler.new(current_user, reservation).register_event
+            BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later
+            render json: reservation
+          else
+            render json: { time: ["This time is already taken!"] }, status: :unprocessable_entity
+          end
+        else
+          render json: reservation.errors, status: :bad_request
+        end
+      end
     end
   end
 
@@ -59,6 +75,10 @@ class ReservationsController < ApplicationController
 
     def get_employee
       current_user.employee
+    end
+
+    def available_place?(params)
+      Place.find(params[:place_id]).available_to_book?(params[:start_at], params[:end_at])
     end
 
     def set_reservation

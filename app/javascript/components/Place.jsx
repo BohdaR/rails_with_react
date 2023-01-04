@@ -1,15 +1,10 @@
 import React, {useState} from 'react';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import {post} from "./useAPI/useAPI";
 import style from '../stylesheets/booking.module.css'
-import {Alert} from "@mui/material";
+import ReservationConfirmation from "./ReservationConfirmation";
 
 const Place = ({place, token, start_at, end_at, setShowRoom}) => {
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [showPlace, setShowPlace] = useState(true);
   const [open, setOpen] = useState(false);
   const [errors, setErrors] = useState({});
@@ -23,6 +18,7 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
 
   const handleModal = () => {
     setOpen(!open);
+    setConfirmationOpen(true);
     setErrors({});
   }
 
@@ -53,61 +49,14 @@ const Place = ({place, token, start_at, end_at, setShowRoom}) => {
             <button className={style.bookingButton} onClick={handleModal}>
               {place.number}
             </button>
-            <Dialog
-              open={open}
-              onClose={handleModal}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-              >
-              <DialogTitle id="alert-dialog-title"
-                style={{
-                   textAlign: "center",
-                   color: "#173166"
-                }}>
-                {"Book a place"}
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  {errors.start_at ?
-                    <Alert severity="error" onClose={() => {
-                      setErrors({start_at: null, place_id: errors.place_id, end_at: errors.end_at})
-                    }} style={{marginBottom: 10}}>
-                      Start date {errors.start_at} <br/>
-                    </Alert> : null
-                  }
-                  {errors.place_id ?
-                    <Alert severity="error" onClose={() => {
-                      setErrors({start_at: errors.start_at, place_id: null, end_at: errors.end_at})
-                    }} style={{marginBottom: 10}}>
-                      Place {errors.place_id}
-                    </Alert> : null
-                  }
-                  {errors.end_at ?
-                    <Alert severity="error" onClose={() => {
-                      setErrors({email: errors.start_at, place_id: errors.place_id, end_at: null})
-                    }} style={{marginBottom: 10}}>
-                      End date {errors.end_at}
-                    </Alert> : null
-                  }
-                  {confirmationMessage}
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button 
-                  onClick={handleModal}
-                  style={{
-                    color: "#173166"
-                  }}
-                >Cancel</Button>
-                <Button 
-                  onClick={bookPlace} autoFocus
-                  style={{
-                    color: "#173166"
-                  }}>
-                  Confirm
-                </Button>
-              </DialogActions>
-            </Dialog>
+            <ReservationConfirmation
+              open={confirmationOpen}
+              setOpen={setConfirmationOpen}
+              errors={errors}
+              setErrors={setErrors}
+              confirmationMessage={confirmationMessage}
+              handleSuccess={bookPlace}
+            />
           </div> : null
       }
     </div>

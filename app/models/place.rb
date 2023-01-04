@@ -9,6 +9,10 @@ class Place < ApplicationRecord
 
   has_and_belongs_to_many :issues
 
+  def available_to_book?(look_from, look_to)
+    Place.free_places(look_from, look_to).include? self
+  end
+
   def self.free_places(look_from = Time.zone.now, look_to = Time.zone.now + 1.day)
     Place.left_joins(:issues, :reservations)
          .where("reservations.place_id IS NULL")
