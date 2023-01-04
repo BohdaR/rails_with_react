@@ -20,7 +20,7 @@ const FavoritePlaces = ({token}) => {
 
   const onFavoriteDelete = async (id) => {
     try {
-      await axios.delete(`${process.env.API_HOST}/favorites/${id}`);
+      await axios.delete(`${process.env.API_HOST}/favorites/${id}?authenticity_token=${token}`);
       const del = favorites.filter((favorite) => id !== favorite.id);
       setFavorites(del);
     } catch (err) {
