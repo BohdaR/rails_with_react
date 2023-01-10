@@ -45,10 +45,8 @@ const Profile = ({user, form_authenticity_token, has_slack_id, company_slack, se
 
             }}
             alt="Remy Sharp"
-            src="/broken-image.jpg"
-          >
-            B
-          </Avatar>
+            src={user.avatar_url}
+          />
           <h2 className={style.userName}>{user.full_name}</h2>
           <Divider flexItem/>
           <List sx={{
