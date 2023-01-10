@@ -28,5 +28,4 @@ class Place < ApplicationRecord
       .joins(:reservations).joins("INNER JOIN employees ON employees.id = reservations.employee_id")
       .joins("INNER JOIN users ON users.id = employees.user_id")
   end
-
 end
