@@ -3,6 +3,7 @@ import {post} from "./useAPI/useAPI";
 import ReservationConfirmation from "./ReservationConfirmation";
 import {Avatar, Box} from "@mui/material";
 import style from '../stylesheets/booking.module.css'
+import {deepOrange} from "@mui/material/colors";
 
 const Place = ({place, token, start_at, end_at, width, height, radius, available}) => {
   const [confirmationOpen, setConfirmationOpen] = useState(false);
@@ -37,11 +38,18 @@ const Place = ({place, token, start_at, end_at, width, height, radius, available
         }
       )
       .catch(
-      (errors) => {
-        setErrors(errors.response.data)
-      }
-    );
+        (errors) => {
+          setErrors(errors.response.data)
+        }
+      );
   }
+
+  const markStyles = {
+    height: width * radius,
+    width: width * radius,
+    fontSize: width * radius * 0.6,
+  }
+
 
   return (
     <Fragment>
@@ -56,14 +64,17 @@ const Place = ({place, token, start_at, end_at, width, height, radius, available
           top: place.y * height - width * radius / 2,
         }}>
         <Avatar
-          alt={place.full_name}
-          title={place.full_name}
-          src={place.avatar_url}
-          sx={{
-            height: width * radius,
-            width: width * radius,
-          }}
-        />
+          alt={place.user_full_name}
+          title={place.user_full_name}
+          src={place.user_avatar_url}
+          sx={
+            available ? markStyles :
+              {
+                ...markStyles,
+                bgcolor: deepOrange[500]
+              }
+          }
+        >{place.user_email ? place.user_email.charAt(0) : null}</Avatar>
       </Box>
       <ReservationConfirmation
         open={confirmationOpen}

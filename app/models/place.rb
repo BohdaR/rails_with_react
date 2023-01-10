@@ -24,7 +24,7 @@ class Place < ApplicationRecord
 
   def self.booked_places(look_from, look_to)
     Place.where.not(id: Place.free_places(look_from, look_to).ids)
-      .select("places.*", "users.avatar_url", "users.full_name")
+      .select("places.*", "users.avatar_url as user_avatar_url", "users.full_name as user_full_name", "users.email as user_email")
       .joins(:reservations).joins("INNER JOIN employees ON employees.id = reservations.employee_id")
       .joins("INNER JOIN users ON users.id = employees.user_id")
   end
