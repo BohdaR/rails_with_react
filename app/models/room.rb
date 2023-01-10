@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Room < ApplicationRecord
+  has_one_attached :image
   validates :name, :floor, presence: true
 
   belongs_to :office
