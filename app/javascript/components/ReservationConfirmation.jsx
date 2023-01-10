@@ -35,42 +35,42 @@ const ReservationConfirmation = ({
         {"Book a place"}
       </DialogTitle>
       <DialogContent>
+        {errors.start_at ?
+          <Alert severity="error" onClose={() => {
+            setErrors({...errors, start_at: null})
+          }} style={{marginBottom: 10}}>
+            Start date {errors.start_at} <br/>
+          </Alert> : null
+        }
+        {errors.place_id ?
+          <Alert severity="error" onClose={() => {
+            setErrors({...errors, place_id: null})
+          }} style={{marginBottom: 10}}>
+            Place {errors.place_id}
+          </Alert> : null
+        }
+        {errors.end_at ?
+          <Alert severity="error" onClose={() => {
+            setErrors({...errors, end_at: null})
+          }} style={{marginBottom: 10}}>
+            End date {errors.end_at}
+          </Alert> : null
+        }
+        {errors.time ?
+          <Alert severity="error" onClose={() => {
+            setErrors({...errors, time: null})
+          }} style={{marginBottom: 10}}>
+            {errors.time}
+          </Alert> : null
+        }
+        {errors.place ?
+          <Alert severity="error" onClose={() => {
+            setErrors({...errors, place: null})
+          }} style={{marginBottom: 10}}>
+            {errors.place}
+          </Alert> : null
+        }
         <DialogContentText id="alert-dialog-description">
-          {errors.start_at ?
-            <Alert severity="error" onClose={() => {
-              setErrors({...errors, start_at: null})
-            }} style={{marginBottom: 10}}>
-              Start date {errors.start_at} <br/>
-            </Alert> : null
-          }
-          {errors.place_id ?
-            <Alert severity="error" onClose={() => {
-              setErrors({...errors, place_id: null})
-            }} style={{marginBottom: 10}}>
-              Place {errors.place_id}
-            </Alert> : null
-          }
-          {errors.end_at ?
-            <Alert severity="error" onClose={() => {
-              setErrors({...errors, end_at: null})
-            }} style={{marginBottom: 10}}>
-              End date {errors.end_at}
-            </Alert> : null
-          }
-          {errors.time ?
-            <Alert severity="error" onClose={() => {
-              setErrors({...errors, time: null})
-            }} style={{marginBottom: 10}}>
-              {errors.time}
-            </Alert> : null
-          }
-          {errors.place ?
-            <Alert severity="error" onClose={() => {
-              setErrors({...errors, place: null})
-            }} style={{marginBottom: 10}}>
-              {errors.place}
-            </Alert> : null
-          }
           {confirmationMessage}
         </DialogContentText>
       </DialogContent>

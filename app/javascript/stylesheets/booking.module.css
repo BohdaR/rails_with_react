@@ -1,3 +1,13 @@
+.available {
+    cursor: pointer;
+}
+
+.roomPicture {
+    width: 100%;
+}
+
+/*  */
+
 .roomTitle {
     padding-left: 5px;
     cursor: pointer;
