@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {authentication, authenticationHeadline, formContainer} from "../stylesheets/authentication_form.module.css";
-import AuthenticityTokenInput from "./Inputs/AuthenticityTokenInput";
 import SubmitInput from "./Inputs/SubmitInput";
 import PasswordInput from "./Inputs/PasswordInput";
-import HiddenMethodInput from "./Inputs/HiddenMethodInput";
 import {put} from "./useAPI/useAPI";
 import {Alert} from "@mui/material";
 
@@ -15,7 +13,7 @@ const ChangePassword = ({form_authenticity_token, reset_password_token}) => {
 
   const config = {
     headers: {
-      accept: 'application/json'
+      accept: 'application/json',
     }
   }
 
