@@ -7,10 +7,7 @@ import {
   authentication,
   authenticationHeadline,
   authenticationLinks,
-  formContainer,
-  formSeparator,
-  signupWrapper,
-  authenticationFullNameInput
+  formContainer, formSeparator, signupWrapper
 } from '../stylesheets/authentication_form.module.css'
 import {post} from "./useAPI/useAPI";
 import {Alert} from "@mui/material";
@@ -20,7 +17,6 @@ const RegForm = ({form_authenticity_token}) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState('');
-  const [fullName, setFullName] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -30,7 +26,6 @@ const RegForm = ({form_authenticity_token}) => {
         password: password,
         password_confirmation: passwordConfirmation,
         email: email,
-        full_name: fullName,
       }
     }
 
@@ -56,41 +51,27 @@ const RegForm = ({form_authenticity_token}) => {
         <h1 className={authenticationHeadline}>Sing up</h1>
         {errors.email ?
           <Alert severity="error" onClose={() => {
-            setErrors({...errors, email: null})
+            setErrors({email: null, password: errors.password, password_confirmation: errors.password_confirmation})
           }} style={{marginBottom: 10}}>
             Email {errors.email} <br/>
           </Alert> : null
         }
         {errors.password ?
           <Alert severity="error" onClose={() => {
-            setErrors({...errors,  password: null,})
+            setErrors({email: errors.email, password: null, password_confirmation: errors.password_confirmation})
           }} style={{marginBottom: 10}}>
             Password {errors.password}
           </Alert> : null
         }
         {errors.password_confirmation ?
           <Alert severity="error" onClose={() => {
-            setErrors({...errors, password_confirmation: null})
+            setErrors({email: errors.email, password: errors.password, password_confirmation: null})
           }} style={{marginBottom: 10}}>
             Password confirmation {errors.password_confirmation}
           </Alert> : null
         }
-        {errors.full_name ?
-          <Alert severity="error" onClose={() => {
-            setErrors({...errors, full_name: null})
-          }} style={{marginBottom: 10}}>
-            Full name {errors.full_name}
-          </Alert> : null
-        }
         <form action="/user" id="new_user" method="post" onSubmit={(e) => handleSubmit(e)}>
           <EmailInput name="user[email]" value={email} onChange={(e) => setEmail(e.target.value)}/>
-          <input
-            className={authenticationFullNameInput}
-            placeholder="Full name"
-            value={fullName}
-            type="text"
-            onChange={(e) => setFullName(e.target.value)}
-          />
           <PasswordInput
             placeholder="Password"
             value={password}

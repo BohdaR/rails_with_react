@@ -41,7 +41,7 @@
     font-size: 18px;
 }
 
-.authenticationEmailInput, .authenticationPasswordInput,  .authenticationFullNameInput{
+.authenticationEmailInput, .authenticationPasswordInput {
     margin-bottom: 10px;
     background-color: white;
     border-radius: 5px !important;
