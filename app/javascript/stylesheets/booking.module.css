@@ -1,3 +1,9 @@
+.roomPicture {
+    width: 100%;
+}
+
+/*  */
+
 .roomTitle {
     padding-left: 5px;
     cursor: pointer;
@@ -30,35 +36,6 @@
     border: 1px solid #ECEFF1;
     padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;
-}
-
-.placesList {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.place {
-    display: block;
-}
-
-.bookingButton {
-    margin: 5px;
-    width: 100px;
-    padding: 5px;
-    background-color: #416093;
-    border-radius: 4px;
-    border: 0;
-    box-shadow: rgba(1,60,136,.5) 0 -1px 3px 0 inset,rgba(0,44,97,.1) 0 3px 6px 0;
-    box-sizing: border-box;
-    color: #fff;
-    line-height: 26px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.bookingButton:hover {
-    cursor: pointer;
-    background-color: #94a412;
 }
 
 .wrapper {

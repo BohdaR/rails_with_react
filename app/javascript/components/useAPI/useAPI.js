@@ -19,7 +19,7 @@ export const deleteRequest = async (url, config) => {
 
 export const bookPlace = async (token, start_at, end_at, placeId) => {
 
-  await post(`${process.env.HOST}/reservations`, {
+  await post(`${process.env.API_HOST}/reservations`, {
     authenticity_token: token,
     reservation: {
       start_at: start_at,

@@ -7,7 +7,10 @@ class RoomsController < ApplicationController
 
   def index
     query_params = params.permit(:floor, :office_id, :look_from, :look_to)
-    rooms = Room.where(query_params.slice(:floor, :office_id)).not_empty_rooms(query_params.slice(:look_from, :look_to))
+    rooms = Room.where(query_params.slice(:floor, :office_id)).not_empty_rooms(query_params.slice(:look_from, :look_to)).as_json
+    rooms.each do |room|
+      room["image_url"] = url_for(Room.find(room["id"]).image)
+    end
     render json: rooms
   end
   def floors

@@ -18,30 +18,24 @@ class ReservationsController < ApplicationController
       render json: { place: ["There is no such place!"] }, status: :bad_request
     else
       reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
-      if reservation.save
-        GoogleCalendar::EventScheduler.new(current_user, reservation).register_event
-        unless get_employee.slack_id.blank?
-          send_slack_notification(reservation)
-        end
-        if get_employee.employee_setting&.email_notifications
-          BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later
-        end
-        render json: reservation
-      else
-        reservation = Reservation.new({ employee: get_employee }.merge(reservation_params))
-        if reservation.valid?
-          if available_place?(reservation_params)
-            reservation.save
-            GoogleCalendar::EventScheduler.new(current_user, reservation).register_event
-            BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later
-            render json: reservation
-          else
-            render json: { time: ["This time is already taken!"] }, status: :unprocessable_entity
+      if reservation.valid?
+        if available_place?(reservation_params)
+          reservation.save
+          GoogleCalendar::EventScheduler.new(current_user, reservation).register_event
+          unless get_employee.slack_id.blank?
+            send_slack_notification(reservation)
           end
+          if get_employee.employee_setting&.email_notifications
+            BookingMailer.with(employee: current_user.employee, reservation:).booked_place_email.deliver_later
+          end
+          render json: reservation
         else
-          render json: reservation.errors, status: :bad_request
+          render json: { time: ["This time is already taken!"] }, status: :unprocessable_entity
         end
+      else
+        render json: reservation.errors, status: :bad_request
       end
+
     end
   end
 

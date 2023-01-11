@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import PlacesList from "./PlacesList";
 import style from '../stylesheets/booking.module.css'
+import RoomPicture from "./RoomPicture";
 
 const Room = ({room, ...props}) => {
   const [showRoomPlaces, setShowRoomPlaces] = useState(false)
@@ -18,8 +18,9 @@ const Room = ({room, ...props}) => {
           {room.name}
         </h1>
         {showRoomPlaces ?
-          <PlacesList
+          <RoomPicture
             roomId={room.id}
+            image={room.image_url}
             setShowRoom={setShowRoom}
             {...props}
           /> : null

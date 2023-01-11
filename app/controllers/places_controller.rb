@@ -5,7 +5,11 @@ class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :update, :destroy]
 
   def index
-    render json: free_places
+    if params[:booked]
+      render json: booked_places.as_json
+    else
+      render json: free_places
+    end
   end
 
   def show
@@ -37,12 +41,21 @@ class PlacesController < ApplicationController
     def place_params
       params.require(:place).permit(:room_id, :number)
     end
+
     def free_places
       Place.free_places(
         params[:look_from],
         params[:look_to],
       ).where(room_id: params[:room_id])
     end
+
+    def booked_places
+      Place.booked_places(
+        params[:look_from],
+        params[:look_to],
+      ).where(room_id: params[:room_id])
+    end
+
     def set_place
       @place = Place.where(room_id: params[:room_id]).find(params[:id])
     end
