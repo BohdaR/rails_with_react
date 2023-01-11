@@ -20,11 +20,7 @@ const RoomPicture = ({roomId, lookFromTime, lookToTime, image,...props}) => {
     });
   }
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize, false);
-  }, []);
-
-  useEffect(() => {
+  const getPlaces = () => {
     get(`${process.env.API_HOST}/rooms/${roomId}/places?look_from=${lookFromTime}&look_to=${lookToTime}`)
       .then(
         (response) => {
@@ -35,6 +31,14 @@ const RoomPicture = ({roomId, lookFromTime, lookToTime, image,...props}) => {
         (response) => {
           setBookedPlaces(response.data)
         })
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize, false);
+  }, []);
+
+  useEffect(() => {
+    getPlaces();
   }, [lookFromTime, lookToTime])
   return (
     <Fragment>
@@ -51,6 +55,7 @@ const RoomPicture = ({roomId, lookFromTime, lookToTime, image,...props}) => {
           bookedPlaces={bookedPlaces}
           start_at={lookFromTime}
           end_at={lookToTime}
+          setPlaces={getPlaces}
           {...props}
         />
         <img

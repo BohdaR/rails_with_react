@@ -1,14 +1,15 @@
 import React, {Fragment} from 'react';
-import Place from "./Place";
+import FreePlaceMarker from "./placeMarkers/FreePlaceMarker";
+import BookedPlaceMarker from "./placeMarkers/BookedPlaceMarker";
 
 const PlaceMarkers = ({freePlaces, bookedPlaces, width, height, ...props}) => {
   return (
     <Fragment>
       {freePlaces.map((place) =>
-        <Place key={place.id} place={place} height={height} width={width} radius={0.03} available={true} {...props}/>
+        <FreePlaceMarker key={place.id} place={place} height={height} width={width} radius={0.03} available={true} {...props}/>
       )}
       {bookedPlaces.map((place) =>
-        <Place key={place.id} place={place} height={height} width={width} radius={0.03} available={false} {...props}/>
+        <BookedPlaceMarker key={place.id} place={place} height={height} width={width} radius={0.03}/>
       )}
     </Fragment>
   );
